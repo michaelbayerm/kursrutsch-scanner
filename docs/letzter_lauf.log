@@ -3,6 +3,9 @@
 
 2) Kurse abrufen …
   Kurse 1–150 von 1177 …
+
+1 Failed download:
+['0386.HK']: OperationalError('database is locked')
   Kurse 151–300 von 1177 …
   Kurse 301–450 von 1177 …
   Kurse 451–600 von 1177 …
@@ -31,6 +34,7 @@ $ECV.DE: No data found, symbol may be delisted
   ANET       Arista Networks, Inc.
   ASM.AS     ASM International NV
   BE         Bloom Energy Corporation
+  CCC.L      Computacenter plc
   CIEN       Ciena Corporation
   COHR       Coherent Corp.
   CRWV       CoreWeave, Inc.
@@ -52,7 +56,6 @@ $ECV.DE: No data found, symbol may be delisted
   RKLB       Rocket Lab Corporation
   SKYD       Skydance Corporation
   SMCI       Super Micro Computer, Inc.
-  STX        Seagate Technology Holdings plc
   TER        Teradyne, Inc.
   VRT        Vertiv Holdings Co
   WAF.DE     Siltronic AG
@@ -62,48 +65,51 @@ $ECV.DE: No data found, symbol may be delisted
 
 5) Nachrichten der letzten 24 Std. auswerten …
 
-=== Kursrutsch ≥10 % in 3 Tagen, Marktkap. > 5 Mrd. € (Stand 15.10.2026 17:29) ===
+6) Kursverläufe der letzten 24 Std. laden …
+   38 von 38 Verläufen geladen
 
-                           Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €)        Land     Kurszeit                                           News
-                 CoreWeave, Inc. A413X6    56,36   -4,0 % -22,6 %               30,9         USA 15.10. 17:31            128: Ausverkauf 45, Gewinnwarnung 4
-            Skydance Corporation A412AL     6,56   +4,1 % -20,8 %               33,0         USA 15.10. 17:31         43: Ausverkauf 9, Übernahme / Fusion 2
-            Lenovo Group Limited A3ENBE     2,95  -14,5 % -19,6 %               36,7    Hongkong 15.10. 10:08         23: Ausverkauf 7, Zinsen / Notenbank 1
-          Dell Technologies Inc. A2N6WP   415,31   -8,4 % -19,0 %              263,8         USA 15.10. 17:31   62: Ausverkauf 13, Abstufung / Kursziel ↓ 11
-          Rocket Lab Corporation A419CG    47,36  -10,3 % -22,4 %               30,2         USA 15.10. 17:31           110: Ausverkauf 24, Quartalszahlen 2
-                       Flex Ltd. 890331    84,52   -5,6 % -17,5 %               31,2         USA 15.10. 17:31     34: Übernahme / Fusion 4, Quartalszahlen 1
-     Kioxia Holdings Corporation A2QB8W    82,90   -3,2 % -21,6 %               38,7       Japan 15.10. 08:30            39: Ausverkauf 19, Quartalszahlen 1
-                  Everpure, Inc. A14YFN   116,92   -7,4 % -13,0 %               39,1         USA 15.10. 17:31                          20: Kapitalerhöhung 1
-Hewlett Packard Enterprise Compa A140KD    52,39   -7,0 % -17,3 %               69,6         USA 15.10. 17:31     33: Abstufung / Kursziel ↓ 9, Ausverkauf 3
-               Nebius Group N.V. A1JGSL   156,88   -5,5 % -20,0 %               42,5 Niederlande 15.10. 17:31        45: Ausverkauf 11, Zinsen / Notenbank 2
-                  Coherent Corp. A3DQXS   219,32   -6,7 % -18,7 %               43,1         USA 15.10. 17:31             35: Quartalszahlen 6, Ausverkauf 2
-      Super Micro Computer, Inc. A40MRM    30,40   -4,8 % -20,4 %               19,9         USA 15.10. 17:31     78: Ausverkauf 6, Abstufung / Kursziel ↓ 2
-          Lumentum Holdings Inc. A14WK0   761,28   -4,8 % -18,6 %               68,8         USA 15.10. 17:31       28: Ausverkauf 2, Klage / Ermittlungen 1
-         Applied Materials, Inc. 865177   380,54   -4,5 % -16,3 %              301,2         USA 15.10. 17:31         41: Ausverkauf 4, Zinsen / Notenbank 1
-               Ciena Corporation A0LDA7   309,91   -3,4 % -18,5 %               43,9         USA 15.10. 17:31                                           14: 
-             Olympus Corporation 856840     9,93  -13,5 % -12,5 %               10,3       Japan 15.10. 08:30              11: Gewinnwarnung 1, Ausverkauf 1
-           Arista Networks, Inc. A40V33   162,87   -6,6 % -13,5 %              205,1         USA 15.10. 17:31 25: Übernahme / Fusion 5, Zinsen / Notenbank 1
-            ASM International NV 868730   764,60   -7,3 % -14,9 %               37,4 Niederlande 15.10. 17:16             16: Quartalszahlen 1, Ausverkauf 1
-        Lam Research Corporation A40L1V   242,22   -5,4 % -15,3 %              302,5         USA 15.10. 17:31        68: Quartalszahlen 3, Gewinnerwartung 1
-        Bloom Energy Corporation A2JQTG   206,69   -3,2 % -15,1 %               60,6         USA 15.10. 17:31             38: Ausverkauf 6, Quartalszahlen 4
-              Vertiv Holdings Co A2PZ5A   187,80   -5,6 % -13,7 %               72,4         USA 15.10. 17:31 21: Abstufung / Kursziel ↓ 3, Quartalszahlen 1
-        Marvell Technology, Inc. A3CNLD   210,93   -3,6 % -13,9 %              189,5         USA 15.10. 17:31                           26: Quartalszahlen 1
-            SoftBank Group Corp. A40D98    30,20   +0,8 % -15,0 %              156,1       Japan 15.10. 08:30        46: Ausverkauf 20, Zinsen / Notenbank 3
-               Sumco Corporation A0HGFA    17,38   -1,6 % -17,3 %                5,2       Japan 15.10. 08:30                                            0: 
-                  Teradyne, Inc. 859892   303,94   -5,2 % -14,6 %               47,5         USA 15.10. 17:31             13: Ausverkauf 1, Quartalszahlen 1
-     Keysight Technologies, Inc. A12B6J   299,15   -6,3 % -10,5 %               50,9         USA 15.10. 17:31                           15: Quartalszahlen 1
-            EchoStar Corporation A0NDYQ    75,66   -3,5 %  -9,2 %               21,9         USA 15.10. 17:31                                            9: 
-     Western Digital Corporation 863060   307,86   -5,3 % -12,3 %              115,2         USA 15.10. 17:31             44: Ausverkauf 8, Quartalszahlen 6
-       Comfort Systems USA, Inc. 907784 1.303,37   -5,3 % -14,4 %               45,9         USA 15.10. 17:31     17: Quartalszahlen 3, Zinsen / Notenbank 2
-                      Jabil Inc. 886423   252,97   -3,6 %  -5,2 %               26,5         USA 15.10. 17:31                            9: Quartalszahlen 1
-       Akamai Technologies, Inc. 928906    80,97   -1,1 % -10,1 %               11,6         USA 15.10. 17:31     16: Zinsen / Notenbank 2, Quartalszahlen 1
- Renesas Electronics Corporation 812960    18,90   -1,1 % -16,2 %               31,1       Japan 15.10. 08:30                                8: Ausverkauf 2
-                 Prysmian S.p.A. A0MP84   109,90   -2,9 % -10,1 %               32,9     Italien 15.10. 17:16                               10: Ausverkauf 3
-               Astera Labs, Inc. A404AF   260,65   -2,7 % -15,8 %               45,1         USA 15.10. 17:31             13: Ausverkauf 2, Quartalszahlen 1
-               Siemens Energy AG ENER6Y   131,80   -2,6 %  -7,5 %              112,2 Deutschland 15.10. 17:16         55: Ausverkauf 6, Zinsen / Notenbank 3
-                  ROHM Co., Ltd. 869082    25,85   +0,3 % -14,3 %                8,9       Japan 15.10. 08:30                                            0: 
- Seagate Technology Holdings plc A3CQU7   604,41   -5,1 % -12,6 %              137,2    Singapur 15.10. 17:31     17: Quartalszahlen 2, Zinsen / Notenbank 1
-           Generac Holdings Inc. A0YGR4   175,25   -0,8 % -12,5 %               10,3         USA 15.10. 17:31                   10: Abstufung / Kursziel ↓ 1
+=== Kursrutsch ≥10 % in 3 Tagen, Marktkap. > 5 Mrd. € (Stand 15.10.2026 17:40) ===
 
-Neu seit letztem Lauf: 2
+                           Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €)           Land     Kurszeit                                           News
+               Computacenter plc A14NH6    60,57   -6,3 %  -6,7 %                6,4 Großbritannien 15.10. 17:26                                           11: 
+            Lenovo Group Limited A3ENBE     2,95  -14,5 % -19,6 %               36,7       Hongkong 15.10. 10:08         23: Ausverkauf 7, Zinsen / Notenbank 1
+             Olympus Corporation 856840     9,93  -13,5 % -12,5 %               10,3          Japan 15.10. 08:30              12: Gewinnwarnung 1, Ausverkauf 1
+          Rocket Lab Corporation A419CG    47,16  -10,7 % -22,7 %               30,2            USA 15.10. 17:42           113: Ausverkauf 24, Quartalszahlen 2
+          Dell Technologies Inc. A2N6WP   418,03   -7,8 % -18,5 %              265,5            USA 15.10. 17:42   61: Ausverkauf 13, Abstufung / Kursziel ↓ 11
+            ASM International NV 868730   763,00   -7,5 % -15,1 %               37,2    Niederlande 15.10. 17:27             16: Quartalszahlen 1, Ausverkauf 1
+                  Everpure, Inc. A14YFN   117,82   -6,7 % -12,3 %               39,2            USA 15.10. 17:42                          20: Kapitalerhöhung 1
+                  Coherent Corp. A3DQXS   219,94   -6,4 % -18,5 %               43,2            USA 15.10. 17:42             35: Quartalszahlen 6, Ausverkauf 2
+     Keysight Technologies, Inc. A12B6J   299,63   -6,1 % -10,4 %               51,0            USA 15.10. 17:42                           18: Quartalszahlen 1
+Hewlett Packard Enterprise Compa A140KD    52,93   -6,0 % -16,4 %               70,3            USA 15.10. 17:42     32: Abstufung / Kursziel ↓ 9, Ausverkauf 3
+           Arista Networks, Inc. A40V33   163,98   -5,9 % -12,9 %              206,7            USA 15.10. 17:42 26: Übernahme / Fusion 5, Zinsen / Notenbank 1
+              Vertiv Holdings Co A2PZ5A   187,45   -5,7 % -13,8 %               72,1            USA 15.10. 17:42 22: Abstufung / Kursziel ↓ 3, Quartalszahlen 1
+       Comfort Systems USA, Inc. 907784 1.297,87   -5,6 % -14,8 %               45,7            USA 15.10. 17:42     17: Quartalszahlen 3, Zinsen / Notenbank 2
+                  Teradyne, Inc. 859892   303,47   -5,4 % -14,7 %               47,3            USA 15.10. 17:42             14: Ausverkauf 1, Quartalszahlen 1
+                       Flex Ltd. 890331    84,73   -5,4 % -17,2 %               31,3            USA 15.10. 17:42     34: Übernahme / Fusion 4, Quartalszahlen 1
+        Lam Research Corporation A40L1V   242,63   -5,2 % -15,2 %              303,6            USA 15.10. 17:42        67: Quartalszahlen 3, Gewinnerwartung 1
+     Western Digital Corporation 863060   308,25   -5,1 % -12,2 %              115,1            USA 15.10. 17:42             42: Ausverkauf 8, Quartalszahlen 6
+               Nebius Group N.V. A1JGSL   157,79   -4,9 % -19,5 %               42,9    Niederlande 15.10. 17:42         42: Ausverkauf 8, Zinsen / Notenbank 1
+      Super Micro Computer, Inc. A40MRM    30,49   -4,5 % -20,1 %               19,7            USA 15.10. 17:42             78: Ausverkauf 4, Quartalszahlen 2
+          Lumentum Holdings Inc. A14WK0   764,08   -4,5 % -18,3 %               69,2            USA 15.10. 17:42       28: Ausverkauf 2, Klage / Ermittlungen 1
+         Applied Materials, Inc. 865177   381,66   -4,2 % -16,1 %              302,9            USA 15.10. 17:42         42: Ausverkauf 4, Zinsen / Notenbank 1
+            EchoStar Corporation A0NDYQ    75,52   -3,7 %  -9,3 %               22,0            USA 15.10. 17:42                                            9: 
+        Marvell Technology, Inc. A3CNLD   211,09   -3,5 % -13,8 %              189,5            USA 15.10. 17:42                           27: Quartalszahlen 1
+        Bloom Energy Corporation A2JQTG   206,54   -3,3 % -15,1 %               60,8            USA 15.10. 17:42             36: Ausverkauf 6, Quartalszahlen 4
+                      Jabil Inc. 886423   253,67   -3,3 %  -5,0 %               26,5            USA 15.10. 17:42                            9: Quartalszahlen 1
+     Kioxia Holdings Corporation A2QB8W    82,90   -3,2 % -21,6 %               38,7          Japan 15.10. 08:30        39: Ausverkauf 18, Zinsen / Notenbank 1
+                 CoreWeave, Inc. A413X6    56,86   -3,1 % -21,9 %               31,3            USA 15.10. 17:42            128: Ausverkauf 45, Gewinnwarnung 4
+                 Prysmian S.p.A. A0MP84   109,95   -2,8 % -10,1 %               32,9        Italien 15.10. 17:27                               10: Ausverkauf 3
+               Siemens Energy AG ENER6Y   131,60   -2,7 %  -7,6 %              111,9    Deutschland 15.10. 17:27         55: Ausverkauf 6, Zinsen / Notenbank 3
+               Ciena Corporation A0LDA7   312,43   -2,6 % -17,8 %               44,1            USA 15.10. 17:42                                           14: 
+               Astera Labs, Inc. A404AF   260,98   -2,6 % -15,7 %               45,1            USA 15.10. 17:42             12: Ausverkauf 2, Quartalszahlen 1
+               Sumco Corporation A0HGFA    17,38   -1,6 % -17,3 %                5,2          Japan 15.10. 08:30                                            0: 
+           Generac Holdings Inc. A0YGR4   174,51   -1,2 % -12,8 %               10,3            USA 15.10. 17:42                   10: Abstufung / Kursziel ↓ 1
+ Renesas Electronics Corporation 812960    18,90   -1,1 % -16,2 %               31,1          Japan 15.10. 08:30                               11: Ausverkauf 2
+       Akamai Technologies, Inc. 928906    81,17   -0,8 %  -9,8 %               11,6            USA 15.10. 17:42     15: Zinsen / Notenbank 3, Quartalszahlen 1
+                  ROHM Co., Ltd. 869082    25,85   +0,3 % -14,3 %                8,9          Japan 15.10. 08:30                                            0: 
+            SoftBank Group Corp. A40D98    30,20   +0,8 % -15,0 %              156,1          Japan 15.10. 08:30        47: Ausverkauf 20, Zinsen / Notenbank 3
+            Skydance Corporation A412AL     6,59   +4,6 % -20,4 %               33,2            USA 15.10. 17:42         42: Ausverkauf 9, Übernahme / Fusion 2
+
+Neu seit letztem Lauf: 1
 Seite geschrieben: docs/index.html
 Push-Nachricht gesendet.
