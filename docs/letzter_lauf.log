@@ -81,104 +81,68 @@ $ECV.DE: No data found, symbol may be delisted
   WAF.DE     Siltronic AG
 
 4) WKN ermitteln …
-  WKN nicht gefunden für Kioxia Holdings Corporation – 'Kioxia': TypeError; 'Kioxia Holdings Corporation': TypeError; '285A': TypeError
-  WKN nicht gefunden für Sumco Corporation – 'Sumco': TypeError; 'Sumco Corporation': TypeError; '3436': TypeError
-  WKN nicht gefunden für Resonac Holdings Corporation – 'Resonac': TypeError; 'Resonac Holdings Corporation': TypeError; '4004': TypeError
-  WKN nicht gefunden für Mitsui Kinzoku Company, Limited – 'Mitsui Kinzoku': TypeError; 'Mitsui Kinzoku Company, Limited': TypeError; '5706': TypeError
-  WKN nicht gefunden für Furukawa Electric Co., Ltd. – 'Furukawa Electric': TypeError; 'Furukawa Electric Co., Ltd.': TypeError; '5801': TypeError
-  WKN nicht gefunden für Sumitomo Electric Industries, Ltd. – 'Sumitomo Electric Industries': TypeError; 'Sumitomo Electric Industries, Ltd.': TypeError; '5802': TypeError
-  WKN nicht gefunden für Disco Corporation – 'Disco': TypeError; 'Disco Corporation': TypeError; '6146': TypeError
-  WKN nicht gefunden für Ebara Corporation – 'Ebara': TypeError; 'Ebara Corporation': TypeError; '6361': TypeError
-  WKN nicht gefunden für YASKAWA Electric Corporation – 'YASKAWA Electric': TypeError; 'YASKAWA Electric Corporation': TypeError; '6506': TypeError
-  WKN nicht gefunden für Renesas Electronics Corporation – 'Renesas Electronics': TypeError; 'Renesas Electronics Corporation': TypeError; '6723': TypeError
-  WKN nicht gefunden für Panasonic Holdings Corporation – 'Panasonic': TypeError; 'Panasonic Holdings Corporation': TypeError; '6752': TypeError
-  WKN nicht gefunden für TDK Corporation – 'JP3457600009': TypeError; 'TDK': TypeError; 'TDK Corporation': TypeError; '6762': TypeError
-  WKN nicht gefunden für Advantest Corporation – 'Advantest': TypeError; 'Advantest Corporation': TypeError; '6857': TypeError
-  WKN nicht gefunden für Lasertec Corporation – 'Lasertec': TypeError; 'Lasertec Corporation': TypeError; '6920': TypeError
-  WKN nicht gefunden für ROHM Co., Ltd. – 'JP3190600001': TypeError; 'ROHM': TypeError; 'ROHM Co., Ltd.': TypeError; '6963': TypeError
-  WKN nicht gefunden für Taiyo Yuden Co., Ltd. – 'Taiyo Yuden': TypeError; 'Taiyo Yuden Co., Ltd.': TypeError; '6976': TypeError
-  WKN nicht gefunden für Murata Manufacturing Co., Ltd. – 'Murata Manufacturing': TypeError; 'Murata Manufacturing Co., Ltd.': TypeError; '6981': TypeError
-  WKN nicht gefunden für Olympus Corporation – 'Olympus': TypeError; 'Olympus Corporation': TypeError; '7733': TypeError
-  WKN nicht gefunden für SCREEN Holdings Co., Ltd. – 'SCREEN': TypeError; 'SCREEN Holdings Co., Ltd.': TypeError; '7735': TypeError
-  WKN nicht gefunden für Akamai Technologies, Inc. – 'Akamai Technologies': TypeError; 'Akamai Technologies, Inc.': TypeError; 'AKAM': TypeError
-  WKN nicht gefunden für ASM International NV – 'ASM International': TypeError; 'ASM International NV': TypeError; 'ASM': TypeError
-  WKN nicht gefunden für Bloom Energy Corporation – 'Bloom Energy': TypeError; 'Bloom Energy Corporation': TypeError; 'BE': TypeError
-  WKN nicht gefunden für Computacenter plc – 'Computacenter': TypeError; 'Computacenter plc': TypeError; 'CCC': TypeError
-  WKN nicht gefunden für Ciena Corporation – 'Ciena': TypeError; 'Ciena Corporation': TypeError; 'CIEN': TypeError
-  WKN nicht gefunden für CoreWeave, Inc. – 'CoreWeave': TypeError; 'CoreWeave, Inc.': TypeError; 'CRWV': TypeError
-  WKN nicht gefunden für Siemens Energy AG – 'Siemens Energy': TypeError; 'Siemens Energy AG': TypeError; 'ENR': TypeError
-  WKN nicht gefunden für Corning Incorporated – 'Corning': TypeError; 'Corning Incorporated': TypeError; 'GLW': TypeError
-  WKN nicht gefunden für Hewlett Packard Enterprise Company – 'Hewlett Packard Enterprise': TypeError; 'Hewlett Packard Enterprise Company': TypeError; 'HPE': TypeError
-  WKN nicht gefunden für Infineon Technologies AG – 'Infineon Technologies': TypeError; 'Infineon Technologies AG': TypeError; 'IFX': TypeError
-  WKN nicht gefunden für Lam Research Corporation – 'Lam Research': TypeError; 'Lam Research Corporation': TypeError; 'LRCX': TypeError
-  WKN nicht gefunden für Marvell Technology, Inc. – 'Marvell Technology': TypeError; 'Marvell Technology, Inc.': TypeError; 'MRVL': TypeError
-  WKN nicht gefunden für Nebius Group N.V. – 'AR0321947183': TypeError; 'Nebius': TypeError; 'Nebius Group N.V.': TypeError; 'NBIS': TypeError
-  WKN nicht gefunden für Prysmian S.p.A. – 'Prysmian': TypeError; 'Prysmian S.p.A.': TypeError; 'PRY': TypeError
-  WKN nicht gefunden für Skydance Corporation – 'Skydance': TypeError; 'Skydance Corporation': TypeError; 'SKYD': TypeError
-  WKN nicht gefunden für STMicroelectronics N.V. – 'STMicroelectronics': TypeError; 'STMicroelectronics N.V.': TypeError; 'STMMI': TypeError
-  WKN nicht gefunden für STMicroelectronics N.V. – 'STMicroelectronics': TypeError; 'STMicroelectronics N.V.': TypeError; 'STMPA': TypeError
 
-=== Kursrutsch ≥10 % in 3 Tagen, Marktkap. > 5 Mrd. € (Stand 15.10.2026 15:23) ===
+=== Kursrutsch ≥10 % in 3 Tagen, Marktkap. > 5 Mrd. € (Stand 15.10.2026 15:27) ===
 
                            Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €)
-     Kioxia Holdings Corporation      –    72,86  -12,3 % -28,0 %               38,8
-            Skydance Corporation      –     6,30  -23,8 % -20,6 %               31,7
-               Sumco Corporation      –    15,00  -13,9 % -28,0 %                5,2
-               Ciena Corporation      –   320,73  -10,2 % -19,5 %               45,5
-                 CoreWeave, Inc.      –    58,67  -15,5 % -25,6 %               32,4
+     Kioxia Holdings Corporation A2QB8W    72,85  -12,3 % -28,0 %               38,8
+            Skydance Corporation A412AL     6,30  -23,8 % -20,6 %               31,7
+               Sumco Corporation A0HGFA    15,00  -13,9 % -28,0 %                5,2
+               Ciena Corporation A0LDA7   320,66  -10,2 % -19,5 %               45,5
+                 CoreWeave, Inc. A413X6    58,66  -15,5 % -25,6 %               32,4
             Lenovo Group Limited A3ENBE     2,95  -14,5 % -19,6 %               36,6
-            Lasertec Corporation      –   221,86  -13,6 % -16,0 %               19,9
-          Lumentum Holdings Inc. A14WK0   799,44   -9,3 % -19,3 %               72,4
-       SCREEN Holdings Co., Ltd.      –    76,73  -10,6 % -14,8 %               14,5
-                  ROHM Co., Ltd.      –    22,99  -11,3 % -24,4 %                8,9
-     Furukawa Electric Co., Ltd.      –    19,10  -13,1 % -24,0 %               13,4
-           Advantest Corporation      –   194,25  -15,0 % -16,8 %              140,2
+            Lasertec Corporation 887360   221,83  -13,6 % -16,0 %               19,9
+          Lumentum Holdings Inc. A14WK0   799,26   -9,3 % -19,3 %               72,4
+       SCREEN Holdings Co., Ltd. 859619    76,72  -10,6 % -14,8 %               14,5
+                  ROHM Co., Ltd. 869082    22,99  -11,3 % -24,4 %                8,9
+     Furukawa Electric Co., Ltd. 854857    19,09  -13,1 % -24,0 %               13,4
+           Advantest Corporation 868805   194,23  -15,0 % -16,8 %              140,2
           Tokyo Electron Limited 257110    58,63   -7,8 % -17,1 %               26,6
-            SoftBank Group Corp. A40D98    27,45   -9,3 % -23,1 %              156,4
- Renesas Electronics Corporation      –    17,05  -10,0 % -23,2 %               31,2
-                       Flex Ltd. 890331    89,50   -9,5 % -15,9 %               33,1
+            SoftBank Group Corp. A40D98    27,44   -9,3 % -23,1 %              156,4
+ Renesas Electronics Corporation 812960    17,05  -10,0 % -23,2 %               31,2
+                       Flex Ltd. 890331    89,48   -9,5 % -15,9 %               33,1
                    Fujikura Ltd. 876144    25,68  -12,7 % -20,4 %               42,5
-               Nebius Group N.V.      –   165,90  -10,1 % -21,6 %               45,1
-                  Coherent Corp. A3DQXS   234,86   -9,2 % -21,3 %               46,3
-             Olympus Corporation      –     9,74   -2,2 % -13,9 %               10,3
-  Murata Manufacturing Co., Ltd.      –    38,18  -10,0 % -22,3 %               69,1
- Mitsui Kinzoku Company, Limited      –    12,78  -13,1 % -18,6 %                7,3
-        Bloom Energy Corporation      –   213,47   -9,2 % -17,8 %               62,9
-      Super Micro Computer, Inc. A40MRM    31,91   -8,4 % -20,4 %               21,0
-    Resonac Holdings Corporation      –    84,99   -8,9 % -16,9 %               16,1
-       Akamai Technologies, Inc.      –    81,80   -8,2 % -12,3 %               11,8
-Hewlett Packard Enterprise Compa      –    56,29   -8,3 % -12,5 %               74,7
-            ASM International NV      –   754,80   -8,5 % -16,0 %               36,8
-               Ebara Corporation      –    23,41  -10,5 % -14,4 %               10,7
-               Disco Corporation      –   300,82   -8,5 % -13,4 %               32,6
-          Dell Technologies Inc. A2N6WP   453,02  -11,3 % -12,3 %              288,0
-          Rocket Lab Corporation A419CG    52,78   -7,8 % -17,7 %               33,7
-         STMicroelectronics N.V.      –    39,87   -7,3 % -16,9 %               35,7
-                 Antofagasta plc 564734    39,39   -6,7 %  -7,6 %               38,9
-               Astera Labs, Inc. A404AF   267,82   -7,7 % -21,4 %               46,5
-               Siemens Energy AG      –   129,16   -4,5 %  -9,4 %              110,0
-           Generac Holdings Inc. A0YGR4   176,65   -7,6 % -10,5 %               10,4
-                 Prysmian S.p.A.      –   107,85   -4,7 % -11,8 %               32,2
-         Applied Materials, Inc. 865177   398,35   -3,8 % -14,2 %              316,1
-    YASKAWA Electric Corporation      –    24,18   -9,3 % -13,6 %                6,3
-           Taiyo Yuden Co., Ltd.      –    55,80  -10,1 % -13,9 %                7,4
-        Infineon Technologies AG      –    50,71   -8,4 % -13,9 %               65,9
-             Sandisk Corporation A429HK 1.251,64   -5,3 % -17,1 %              180,9
-               Computacenter plc      –    59,81   -7,4 %  -7,8 %                6,3
-                 TDK Corporation      –    16,42   -7,9 % -17,7 %               31,2
-         Micron Technology, Inc. 869020   815,31   -4,1 % -16,0 %              922,5
-  Panasonic Holdings Corporation      –    22,42   -7,0 % -15,1 %               52,3
-            MINEBEA MITSUMI Inc. A3D9VL    18,40   -8,0 % -15,5 %                7,4
-        Marvell Technology, Inc.      –   218,77   -8,7 % -13,8 %              196,6
-                  Teradyne, Inc. 859892   320,58   -5,5 % -12,7 %               50,1
-Sumitomo Electric Industries, Lt      –    11,92   -9,1 % -15,1 %               37,2
-                Arm Holdings plc A3EUCD   212,28   -6,8 % -19,1 %              226,7
-        Palo Alto Networks, Inc. A1JZ0Q   334,50   -5,5 %  -7,5 %              273,6
-  Monolithic Power Systems, Inc. A0DLC4 1.108,73   -5,8 % -12,8 %               54,5
-       Comfort Systems USA, Inc. 907784 1.375,02   -5,2 % -11,5 %               48,4
-            Corning Incorporated      –   125,66   -5,2 % -13,7 %              108,2
-        Lam Research Corporation      –   255,90   -4,7 % -12,9 %              320,2
+               Nebius Group N.V. A1JGSL   165,87  -10,1 % -21,6 %               45,1
+                  Coherent Corp. A3DQXS   234,80   -9,2 % -21,3 %               46,2
+             Olympus Corporation 856840     9,73   -2,2 % -13,9 %               10,3
+  Murata Manufacturing Co., Ltd. 853657    38,17  -10,0 % -22,3 %               69,1
+ Mitsui Kinzoku Company, Limited 860971    12,78  -13,1 % -18,6 %                7,3
+        Bloom Energy Corporation A2JQTG   213,42   -9,2 % -17,8 %               62,9
+      Super Micro Computer, Inc. A40MRM    31,91   -8,4 % -20,4 %               20,6
+    Resonac Holdings Corporation 859554    84,98   -8,9 % -16,9 %               16,1
+       Akamai Technologies, Inc. 928906    81,78   -8,2 % -12,3 %               11,8
+Hewlett Packard Enterprise Compa A140KD    56,28   -8,3 % -12,5 %               74,7
+            ASM International NV 868730   753,20   -8,7 % -16,2 %               36,7
+               Ebara Corporation 858656    23,40  -10,5 % -14,4 %               10,7
+               Disco Corporation A42FT5   300,79   -8,5 % -13,4 %               32,6
+          Dell Technologies Inc. A2N6WP   452,92  -11,3 % -12,3 %              288,0
+          Rocket Lab Corporation A419CG    52,77   -7,8 % -17,7 %               33,7
+         STMicroelectronics N.V. 893438    39,85   -7,4 % -17,0 %               35,6
+                 Antofagasta plc 564734    39,39   -6,7 %  -7,6 %               38,8
+               Astera Labs, Inc. A404AF   267,76   -7,7 % -21,4 %               46,5
+                 Prysmian S.p.A. A0MP84   107,60   -4,9 % -12,0 %               32,2
+               Siemens Energy AG ENER6Y   129,18   -4,5 %  -9,3 %              110,0
+           Generac Holdings Inc. A0YGR4   176,61   -7,6 % -10,5 %               10,4
+         Applied Materials, Inc. 865177   398,26   -3,8 % -14,2 %              316,1
+    YASKAWA Electric Corporation 857658    24,17   -9,3 % -13,6 %                6,3
+        Infineon Technologies AG 623100    50,66   -8,5 % -14,0 %               65,8
+           Taiyo Yuden Co., Ltd. 863428    55,79  -10,1 % -13,9 %                7,4
+             Sandisk Corporation A429HK 1.251,36   -5,3 % -17,1 %              180,9
+                 TDK Corporation 857032    16,42   -7,9 % -17,7 %               31,2
+               Computacenter plc A14NH6    59,81   -7,4 %  -7,7 %                6,3
+         Micron Technology, Inc. 869020   815,13   -4,1 % -16,0 %              922,3
+  Panasonic Holdings Corporation 853666    22,42   -7,0 % -15,1 %               52,3
+            MINEBEA MITSUMI Inc. A3D9VL    18,39   -8,0 % -15,5 %                7,4
+        Marvell Technology, Inc. A3CNLD   218,72   -8,7 % -13,8 %              196,6
+                  Teradyne, Inc. 859892   320,51   -5,5 % -12,7 %               50,1
+Sumitomo Electric Industries, Lt 857716    11,92   -9,1 % -15,1 %               37,2
+                Arm Holdings plc A3EUCD   212,23   -6,8 % -19,1 %              226,7
+        Palo Alto Networks, Inc. A1JZ0Q   334,42   -5,5 %  -7,5 %              273,6
+  Monolithic Power Systems, Inc. A0DLC4 1.108,48   -5,8 % -12,8 %               54,5
+       Comfort Systems USA, Inc. 907784 1.374,72   -5,2 % -11,5 %               48,4
+            Corning Incorporated 850808   125,63   -5,2 % -13,7 %              108,0
+        Lam Research Corporation A40L1V   255,85   -4,7 % -12,9 %              320,2
 
-Neu seit letztem Lauf: 0
+Neu seit letztem Lauf: 1
 Seite geschrieben: docs/index.html
 Hinweis: NTFY_TOPIC ist nicht gesetzt – keine Push-Nachricht.
