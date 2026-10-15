@@ -502,7 +502,9 @@ def main():
 
     if state_path:
         state_path.parent.mkdir(parents=True, exist_ok=True)
-        state_path.write_text(json.dumps({"letzter_lauf": str(jetzt.date()),
+        # Nur geplante Läufe zählen als "heutiger Lauf"; manuelle Starts blockieren den 17-Uhr-Lauf nicht
+        letzter = str(jetzt.date()) if a.einmal_taeglich_ab is not None else state.get("letzter_lauf")
+        state_path.write_text(json.dumps({"letzter_lauf": letzter,
                                           "ticker": sorted(jetzt_set)}, indent=1))
 
 
