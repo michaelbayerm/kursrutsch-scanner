@@ -42,8 +42,8 @@ CACHE_DIR.mkdir(parents=True, exist_ok=True)
 INDIZES = {
     "S&P 500":       dict(url="https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
                           cols=["Symbol"], style="us"),
-    "Nasdaq-100":    dict(url="https://en.wikipedia.org/wiki/Nasdaq-100",
-                          cols=["Ticker", "Symbol"], style="us"),
+    "Nasdaq-100":    dict(url="https://api.nasdaq.com/api/quote/list-type/nasdaq100",
+                          cols=[], style="us", nasdaq_api=True),
     "DAX":           dict(url="https://en.wikipedia.org/wiki/DAX",
                           cols=["Ticker", "Symbol"], suffix=".DE"),
     "MDAX":          dict(url="https://en.wikipedia.org/wiki/MDAX",
@@ -67,7 +67,7 @@ INDIZES = {
                           regex=r"SEHK\s*:\s*(\d{1,5})"),
     "Nikkei 225":    dict(url="https://en.wikipedia.org/wiki/Nikkei_225",
                           cols=["Code", "Ticker", "Symbol"], style="jp",
-                          regex=r"(?:TYO|TSE)\s*:\s*(\d{4})"),
+                          regex=r"(?:TYO|TSE)\s*:\s*([0-9][0-9A-Z]{3})\b"),
 }
 
 # Währungen, in denen Yahoo Kurse in Hundertsteln angibt
@@ -94,8 +94,8 @@ def normalize(raw, cfg):
         d = re.sub(r"\D", "", s)
         return f"{int(d):04d}.HK" if d else None
     if style == "jp":
-        d = re.sub(r"\D", "", s)
-        return f"{d}.T" if len(d) == 4 else None
+        d = s.upper().split(".")[0]
+        return f"{d}.T" if re.fullmatch(r"[0-9][0-9A-Z]{3}", d) else None
     if style == "lse":
         if s.upper().endswith(".L"):
             s = s[:-2]
@@ -108,6 +108,13 @@ def normalize(raw, cfg):
 
 
 def fetch_index(cfg):
+    if cfg.get("nasdaq_api"):
+        r = requests.get(cfg["url"], timeout=30, headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                          "(KHTML, like Gecko) Chrome/130.0 Safari/537.36",
+            "Accept": "application/json, text/plain, */*"})
+        rows = ((r.json().get("data") or {}).get("data") or {}).get("rows") or []
+        return {t for t in (normalize(x.get("symbol"), cfg) for x in rows) if t}
     page = requests.get(cfg["url"], headers=HEADERS, timeout=30).text
     best = set()
     try:
@@ -124,7 +131,8 @@ def fetch_index(cfg):
                     best = found
                 break
     if len(best) < 5 and cfg.get("regex"):
-        best |= {t for t in (normalize(m, cfg) for m in re.findall(cfg["regex"], page)) if t}
+        text = re.sub(r"<[^>]+>", "", page).replace("&#160;", " ").replace("&nbsp;", " ")
+        best |= {t for t in (normalize(m, cfg) for m in re.findall(cfg["regex"], text)) if t}
     return best
 
 
@@ -217,7 +225,11 @@ WKN_CACHE = CACHE_DIR / "wkn.json"
 
 
 def lookup_wkn(isin, name, cache):
+    isin = isin if isinstance(isin, str) and isin.strip() else None
+    name = name if isinstance(name, str) and name.strip() else None
     key = isin or name
+    if not key:
+        return "–"
     if key in cache:
         return cache[key]
     wkn = None
@@ -308,7 +320,8 @@ def write_html(path, df, neu, a, stand):
         cards = []
         for _, r in df.iterrows():
             badge = '<span class="neu">NEU</span>' if r["ticker"] in neu else ""
-            link = f'https://www.onvista.de/suche/?searchValue={html.escape(r["isin"] or r["wkn"] or "")}'
+            such = r["isin"] if isinstance(r["isin"], str) else (r["wkn"] if r["wkn"] != "–" else r["titel"])
+            link = f'https://www.onvista.de/suche/?searchValue={html.escape(str(such))}'
             cards.append(f"""
 <a class="card" href="{link}">
   <div class="kopf"><span class="titel">{html.escape(str(r['titel']))}</span>{badge}</div>
@@ -400,7 +413,10 @@ def scan(a):
     df["wkn"] = [lookup_wkn(i, n, wkn_cache) for i, n in zip(df["isin"], df["titel"])]
     WKN_CACHE.write_text(json.dumps(wkn_cache, ensure_ascii=False, indent=0))
     df["index"] = df["ticker"].map(mapping)
-    return df.sort_values("fall")
+    df = df.sort_values("fall")
+    # Doppelt gelistete Aktien (z. B. Mailand + Paris) nur einmal zeigen
+    df["_key"] = df["isin"].where(df["isin"].notna(), df["titel"])
+    return df.drop_duplicates("_key").drop(columns="_key")
 
 
 def main():
