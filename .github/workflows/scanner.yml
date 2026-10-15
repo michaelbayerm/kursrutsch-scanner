@@ -20,9 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
@@ -38,9 +38,11 @@ jobs:
         run: |
           EXTRA="--einmal-taeglich-ab 17"
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then EXTRA=""; fi
-          python aktien_crash_scanner.py --html docs/index.html --state docs/state.json $EXTRA
+          set -o pipefail
+          python -u aktien_crash_scanner.py --html docs/index.html --state docs/state.json $EXTRA 2>&1 | tee docs/letzter_lauf.log
 
       - name: Ergebnis speichern
+        if: always()
         run: |
           git config user.name "scanner-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
