@@ -84,24 +84,24 @@ $ECV.DE: No data found, symbol may be delisted
 
 5) Kurse an deutscher Börse (Stuttgart › Frankfurt › München) …
   Kurse 1–144 von 144 …
-HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: US1999081045.F"}}}
-$US23804L1035.MU: No data found, symbol may be delisted
-$US1999081045.F: No data found, symbol may be delisted
-$US23804L1035.F: No data found, symbol may be delisted
-$NIB1.MU: No data found, symbol may be delisted
-$S3X0.SG: No data found, symbol may be delisted
-$FG10.SG: No data found, symbol may be delisted
-$ENR.SG: No data found, symbol may be delisted
-$1KT.MU: No data found, symbol may be delisted
 $49V.SG: No data found, symbol may be delisted
-$US1999081045.MU: No data found, symbol may be delisted
-$NIB1.SG: No data found, symbol may be delisted
 $S3X0.F: No data found, symbol may be delisted
+$NIB1.SG: No data found, symbol may be delisted
+$ENR.SG: No data found, symbol may be delisted
+$US1999081045.F: No data found, symbol may be delisted
+$FG10.SG: No data found, symbol may be delisted
 $FG10.MU: No data found, symbol may be delisted
+$US1999081045.MU: No data found, symbol may be delisted
+$NIB1.MU: No data found, symbol may be delisted
+$1KT.MU: No data found, symbol may be delisted
+$US23804L1035.F: No data found, symbol may be delisted
+$US23804L1035.MU: No data found, symbol may be delisted
+$S3X0.SG: No data found, symbol may be delisted
 
 13 Failed downloads:
-['US23804L1035.MU', 'US1999081045.F', 'US23804L1035.F', 'NIB1.MU', 'S3X0.SG', 'FG10.SG', 'ENR.SG', '1KT.MU', '49V.SG', 'US1999081045.MU', 'NIB1.SG', 'S3X0.F', 'FG10.MU']: No data found, symbol may be delisted
-   45 von 58 Titeln mit deutschem Börsenkurs (Stuttgart: 36, Frankfurt: 8, München: 1)
+['49V.SG', 'S3X0.F', 'NIB1.SG', 'ENR.SG', 'US1999081045.F', 'FG10.SG', 'FG10.MU', 'US1999081045.MU', 'NIB1.MU', '1KT.MU', 'US23804L1035.F', 'US23804L1035.MU', 'S3X0.SG']: No data found, symbol may be delisted
+   Unplausibel, verworfen: S3X0.MU (30,80 € statt ~17,37 €), NIB1.F (2,50 € statt ~10,95 €)
+   43 von 58 Titeln mit deutschem Börsenkurs (Stuttgart: 35, Frankfurt: 8, München: 0)
    38 Titel erfüllen ≥10 % Verlust auf Basis der deutschen Kurse
 
 6) Nachrichten der letzten 24 Std. auswerten …
@@ -109,35 +109,35 @@ $FG10.MU: No data found, symbol may be delisted
 7) Wochenverläufe laden …
    25 von 25 Verläufen geladen
 
-=== Kursrutsch ≥10 % in 3 Tagen, Marktkap. > 5 Mrd. € (Stand 15.10.2026 18:11) ===
+=== Kursrutsch ≥10 % in 3 Tagen, Marktkap. > 5 Mrd. € (Stand 15.10.2026 18:15) ===
 
                            Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €)          Börse        Land     Kurszeit                                           News
-  Murata Manufacturing Co., Ltd. 853657    38,60   -7,2 % -16,4 %               68,9      Stuttgart       Japan 15.10. 17:47                                            8: 
-          Tokyo Electron Limited 257110    58,31   -5,4 % -12,6 %               26,6      Stuttgart       Japan 15.10. 17:46        36: Ausverkauf 14, Zinsen / Notenbank 4
-                    NetApp, Inc. A0NHKR   192,46   -3,1 %  -6,2 %               38,0      Stuttgart         USA 15.10. 17:47     35: Abstufung / Kursziel ↓ 7, Ausverkauf 3
-           Generac Holdings Inc. A0YGR4   173,80   -1,9 % -12,6 %               10,3      Stuttgart         USA 15.10. 17:47                   10: Abstufung / Kursziel ↓ 1
-            Skydance Corporation A412AL     6,55  -20,7 % -17,0 %               32,7      Stuttgart         USA 14.10. 08:55        43: Ausverkauf 10, Übernahme / Fusion 2
-               Sumco Corporation A0HGFA    30,80  -13,0 % -24,1 %                5,2        München       Japan 15.10. 08:03                                            0: 
-          Rocket Lab Corporation A419CG    46,95  -11,2 % -23,2 %               30,1      Stuttgart         USA 15.10. 17:46           117: Ausverkauf 26, Quartalszahlen 2
-                  ROHM Co., Ltd. 869082    22,94   -9,2 % -18,5 %                8,9      Stuttgart       Japan 15.10. 17:46                                            0: 
-            EchoStar Corporation A0NDYQ    74,14   -8,3 % -14,0 %               21,8      Frankfurt         USA 15.10. 15:33                                            8: 
-                  Everpure, Inc. A14YFN   117,00   -7,7 % -13,0 %               39,5      Stuttgart         USA 15.10. 17:47                          19: Kapitalerhöhung 1
-          Dell Technologies Inc. A2N6WP   419,25   -7,4 % -18,0 %              265,4      Stuttgart         USA 15.10. 17:50   60: Ausverkauf 13, Abstufung / Kursziel ↓ 11
-     Keysight Technologies, Inc. A12B6J   298,00   -7,2 % -10,7 %               50,8      Stuttgart         USA 15.10. 17:46         21: Ausverkauf 1, Zinsen / Notenbank 1
- Renesas Electronics Corporation 812960    17,14   -7,2 % -16,0 %               31,1      Stuttgart       Japan 15.10. 17:47                               11: Ausverkauf 1
-                  Coherent Corp. A3DQXS   218,76   -6,9 % -18,9 %               43,0 NYSE (umgerech         USA 15.10. 18:12             34: Quartalszahlen 6, Ausverkauf 1
-Hewlett Packard Enterprise Compa A140KD    52,82   -6,7 % -16,4 %               70,4      Stuttgart         USA 15.10. 17:47    37: Abstufung / Kursziel ↓ 10, Ausverkauf 5
-           Arista Networks, Inc. A40V33   163,36   -6,6 % -12,8 %              206,4      Stuttgart         USA 15.10. 17:47 28: Übernahme / Fusion 5, Zinsen / Notenbank 1
-                  Teradyne, Inc. 859892   301,75   -6,5 % -15,0 %               47,2      Stuttgart         USA 15.10. 17:56             12: Ausverkauf 1, Quartalszahlen 1
-               Nebius Group N.V. A1JGSL   156,08   -6,0 % -20,3 %               42,8      Stuttgart Niederlande 15.10. 17:56         39: Ausverkauf 8, Zinsen / Notenbank 1
-       Comfort Systems USA, Inc. 907784 1.293,48   -6,0 % -15,1 %               45,5 NYSE (umgerech         USA 15.10. 18:13     17: Quartalszahlen 3, Zinsen / Notenbank 2
-                       Flex Ltd. 890331    84,27   -5,9 % -17,7 %               31,1 NasdaqGS (umge         USA 15.10. 18:12     31: Übernahme / Fusion 4, Quartalszahlen 1
-               Astera Labs, Inc. A404AF   258,00   -5,8 % -18,1 %               44,8      Frankfurt         USA 15.10. 13:00             12: Ausverkauf 2, Quartalszahlen 1
-            ASM International NV 868730   766,40   -5,8 % -13,1 %               37,4      Stuttgart Niederlande 15.10. 17:47             16: Quartalszahlen 1, Ausverkauf 1
-     Western Digital Corporation 863060   306,70   -5,7 % -12,4 %              115,5      Stuttgart         USA 15.10. 17:47             46: Ausverkauf 8, Quartalszahlen 6
-        Lam Research Corporation A40L1V   242,60   -5,6 % -15,0 %              305,6      Stuttgart         USA 15.10. 17:48        67: Quartalszahlen 3, Gewinnerwartung 1
+ Seagate Technology Holdings plc A3CQU7   604,00   -5,9 % -14,0 %              137,3      Frankfurt    Singapur 15.10. 14:35                           18: Quartalszahlen 1
+            Skydance Corporation A412AL     6,55  -20,7 % -17,0 %               32,4      Stuttgart         USA 14.10. 08:55        44: Ausverkauf 10, Übernahme / Fusion 2
+          Rocket Lab Corporation A419CG    47,65   -9,9 % -22,0 %               30,1      Stuttgart         USA 15.10. 18:01           117: Ausverkauf 24, Quartalszahlen 2
+                  ROHM Co., Ltd. 869082    22,94   -9,2 % -18,5 %                8,9      Stuttgart       Japan 15.10. 18:01                                            0: 
+            EchoStar Corporation A0NDYQ    74,14   -8,3 % -14,0 %               21,9      Frankfurt         USA 15.10. 15:33                                            8: 
+          Dell Technologies Inc. A2N6WP   419,70   -7,3 % -17,9 %              265,1      Stuttgart         USA 15.10. 18:02   60: Ausverkauf 13, Abstufung / Kursziel ↓ 11
+  Murata Manufacturing Co., Ltd. 853657    38,60   -7,2 % -16,4 %               68,9      Stuttgart       Japan 15.10. 18:02                                            8: 
+ Renesas Electronics Corporation 812960    17,16   -7,0 % -15,9 %               31,1      Stuttgart       Japan 15.10. 18:02                               11: Ausverkauf 1
+                  Coherent Corp. A3DQXS   218,72   -6,9 % -18,9 %               43,1 NYSE (umgerech         USA 15.10. 18:17             35: Quartalszahlen 6, Ausverkauf 1
+     Keysight Technologies, Inc. A12B6J   299,90   -6,6 % -10,1 %               50,8      Stuttgart         USA 15.10. 18:01         22: Ausverkauf 1, Zinsen / Notenbank 1
+           Arista Networks, Inc. A40V33   163,36   -6,6 % -12,8 %              206,2      Stuttgart         USA 15.10. 17:47 28: Übernahme / Fusion 5, Zinsen / Notenbank 1
+                  Everpure, Inc. A14YFN   118,70   -6,4 % -11,7 %               39,2      Stuttgart         USA 15.10. 18:02                          20: Kapitalerhöhung 1
+       Comfort Systems USA, Inc. 907784 1.293,52   -6,0 % -15,1 %               45,5 NYSE (umgerech         USA 15.10. 18:17     17: Quartalszahlen 3, Zinsen / Notenbank 2
+                  Teradyne, Inc. 859892   303,55   -5,9 % -14,5 %               47,0      Stuttgart         USA 15.10. 18:01             13: Ausverkauf 1, Quartalszahlen 1
+Hewlett Packard Enterprise Compa A140KD    53,26   -5,9 % -15,7 %               70,3      Stuttgart         USA 15.10. 18:01    35: Abstufung / Kursziel ↓ 10, Ausverkauf 5
+            ASM International NV 868730   765,20   -5,9 % -13,3 %               37,4      Stuttgart Niederlande 15.10. 18:02             15: Quartalszahlen 1, Ausverkauf 1
+               Astera Labs, Inc. A404AF   258,00   -5,8 % -18,1 %               44,6      Frankfurt         USA 15.10. 13:00             12: Ausverkauf 2, Quartalszahlen 1
+                       Flex Ltd. 890331    84,53   -5,6 % -17,4 %               31,2 NasdaqGS (umge         USA 15.10. 18:17     32: Übernahme / Fusion 4, Quartalszahlen 1
+        Lam Research Corporation A40L1V   242,60   -5,6 % -15,0 %              305,0      Stuttgart         USA 15.10. 17:48        67: Quartalszahlen 3, Gewinnerwartung 1
+          Tokyo Electron Limited 257110    58,31   -5,4 % -12,6 %               26,6      Stuttgart       Japan 15.10. 18:01        37: Ausverkauf 14, Zinsen / Notenbank 4
               Vertiv Holdings Co A2PZ5A   189,42   -5,2 % -12,5 %               71,8      Frankfurt         USA 15.10. 17:14 21: Abstufung / Kursziel ↓ 3, Quartalszahlen 1
+      Super Micro Computer, Inc. A40MRM    30,46   -5,0 % -19,9 %               19,7      Stuttgart         USA 15.10. 17:47     79: Ausverkauf 4, Abstufung / Kursziel ↓ 3
+          Lumentum Holdings Inc. A14WK0   765,10   -4,8 % -18,0 %               68,4      Stuttgart         USA 15.10. 17:47       28: Ausverkauf 2, Klage / Ermittlungen 1
+     Western Digital Corporation 863060   310,00   -4,7 % -11,5 %              115,1      Stuttgart         USA 15.10. 18:02             45: Ausverkauf 8, Quartalszahlen 6
+               Nebius Group N.V. A1JGSL   158,56   -4,5 % -19,0 %               42,8      Stuttgart Niederlande 15.10. 18:02         41: Ausverkauf 8, Zinsen / Notenbank 1
 
-Neu seit letztem Lauf: 4 · angezeigt 25 von 38
+Neu seit letztem Lauf: 1 · angezeigt 25 von 38
 Seite geschrieben: docs/index.html
 Push-Nachricht gesendet.
