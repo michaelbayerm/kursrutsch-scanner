@@ -1,7 +1,6 @@
 {
  "letzter_lauf": null,
  "ticker": [
-  "0992.HK",
   "285A.T",
   "3436.T",
   "6723.T",
@@ -14,16 +13,13 @@
   "ANET",
   "ASM.AS",
   "BE",
-  "CCC.L",
   "CIEN",
   "COHR",
   "CRWV",
   "DELL",
   "ECHO",
-  "ENR.DE",
   "FIX",
   "FLEX",
-  "GNRC",
   "HPE",
   "JBL",
   "KEYS",
@@ -36,6 +32,7 @@
   "RKLB",
   "SKYD",
   "SMCI",
+  "SPCX",
   "TER",
   "VRT",
   "WDC"
