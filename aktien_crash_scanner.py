@@ -224,40 +224,64 @@ def fx_to_eur(currencies):
 WKN_CACHE = CACHE_DIR / "wkn.json"
 
 
-def lookup_wkn(isin, name, cache):
+LEGAL = r"\b(inc|incorporated|corp|corporation|co|company|ltd|limited|plc|ag|se|sa|s\.?a|s\.?p\.?a|n\.?v|nv|holdings?|group|kgaa|the)\b\.?"
+
+
+def short_name(name):
+    n = re.sub(r"[,()]", " ", name)
+    n = re.sub(LEGAL, " ", n, flags=re.I)
+    return re.sub(r"\s+", " ", n).strip(" .-&")
+
+
+def onvista_search(q):
+    import time
+    for versuch in range(3):
+        try:
+            r = requests.get("https://api.onvista.de/api/v1/instruments/search/facet",
+                             params={"searchValue": q}, headers=HEADERS, timeout=15)
+            if r.status_code == 429:
+                time.sleep(3 * (versuch + 1))
+                continue
+            if r.status_code != 200:
+                return None, f"HTTP {r.status_code}"
+            res = [x for f in r.json().get("facets", []) for x in f.get("results", [])]
+            return res, f"{len(res)} Ergebnisse"
+        except Exception as e:
+            return None, type(e).__name__
+    return None, "HTTP 429"
+
+
+def lookup_wkn(isin, name, ticker, cache):
     isin = isin if isinstance(isin, str) and isin.strip() else None
     name = name if isinstance(name, str) and name.strip() else None
-    key = isin or name
-    if not key:
-        return "–"
+    key = isin or name or ticker
     if key in cache:
         return cache[key]
-    wkn = None
     if isin and isin.startswith("DE000") and len(isin) == 12:
-        wkn = isin[5:11]                         # deutsche ISIN enthält die WKN
-    else:
-        for q in (isin, name):
-            if not q or wkn:
+        cache[key] = isin[5:11]                  # deutsche ISIN enthält die WKN
+        return cache[key]
+
+    queries = [q for q in (isin, short_name(name) if name else None, name,
+                           ticker.split(".")[0] if ticker else None) if q]
+    protokoll = []
+    for q in dict.fromkeys(queries):
+        res, info = onvista_search(q)
+        protokoll.append(f"{q!r}: {info}")
+        for x in res or []:
+            if not x.get("wkn"):
                 continue
-            try:
-                r = requests.get("https://api.onvista.de/api/v1/instruments/search/facet",
-                                 params={"searchValue": q}, headers=HEADERS, timeout=15)
-                for facet in r.json().get("facets", []):
-                    for res in facet.get("results", []):
-                        if not res.get("wkn"):
-                            continue
-                        if q == isin and res.get("isin") not in (None, isin):
-                            continue
-                        if res.get("entityType", "STOCK") != "STOCK":
-                            continue
-                        wkn = res["wkn"]
-                        break
-                    if wkn:
-                        break
-            except Exception:
-                pass
-    cache[key] = wkn or "–"
-    return cache[key]
+            if x.get("entityType") not in (None, "STOCK"):
+                continue
+            if q == isin and x.get("isin") not in (None, isin):
+                continue
+            if q != isin and name:                  # Namenssuche: erstes Wort muss passen
+                erstes = short_name(name).split(" ")[0].lower()
+                if erstes and erstes not in str(x.get("name", "")).lower():
+                    continue
+            cache[key] = x["wkn"]
+            return x["wkn"]
+    print(f"  WKN nicht gefunden für {name or ticker} – " + "; ".join(protokoll))
+    return "–"                                       # Fehlschläge nicht cachen
 
 
 def enrich(hits):
@@ -410,7 +434,7 @@ def scan(a):
 
     print("\n4) WKN ermitteln …")
     wkn_cache = json.loads(WKN_CACHE.read_text()) if WKN_CACHE.exists() else {}
-    df["wkn"] = [lookup_wkn(i, n, wkn_cache) for i, n in zip(df["isin"], df["titel"])]
+    df["wkn"] = [lookup_wkn(i, n, t, wkn_cache) for i, n, t in zip(df["isin"], df["titel"], df["ticker"])]
     WKN_CACHE.write_text(json.dumps(wkn_cache, ensure_ascii=False, indent=0))
     df["index"] = df["ticker"].map(mapping)
     df = df.sort_values("fall")
@@ -466,7 +490,9 @@ def main():
         print(f"Seite geschrieben: {a.html}")
 
     topic = os.environ.get("NTFY_TOPIC")
-    if topic and neu:
+    if not topic:
+        print("Hinweis: NTFY_TOPIC ist nicht gesetzt – keine Push-Nachricht.")
+    elif neu:
         notify(topic, df[df["ticker"].isin(neu)], os.environ.get("PAGE_URL"))
 
     if state_path:
