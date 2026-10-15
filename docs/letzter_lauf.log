@@ -1,44 +1,65 @@
 1) Indexmitglieder laden …
-  S&P 500         503 Titel
-  Nasdaq-100        0 Titel
-  DAX              40 Titel
-  MDAX             50 Titel
-  Euro Stoxx 50    50 Titel
-  FTSE 100        100 Titel
-  CAC 40           40 Titel
-  SMI              20 Titel
-  AEX              25 Titel
-  IBEX 35          35 Titel
-  FTSE MIB         40 Titel
-  Hang Seng        85 Titel
-  Nikkei 225        0 Titel
-   937 Titel insgesamt
+  Nasdaq-100      101 Titel
+  Nikkei 225      225 Titel
+   1177 Titel insgesamt
 
 2) Kurse abrufen …
-  Kurse 1–150 von 937 …
-  Kurse 151–300 von 937 …
-  Kurse 301–450 von 937 …
+  Kurse 1–150 von 1177 …
+
+1 Failed download:
+['4568.T']: OperationalError('database is locked')
+  Kurse 151–300 von 1177 …
+  Kurse 301–450 von 1177 …
+  Kurse 451–600 von 1177 …
 $ECV.DE: No data found, symbol may be delisted
 
 1 Failed download:
 ['ECV.DE']: No data found, symbol may be delisted
-  Kurse 451–600 von 937 …
-  Kurse 601–750 von 937 …
-  Kurse 751–900 von 937 …
-  Kurse 901–937 von 937 …
-   32 Titel mit ≥10 % Verlust
+  Kurse 601–750 von 1177 …
+  Kurse 751–900 von 1177 …
+  Kurse 901–1050 von 1177 …
+  Kurse 1051–1177 von 1177 …
+   62 Titel mit ≥10 % Verlust
 
 3) Stammdaten & Marktkapitalisierung …
   0992.HK    Lenovo Group Limited
+  285A.T     Kioxia Holdings Corporation
+  3436.T     Sumco Corporation
+  4004.T     Resonac Holdings Corporation
+  5301.T     Tokai Carbon Co., Ltd.
+  5706.T     Mitsui Kinzoku Company, Limited
+  5801.T     Furukawa Electric Co., Ltd.
+  5802.T     Sumitomo Electric Industries, Ltd.
+  5803.T     Fujikura Ltd.
+  6146.T     Disco Corporation
+  6361.T     Ebara Corporation
+  6479.T     MINEBEA MITSUMI Inc.
+  6506.T     YASKAWA Electric Corporation
+  6526.T     Socionext Inc.
+  6723.T     Renesas Electronics Corporation
+  6752.T     Panasonic Holdings Corporation
+  6762.T     TDK Corporation
+  6857.T     Advantest Corporation
+  6920.T     Lasertec Corporation
+  6963.T     ROHM Co., Ltd.
+  6976.T     Taiyo Yuden Co., Ltd.
+  6981.T     Murata Manufacturing Co., Ltd.
+  7733.T     Olympus Corporation
+  7735.T     SCREEN Holdings Co., Ltd.
+  8035.T     Tokyo Electron Limited
+  9984.T     SoftBank Group Corp.
   AIXA.DE    AIXTRON SE
   AKAM       Akamai Technologies, Inc.
+  ALAB       Astera Labs, Inc.
   AMAT       Applied Materials, Inc.
   ANTO.L     Antofagasta plc
+  ARM        Arm Holdings plc
   ASM.AS     ASM International NV
   BE         Bloom Energy Corporation
   CCC.L      Computacenter plc
   CIEN       Ciena Corporation
   COHR       Coherent Corp.
+  CRWV       CoreWeave, Inc.
   DELL       Dell Technologies Inc.
   ENR.DE     Siemens Energy AG
   FIX        Comfort Systems USA, Inc.
@@ -52,8 +73,10 @@ $ECV.DE: No data found, symbol may be delisted
   MPWR       Monolithic Power Systems, Inc.
   MRVL       Marvell Technology, Inc.
   MU         Micron Technology, Inc.
+  NBIS       Nebius Group N.V.
   PANW       Palo Alto Networks, Inc.
   PRY.MI     Prysmian S.p.A.
+  RKLB       Rocket Lab Corporation
   SKYD       Skydance Corporation
   SMCI       Super Micro Computer, Inc.
   SNDK       Sandisk Corporation
@@ -63,16 +86,67 @@ $ECV.DE: No data found, symbol may be delisted
   WAF.DE     Siltronic AG
 
 4) WKN ermitteln …
-Traceback (most recent call last):
-  File "/home/runner/work/kursrutsch-scanner/kursrutsch-scanner/aktien_crash_scanner.py", line 463, in <module>
-    main()
-  File "/home/runner/work/kursrutsch-scanner/kursrutsch-scanner/aktien_crash_scanner.py", line 427, in main
-    df = scan(a)
-         ^^^^^^^
-  File "/home/runner/work/kursrutsch-scanner/kursrutsch-scanner/aktien_crash_scanner.py", line 400, in scan
-    df["wkn"] = [lookup_wkn(i, n, wkn_cache) for i, n in zip(df["isin"], df["titel"])]
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/kursrutsch-scanner/kursrutsch-scanner/aktien_crash_scanner.py", line 224, in lookup_wkn
-    if isin and isin.startswith("DE000") and len(isin) == 12:
-                ^^^^^^^^^^^^^^^
-AttributeError: 'float' object has no attribute 'startswith'
+
+=== Kursrutsch ≥10 % in 3 Tagen, Marktkap. > 5 Mrd. € (Stand 15.10.2026 15:18) ===
+
+                           Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €)
+     Kioxia Holdings Corporation      –    72,83  -12,3 % -28,0 %               38,8
+            Skydance Corporation      –     6,30  -23,8 % -20,6 %               31,7
+               Sumco Corporation      –    15,00  -13,9 % -28,0 %                5,2
+               Ciena Corporation      –   320,69  -10,2 % -19,5 %               45,5
+                 CoreWeave, Inc.      –    58,66  -15,5 % -25,6 %               32,4
+            Lenovo Group Limited A3ENBE     2,95  -14,5 % -19,6 %               36,6
+            Lasertec Corporation      –   221,77  -13,6 % -16,0 %               19,9
+          Lumentum Holdings Inc. A14WK0   799,35   -9,3 % -19,3 %               72,4
+       SCREEN Holdings Co., Ltd.      –    76,70  -10,6 % -14,8 %               14,5
+                  ROHM Co., Ltd.      –    22,98  -11,3 % -24,4 %                8,9
+     Furukawa Electric Co., Ltd.      –    19,09  -13,1 % -24,0 %               13,4
+           Advantest Corporation      –   194,17  -15,0 % -16,8 %              140,2
+          Tokyo Electron Limited 257110    58,61   -7,8 % -17,1 %               26,6
+            SoftBank Group Corp. A40D98    27,44   -9,3 % -23,1 %              156,4
+ Renesas Electronics Corporation      –    17,04  -10,0 % -23,2 %               31,1
+                       Flex Ltd. 890331    89,49   -9,5 % -15,9 %               33,1
+                   Fujikura Ltd. 876144    25,67  -12,7 % -20,4 %               42,5
+               Nebius Group N.V.      –   165,88  -10,1 % -21,6 %               45,1
+                  Coherent Corp. A3DQXS   234,83   -9,2 % -21,3 %               46,2
+             Olympus Corporation      –     9,73   -2,2 % -13,9 %               10,3
+  Murata Manufacturing Co., Ltd.      –    38,16  -10,0 % -22,3 %               69,1
+ Mitsui Kinzoku Company, Limited      –    12,78  -13,1 % -18,6 %                7,3
+        Bloom Energy Corporation      –   213,44   -9,2 % -17,8 %               62,9
+      Super Micro Computer, Inc. A40MRM    31,91   -8,4 % -20,4 %               20,6
+    Resonac Holdings Corporation      –    84,96   -8,9 % -16,9 %               16,1
+       Akamai Technologies, Inc.      –    81,79   -8,2 % -12,3 %               11,8
+Hewlett Packard Enterprise Compa      –    56,28   -8,3 % -12,5 %               74,7
+            ASM International NV      –   754,40   -8,5 % -16,0 %               36,8
+               Ebara Corporation      –    23,40  -10,5 % -14,4 %               10,7
+               Disco Corporation      –   300,70   -8,5 % -13,4 %               32,6
+          Dell Technologies Inc. A2N6WP   452,97  -11,3 % -12,3 %              288,0
+          Rocket Lab Corporation A419CG    52,78   -7,8 % -17,7 %               33,7
+         STMicroelectronics N.V.      –    39,82   -7,5 % -17,0 %               35,7
+               Astera Labs, Inc. A404AF   267,79   -7,7 % -21,4 %               46,5
+                 Prysmian S.p.A.      –   107,55   -4,9 % -12,1 %               32,2
+               Siemens Energy AG      –   129,02   -4,6 %  -9,5 %              109,8
+                 Antofagasta plc 564734    39,54   -6,4 %  -7,2 %               39,0
+           Generac Holdings Inc. A0YGR4   176,63   -7,6 % -10,5 %               10,4
+         Applied Materials, Inc. 865177   398,30   -3,8 % -14,2 %              316,1
+    YASKAWA Electric Corporation      –    24,17   -9,3 % -13,6 %                6,3
+           Taiyo Yuden Co., Ltd.      –    55,78  -10,1 % -13,9 %                7,4
+        Infineon Technologies AG      –    50,70   -8,4 % -13,9 %               65,9
+             Sandisk Corporation A429HK 1.251,50   -5,3 % -17,1 %              180,9
+                 TDK Corporation      –    16,42   -7,9 % -17,7 %               31,2
+         Micron Technology, Inc. 869020   815,22   -4,1 % -16,0 %              922,4
+               Computacenter plc      –    59,87   -7,3 %  -7,7 %                6,3
+  Panasonic Holdings Corporation      –    22,41   -7,0 % -15,1 %               52,3
+            MINEBEA MITSUMI Inc. A3D9VL    18,39   -8,0 % -15,5 %                7,4
+        Marvell Technology, Inc.      –   218,74   -8,7 % -13,8 %              196,6
+                  Teradyne, Inc. 859892   320,55   -5,5 % -12,7 %               50,1
+Sumitomo Electric Industries, Lt      –    11,92   -9,1 % -15,1 %               37,2
+                Arm Holdings plc A3EUCD   212,26   -6,8 % -19,1 %              226,7
+        Palo Alto Networks, Inc. A1JZ0Q   334,46   -5,5 %  -7,5 %              273,6
+  Monolithic Power Systems, Inc. A0DLC4 1.108,61   -5,8 % -12,8 %               54,5
+       Comfort Systems USA, Inc. 907784 1.374,87   -5,2 % -11,5 %               48,4
+            Corning Incorporated      –   125,65   -5,2 % -13,7 %              108,0
+        Lam Research Corporation      –   255,88   -4,7 % -12,9 %              320,2
+
+Neu seit letztem Lauf: 57
+Seite geschrieben: docs/index.html
