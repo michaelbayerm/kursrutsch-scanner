@@ -396,6 +396,65 @@ def _yahoo_news(tk):
     return out
 
 
+def intraday_kurven(tickers):
+    """Kursverlauf der letzten 24 Std. (15-Min.-Takt) je Ticker; bei geschlossener Börse die letzte Sitzung."""
+    try:
+        df = yf.download(list(tickers), period="5d", interval="15m", auto_adjust=True,
+                         progress=False, threads=True)
+        close = df["Close"]
+        if isinstance(close, pd.Series):
+            close = close.to_frame(list(tickers)[0])
+    except Exception as e:
+        print(f"  Intraday-Daten nicht verfügbar: {e}")
+        return {}
+    idx = pd.to_datetime(close.index)
+    close.index = idx.tz_localize("UTC") if idx.tz is None else idx.tz_convert("UTC")
+    grenze = pd.Timestamp.now(tz="UTC") - pd.Timedelta(hours=24)
+    out = {}
+    for t in tickers:
+        if t not in close:
+            continue
+        ser = close[t].dropna()
+        if ser.empty:
+            continue
+        teil = ser[ser.index >= grenze]
+        if len(teil) < 4:                        # Börse zu: letzte Handelssitzung zeigen
+            letzter_tag = ser.index[-1].tz_convert(BERLIN).date()
+            teil = ser[[ts.tz_convert(BERLIN).date() == letzter_tag for ts in ser.index]]
+        if len(teil) >= 2:
+            out[t] = dict(werte=[float(v) for v in teil.values],
+                          von=teil.index[0].tz_convert(BERLIN), bis=teil.index[-1].tz_convert(BERLIN))
+    return out
+
+
+def sparkline(kurve, vorschluss):
+    """Kleines SVG-Diagramm; gestrichelte Linie = Vortagesschluss."""
+    if not kurve:
+        return ""
+    w, h, pad = 300, 56, 4
+    werte = kurve["werte"]
+    basis = vorschluss if vorschluss and not pd.isna(vorschluss) else werte[0]
+    lo, hi = min(werte + [basis]), max(werte + [basis])
+    spanne = (hi - lo) or 1
+    x = lambda i: pad + i * (w - 2 * pad) / max(len(werte) - 1, 1)
+    y = lambda v: pad + (hi - v) * (h - 2 * pad) / spanne
+    pts = " ".join(f"{x(i):.1f},{y(v):.1f}" for i, v in enumerate(werte))
+    farbe = "var(--neg)" if werte[-1] < basis else "var(--pos)"
+    flaeche = f"{x(0):.1f},{h - pad} {pts} {x(len(werte) - 1):.1f},{h - pad}"
+    von, bis = kurve["von"], kurve["bis"]
+    fmt = "%d.%m. %H:%M" if von.date() != bis.date() else "%H:%M"
+    return f"""
+  <div class="chart">
+    <div class="lbl">Verlauf {von.strftime(fmt)} – {bis.strftime(fmt)} Uhr · gestrichelt = Vortagesschluss</div>
+    <svg viewBox="0 0 {w} {h}" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
+      <polygon points="{flaeche}" fill="{farbe}" opacity="0.12"/>
+      <line x1="{pad}" x2="{w - pad}" y1="{y(basis):.1f}" y2="{y(basis):.1f}" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
+      <polyline points="{pts}" fill="none" stroke="{farbe}" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <circle cx="{x(len(werte) - 1):.1f}" cy="{y(werte[-1]):.1f}" r="2.6" fill="{farbe}"/>
+    </svg>
+  </div>"""
+
+
 def news_signale(titel, ticker):
     """Artikel der letzten Stunden laden und Signalwörter zählen (Anzahl Artikel je Signal)."""
     import time
@@ -547,7 +606,7 @@ def write_html(path, df, neu, a, stand):
     <div><span class="lbl">Intraday</span><span class="val {color(r['intraday'])}">{pct(r['intraday'])}</span></div>
     <div><span class="lbl">1 Woche</span><span class="val {color(r['woche'])}">{pct(r['woche'])}</span></div>
     <div><span class="lbl">Marktkap.</span><span class="val">{de(r['kap_eur_mrd'])} Mrd €</span></div>
-  </div>{news_html}
+  </div>{sparkline(r.get('kurve'), r['kurs'] / (1 + r['intraday']) if r.get('intraday') is not None else None)}{news_html}
 </div>""")
         body = "\n".join(cards)
 
@@ -572,6 +631,8 @@ h1 {{ font-size:22px; margin:4px 0 2px; }}
 .werte {{ margin-top:10px; }}
 .titel {{ color:inherit; text-decoration:none; }}
 .news {{ border-top:1px solid var(--line); margin-top:10px; padding-top:8px; }}
+.chart {{ margin-top:10px; }}
+.chart svg {{ display:block; width:100%; height:56px; margin-top:3px; }}
 .chips {{ display:flex; flex-wrap:wrap; gap:5px; margin:5px 0 6px; }}
 .chip {{ font-size:12px; padding:2px 8px; border-radius:99px; background:var(--chip); color:var(--chiptext); }}
 .chip b {{ font-weight:700; }}
@@ -649,6 +710,11 @@ def scan(a):
 
     print(f"\n5) Nachrichten der letzten {NEWS_STUNDEN} Std. auswerten …")
     df["news"] = [news_signale(n, t) for n, t in zip(df["titel"], df["ticker"])]
+
+    print("\n6) Kursverläufe der letzten 24 Std. laden …")
+    kurven = intraday_kurven(df["ticker"].tolist())
+    df["kurve"] = df["ticker"].map(lambda t: kurven.get(t))
+    print(f"   {len(kurven)} von {len(df)} Verläufen geladen")
     return df
 
 
@@ -677,6 +743,9 @@ def main():
     vorher = set(state.get("ticker", []))
     jetzt_set = set(df["ticker"]) if not df.empty else set()
     neu = jetzt_set - vorher
+    if not df.empty:
+        df["_neu"] = df["ticker"].isin(neu)
+        df = df.sort_values(["_neu", "intraday"], ascending=[False, True]).drop(columns="_neu")
 
     if df.empty:
         print(f"\nKeine Treffer (≥{a.schwelle:g} %, > {a.min_kap:g} Mrd. €).")
