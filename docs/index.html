@@ -3,8 +3,8 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kursrutsch-Scanner</title>
 <style>
-:root { --bg:#f6f6f4; --card:#fff; --text:#1b1b1b; --mut:#6b6b6b; --line:#e4e4e0; --neg:#c62828; --pos:#2e7d32; --acc:#1f5fbf; }
-@media (prefers-color-scheme: dark) { :root { --bg:#141414; --card:#1f1f1f; --text:#eee; --mut:#9a9a9a; --line:#2e2e2e; --neg:#ef6b6b; --pos:#6fcf73; --acc:#7aa7ff; } }
+:root { --bg:#f6f6f4; --card:#fff; --text:#1b1b1b; --mut:#6b6b6b; --line:#e4e4e0; --neg:#c62828; --pos:#2e7d32; --acc:#1f5fbf; --chip:#fdecea; --chiptext:#8e1c1c; }
+@media (prefers-color-scheme: dark) { :root { --bg:#141414; --card:#1f1f1f; --text:#eee; --mut:#9a9a9a; --line:#2e2e2e; --neg:#ef6b6b; --pos:#6fcf73; --acc:#7aa7ff; --chip:#3a2222; --chiptext:#f3b3b3; } }
 * { box-sizing:border-box; }
 body { margin:0; background:var(--bg); color:var(--text); font:15px/1.4 -apple-system,system-ui,Segoe UI,Roboto,sans-serif; }
 main { max-width:720px; margin:0 auto; padding:16px; }
@@ -14,7 +14,17 @@ h1 { font-size:22px; margin:4px 0 2px; }
 .kopf { display:flex; justify-content:space-between; gap:8px; align-items:baseline; }
 .titel { font-weight:600; font-size:16px; }
 .neu { background:var(--acc); color:#fff; font-size:11px; font-weight:700; padding:2px 7px; border-radius:99px; }
-.sub { color:var(--mut); font-size:12.5px; margin:2px 0 10px; }
+.sub { color:var(--mut); font-size:12.5px; margin:2px 0 0; }
+.sub2 { color:var(--mut); font-size:12px; margin:1px 0 0; font-style:italic; }
+.werte { margin-top:10px; }
+.titel { color:inherit; text-decoration:none; }
+.news { border-top:1px solid var(--line); margin-top:10px; padding-top:8px; }
+.chips { display:flex; flex-wrap:wrap; gap:5px; margin:5px 0 6px; }
+.chip { font-size:12px; padding:2px 8px; border-radius:99px; background:var(--chip); color:var(--chiptext); }
+.chip b { font-weight:700; }
+.chip.leise { background:transparent; border:1px dashed var(--line); color:var(--mut); }
+.headline { display:block; font-size:13px; color:var(--text); text-decoration:none; line-height:1.35; }
+.quelle { display:block; color:var(--mut); font-size:11.5px; margin-top:2px; }
 .werte { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
 .werte div { display:flex; flex-direction:column; }
 .lbl { color:var(--mut); font-size:11.5px; }
@@ -26,710 +36,642 @@ footer { color:var(--mut); font-size:12px; margin-top:18px; }
 </style></head>
 <body><main>
 <h1>Kursrutsch-Scanner</h1>
-<div class="meta">≥ 10 % Verlust in 3 Handelstagen · Marktkap. &gt; 5 Mrd. € · Stand 15.10.2026, 15:42 Uhr · 64 Treffer</div>
+<div class="meta">≥ 10 % Verlust in 3 Handelstagen · Marktkap. &gt; 5 Mrd. € · Stand 15.10.2026, 17:29 Uhr · 38 Treffer</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A2QB8W">
-  <div class="kopf"><span class="titel">Kioxia Holdings Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A2QB8W · Nikkei 225</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A413X6">CoreWeave, Inc.</a></div>
+  <div class="sub">WKN A413X6 · Nasdaq-100 · USA · Technologie</div>
+  <div class="sub2">Software - Infrastructure</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">72,83 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-12,3 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-28,0 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">38,8 Mrd €</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">56,36 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-4,0 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-22,6 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">30,9 Mrd €</span></div>
   </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A412AL">
-  <div class="kopf"><span class="titel">Skydance Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A412AL · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">6,33 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val pos">+0,5 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-23,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">32,1 Mrd €</span></div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 128 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>45</b></span><span class="chip">Gewinnwarnung <b>4</b></span><span class="chip">Zinsen / Notenbank <b>3</b></span><span class="chip">Quartalszahlen <b>2</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMiywFBVV95cUxPdGVrNDROSzNaZmlUQ1Q2QkduTkhFWG04YjJlSkxkYm9KTWE3OW84RVoyTlF0eGFYZlBNWldGSVJIZXdBT3pkYmV6ZDRpdlVReFVaeFdNLXNQOC1XSkkyRE8yWWpDc0RQVjU0eXFWaE5vS3JvaE51QkU5Q3ZnRGJlbmFndWh2Y0lWZnhVc2FuQXZSQTZFR1o5RmRlakpBUUNCVnliTHMwWE13Y1FBQkFqOFVIbktxNnoydy1TT1ZyeDUzemlmc0phUVBWZw?oc=5">KI-Aktien stürzen ab – Milliardenkredite geraten unter Druck</a><span class="quelle">L&#x27;essentiel</span>
   </div>
-</a>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A413X6">
-  <div class="kopf"><span class="titel">CoreWeave, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A413X6 · Nasdaq-100</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A412AL">Skydance Corporation</a></div>
+  <div class="sub">WKN A412AL · S&amp;P 500 · USA · Kommunikation</div>
+  <div class="sub2">Entertainment</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">54,90 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-6,4 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-24,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">30,2 Mrd €</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">6,56 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val pos">+4,1 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-20,8 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">33,0 Mrd €</span></div>
   </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A0HGFA">
-  <div class="kopf"><span class="titel">Sumco Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A0HGFA · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">15,00 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-13,9 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-28,0 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">5,2 Mrd €</span></div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 43 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>9</b></span><span class="chip">Übernahme / Fusion <b>2</b></span><span class="chip">Zinsen / Notenbank <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMicEFVX3lxTE9FQnQyYWZ6UUVJVk1veDllSC1tcDJVRnZIb2w5RHhKUEhpb1ZBeXpjRk9CWDJHdlhGSjZIVF9CQjNBLWlVLVJCWHBaZlZndU5iRG05YU9RR0MyQ3YxVmdQRDZRdzFtVTBQNnV4endURHQ?oc=5">☀️ SKYDANCE Stock Plummet; A24 + Zendaya Again</a><span class="quelle">The Ankler</span>
   </div>
-</a>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US7731211089">
-  <div class="kopf"><span class="titel">Rocket Lab Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A419CG · Nasdaq-100</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=HK0000928959">Lenovo Group Limited</a></div>
+  <div class="sub">WKN A3ENBE · Hang Seng · Hongkong · Technologie</div>
+  <div class="sub2">Computer Hardware</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">45,98 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-12,9 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-24,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">29,3 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=HK0000928959">
-  <div class="kopf"><span class="titel">Lenovo Group Limited</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A3ENBE · Hang Seng</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">2,95 €</span></div>
+    <div><span class="lbl">Kurs · 15.10. 10:08</span><span class="val">2,95 €</span></div>
     <div><span class="lbl">Intraday</span><span class="val neg">-14,5 %</span></div>
     <div><span class="lbl">1 Woche</span><span class="val neg">-19,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">36,6 Mrd €</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">36,7 Mrd €</span></div>
   </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=887360">
-  <div class="kopf"><span class="titel">Lasertec Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 887360 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">221,75 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-13,6 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-16,0 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">19,9 Mrd €</span></div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 23 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>7</b></span><span class="chip">Zinsen / Notenbank <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMixAFBVV95cUxOeGZzUngtZ01nUXJmSXphQk1QZW5nZWhLRy1Ra0pFWWY1enk1c2lvNEkxTU1UblE4SjhCTGJBSnBDeWJjRllCblkxUHJPOHE5cEVGMk1mckQyT0Nhb2ZDSE9fMUpXLUdocGFCakM5eVZSeWd0c0lDaENKbmhJWlo4R2NBcWd3dEMwSmdaRVJxd0M0V0NUUzFCTmlQdkV2QjR2a1hmQm93ZnZ5Wkx4QnB6RTZiZVFKSUZvc1lSU3dDbnE4dmlH?oc=5">Families face packed schedules with little downtime, expert shares time-saving tips</a><span class="quelle">KOKH</span>
   </div>
-</a>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=AR0321947183">
-  <div class="kopf"><span class="titel">Nebius Group N.V.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A1JGSL · Nasdaq-100</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US24703L2025">Dell Technologies Inc.</a></div>
+  <div class="sub">WKN A2N6WP · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Computer Hardware</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">151,71 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-8,6 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-22,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">41,0 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=SG9999000020">
-  <div class="kopf"><span class="titel">Flex Ltd.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 890331 · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">84,74 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-5,3 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-17,2 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">31,3 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US24703L2025">
-  <div class="kopf"><span class="titel">Dell Technologies Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A2N6WP · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">417,89 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-7,8 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-18,5 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">265,1 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=859619">
-  <div class="kopf"><span class="titel">SCREEN Holdings Co., Ltd.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 859619 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">76,70 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-10,6 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-14,8 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">14,5 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=JP3190600001">
-  <div class="kopf"><span class="titel">ROHM Co., Ltd.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 869082 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">22,98 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-11,3 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-24,4 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">8,9 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US55024U1097">
-  <div class="kopf"><span class="titel">Lumentum Holdings Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A14WK0 · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">731,40 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-8,5 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-21,8 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">66,3 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=854857">
-  <div class="kopf"><span class="titel">Furukawa Electric Co., Ltd.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 854857 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">19,09 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-13,1 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-24,0 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">13,4 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=868805">
-  <div class="kopf"><span class="titel">Advantest Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 868805 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">194,16 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-15,0 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-16,8 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">140,2 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=JP3571600000">
-  <div class="kopf"><span class="titel">Tokyo Electron Limited</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 257110 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">58,61 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-7,8 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-17,1 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">26,6 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A140KD">
-  <div class="kopf"><span class="titel">Hewlett Packard Enterprise Company</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A140KD · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">52,31 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-7,1 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-17,4 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">69,4 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US86800U3023">
-  <div class="kopf"><span class="titel">Super Micro Computer, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A40MRM · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">29,77 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-6,7 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-22,0 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">19,2 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=CA83390C1077">
-  <div class="kopf"><span class="titel">SoftBank Group Corp.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A40D98 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">27,43 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-9,3 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-23,1 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">156,3 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=812960">
-  <div class="kopf"><span class="titel">Renesas Electronics Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 812960 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">17,04 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-10,0 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-23,2 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">31,1 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=JP3811600000">
-  <div class="kopf"><span class="titel">Fujikura Ltd.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 876144 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">25,67 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-12,7 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-20,4 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">42,5 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A0LDA7">
-  <div class="kopf"><span class="titel">Ciena Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A0LDA7 · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">304,65 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-5,0 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-19,8 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">43,4 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A2JQTG">
-  <div class="kopf"><span class="titel">Bloom Energy Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A2JQTG · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">198,57 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-7,0 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-18,4 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">58,4 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=856840">
-  <div class="kopf"><span class="titel">Olympus Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 856840 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">9,73 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-2,2 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-13,9 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">10,3 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=853657">
-  <div class="kopf"><span class="titel">Murata Manufacturing Co., Ltd.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 853657 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">38,16 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-10,0 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-22,3 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">69,1 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US19247G1076">
-  <div class="kopf"><span class="titel">Coherent Corp.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A3DQXS · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">219,09 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-6,7 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-18,8 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">43,1 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US74624M1027">
-  <div class="kopf"><span class="titel">Everpure, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A14YFN · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">118,66 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-6,0 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-11,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">39,5 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=860971">
-  <div class="kopf"><span class="titel">Mitsui Kinzoku Company, Limited</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 860971 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">12,78 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-13,1 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-18,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">7,3 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=859554">
-  <div class="kopf"><span class="titel">Resonac Holdings Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 859554 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">84,95 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-8,9 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-16,9 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">16,1 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=868730">
-  <div class="kopf"><span class="titel">ASM International NV</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 868730 · AEX</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">749,60 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-9,1 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-16,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">36,5 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=858656">
-  <div class="kopf"><span class="titel">Ebara Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 858656 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">23,40 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-10,5 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-14,4 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">10,7 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A42FT5">
-  <div class="kopf"><span class="titel">Disco Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A42FT5 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">300,69 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-8,5 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-13,4 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">32,6 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US3687361044">
-  <div class="kopf"><span class="titel">Generac Holdings Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A0YGR4 · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">168,65 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-4,5 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-15,7 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">10,0 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US0382221051">
-  <div class="kopf"><span class="titel">Applied Materials, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 865177 · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">384,68 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-3,4 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-15,4 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">304,5 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US0404132054">
-  <div class="kopf"><span class="titel">Arista Networks, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A40V33 · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">163,37 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-6,3 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-13,2 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">206,2 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A3CVQC">
-  <div class="kopf"><span class="titel">Robinhood Markets, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A3CVQC · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">85,63 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-5,0 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-10,3 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">77,3 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A2PZ5A">
-  <div class="kopf"><span class="titel">Vertiv Holdings Co</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A2PZ5A · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">186,09 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-6,4 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-14,4 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">71,5 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=893438">
-  <div class="kopf"><span class="titel">STMicroelectronics N.V.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 893438 · CAC 40</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">39,82 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-7,5 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-17,0 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">35,7 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=564734">
-  <div class="kopf"><span class="titel">Antofagasta plc</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 564734 · FTSE 100</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">39,34 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-6,8 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-7,7 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">38,8 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=CA8000541083">
-  <div class="kopf"><span class="titel">Sandisk Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A429HK · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">1.162,78 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-7,1 %</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">415,31 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-8,4 %</span></div>
     <div><span class="lbl">1 Woche</span><span class="val neg">-19,0 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">168,6 Mrd €</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">263,8 Mrd €</span></div>
   </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=928906">
-  <div class="kopf"><span class="titel">Akamai Technologies, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 928906 · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">79,55 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-2,7 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-11,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">11,4 Mrd €</span></div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 62 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>13</b></span><span class="chip">Abstufung / Kursziel ↓ <b>11</b></span><span class="chip">Übernahme / Fusion <b>2</b></span><span class="chip">Kapitalerhöhung <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxQb1dlcXA0bHpKY3FqbHFwazYwbkl3R3lMNkdGSUFDd3FQZ2NrRTBfSjNicl94bm9sQVpqbXZ0X3JJV1lCNnIyM3ZsREdCVURyMG1QbHhpdkJmRk53QzRKWlF6NUFGa3NQaG1EZTB0Q21tR0R2R256ZFJPWTdoVXVMLUVpUHN6VXpHRVZr?oc=5">Dell Technologies Inc Stock (DELL) Moved Down by 7.71% on Oct 15: Drivers Behind the Movement</a><span class="quelle">TradingKey</span>
   </div>
-</a>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A40L1V">
-  <div class="kopf"><span class="titel">Lam Research Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A40L1V · S&amp;P 500</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US7731211089">Rocket Lab Corporation</a></div>
+  <div class="sub">WKN A419CG · Nasdaq-100 · USA · Industrie</div>
+  <div class="sub2">Aerospace &amp; Defense</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">242,50 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-5,2 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-15,2 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">303,6 Mrd €</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">47,36 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-10,3 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-22,4 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">30,2 Mrd €</span></div>
   </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=AR0922353138">
-  <div class="kopf"><span class="titel">Space Exploration Technologies Corp.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A42LQA · Nasdaq-100</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">128,02 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-5,7 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-10,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">1.687,9 Mrd €</span></div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 110 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>24</b></span><span class="chip">Quartalszahlen <b>2</b></span><span class="chip">Übernahme / Fusion <b>2</b></span><span class="chip">Abstufung / Kursziel ↓ <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMi4gFBVV95cUxQbHVSeTJUbXBJLVpQbzlJVldGc3ZwSjBNLUlJZmNzalhoanc3NHBMRG5obzdWWFhFajI3MVQtRW1ha3IzSmJnRWN0OXFObzZ6MWZIdVpZUkU5X0stS3VLakVtQ1NqWGFfZXpGaVk4QWVRNzhBcXYtWDFiUDF1OHhCck56V3lxWUdvc1dDdFVMQlJqdkYxdWNFRXlXTVpwUGZibVFJY2VnYW1TSnRScTlQUkFpWkpfTlpmZ2k0RTFtUE82eS02ZDN3Tk5qVGNEeTlmbEFGa3d5d2d1WUZFYkx4MzlR?oc=5">Die Rallye wackelt: KI-Ausverkauf nimmt Fahrt auf: Anleger flüchten in Anleihen</a><span class="quelle">FinanzNachrichten.de</span>
   </div>
-</a>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US1999081045">
-  <div class="kopf"><span class="titel">Comfort Systems USA, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 907784 · S&amp;P 500</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=SG9999000020">Flex Ltd.</a></div>
+  <div class="sub">WKN 890331 · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Electronic Components</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">1.284,39 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-6,6 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-15,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">45,1 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A0MP84">
-  <div class="kopf"><span class="titel">Prysmian S.p.A.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A0MP84 · FTSE MIB</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">107,65 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-4,9 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-12,0 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">32,2 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A3CNLD">
-  <div class="kopf"><span class="titel">Marvell Technology, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A3CNLD · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">210,84 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-3,6 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-13,9 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">188,8 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=ENER6Y">
-  <div class="kopf"><span class="titel">Siemens Energy AG</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN ENER6Y · DAX</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">129,30 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-4,4 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-9,3 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">110,0 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=623100">
-  <div class="kopf"><span class="titel">Infineon Technologies AG</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 623100 · DAX</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">50,46 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-8,8 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-14,3 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">65,4 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A3CQU7">
-  <div class="kopf"><span class="titel">Seagate Technology Holdings plc</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A3CQU7 · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">593,16 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-6,8 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-14,2 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">135,3 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=857658">
-  <div class="kopf"><span class="titel">YASKAWA Electric Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 857658 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">24,17 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-9,3 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-13,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">6,3 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US5951121038">
-  <div class="kopf"><span class="titel">Micron Technology, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 869020 · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">780,96 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-4,2 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-15,5 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">880,6 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=863428">
-  <div class="kopf"><span class="titel">Taiyo Yuden Co., Ltd.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 863428 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">55,77 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-10,1 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-13,9 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">7,4 Mrd €</span></div>
-  </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=JP3457600009">
-  <div class="kopf"><span class="titel">TDK Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 857032 · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">16,42 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-7,9 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-17,7 %</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">84,52 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-5,6 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-17,5 %</span></div>
     <div><span class="lbl">Marktkap.</span><span class="val">31,2 Mrd €</span></div>
   </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US49338L1035">
-  <div class="kopf"><span class="titel">Keysight Technologies, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A12B6J · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">299,31 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-6,2 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-10,4 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">51,0 Mrd €</span></div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 34 Artikel</div>
+    <div class="chips"><span class="chip">Übernahme / Fusion <b>4</b></span><span class="chip">Quartalszahlen <b>1</b></span><span class="chip">Ausverkauf <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMiygFBVV95cUxPWVAwcXdJYUl2ZVRlbTMzdFNCWGgtajZvWXY5cUhZdlhXc3Qxd2JaX3pZMGxOVkpzSENKMWRoOFRCLUxzMmExbnhUNnEzM0pTZUJBZWQ3WVpWNGdZa3o1S0pxOW9UTzJqcFFzVzk0VDhUdFB6WVY2b3ZWbnE1SmNKeDlKcG5wYnpwYVBRcVVFbHVyYlotT1dDZ011OUJIamZYSXVDdGRYSDRqZDkybnQxLTc2TDQyUTJScWxjYmczdXZTUTBCTWZJTmpn?oc=5">Flex Aktie: Übernimmt EPC Power für 4,4 Milliarden Dollar</a><span class="quelle">ad-hoc-news.de</span>
   </div>
-</a>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A14NH6">
-  <div class="kopf"><span class="titel">Computacenter plc</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A14NH6 · FTSE 100</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A2QB8W">Kioxia Holdings Corporation</a></div>
+  <div class="sub">WKN A2QB8W · Nikkei 225 · Japan · Technologie</div>
+  <div class="sub2">Semiconductors</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">59,83 €</span></div>
+    <div><span class="lbl">Kurs · 15.10. 08:30</span><span class="val">82,90 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-3,2 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-21,6 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">38,7 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 39 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>19</b></span><span class="chip">Quartalszahlen <b>1</b></span><span class="chip">Zinsen / Notenbank <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMirgFBVV95cUxPdGQ0TVJ0Ri1iemxRWGhRa0tMeFZNYkx0aEdDOWNlVlJPQkFUZ25hRnZVUVNFOU5mNHo0eXREZmU0bF85NHNhc2RVU3B4cjJyM2I1cnVzNGJDandhTWxKMXpwbFNyUVBqYmhWQzJpZDlTMFJMZ2lKQzMydHlXTlJpTmNTOTRYbU5zZ2VXZ0tEOUFBenVTZWFTTWY2WkVXVmpMNFFGSTE1UnFNWDZ5M2c?oc=5">Kioxia (285A JP) - Interesting Demand/Supply Dynamics Near-Term and Over Time</a><span class="quelle">Smartkarma</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US74624M1027">Everpure, Inc.</a></div>
+  <div class="sub">WKN A14YFN · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Computer Hardware</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">116,92 €</span></div>
     <div><span class="lbl">Intraday</span><span class="val neg">-7,4 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-7,7 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">6,3 Mrd €</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-13,0 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">39,1 Mrd €</span></div>
   </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A0NDYQ">
-  <div class="kopf"><span class="titel">EchoStar Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A0NDYQ · S&amp;P 500</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">75,40 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-3,8 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-9,4 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">22,1 Mrd €</span></div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 20 Artikel</div>
+    <div class="chips"><span class="chip">Kapitalerhöhung <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMilgFBVV95cUxNUmJwakVvZU5YeGYzc2JGQmJObUkwX3BuQ2tmR1RJckhZLURVU2MzYV9abUFMVVQ0LVFLaXRtNFNYUjc2UmhHWjRuUGQ3Mm9QT05wZUY3Ylh0cUE5VDI3LUVybG1KeE9pNUZXdjMxMDRHdmVKTmlQTjBscnpYeWF4MkJMY1VjSnRaMF9SWnZXUkowYkFYZUE?oc=5">Insider-Geschäfte: GameStop-CEO Cohen kauft für 22,7 Millionen Dollar</a><span class="quelle">aktien.news</span>
   </div>
-</a>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=853666">
-  <div class="kopf"><span class="titel">Panasonic Holdings Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 853666 · Nikkei 225</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A140KD">Hewlett Packard Enterprise Company</a></div>
+  <div class="sub">WKN A140KD · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Communication Equipment</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">22,41 €</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">52,39 €</span></div>
     <div><span class="lbl">Intraday</span><span class="val neg">-7,0 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-17,3 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">69,6 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 33 Artikel</div>
+    <div class="chips"><span class="chip">Abstufung / Kursziel ↓ <b>9</b></span><span class="chip">Ausverkauf <b>3</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMirwFBVV95cUxNVHVsM3RiemIzeVpZOUhCWk5wZ3REWkY2dkZ0ZGtZVkxSdHd1QlNScU5ub0VHeEdPZlpUNEpqclNTbHVtWldta3ZrM3VrZ1V0M0YtcXFyMXB6OGJ6TXd1clZ0Ni1xX19FaDJTRmljT2I5UVp0WnNIdElFTkFiRlFiMlB1WTI0Q0tXUUE0OVZtekhoa0Z3NTd1MFROdlgweHVVUXlmSlJLdlRfMm5nTFgw?oc=5">Hewlett Packard Enterprise Aktie News: Hewlett Packard Enterprise fällt am Donnerstagnachmittag tief</a><span class="quelle">finanzen.ch</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=AR0321947183">Nebius Group N.V.</a></div>
+  <div class="sub">WKN A1JGSL · Nasdaq-100 · Niederlande · Kommunikation</div>
+  <div class="sub2">Internet Content &amp; Information</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">156,88 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-5,5 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-20,0 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">42,5 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 45 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>11</b></span><span class="chip">Zinsen / Notenbank <b>2</b></span><span class="chip">Gewinnwarnung <b>1</b></span><span class="chip">Abstufung / Kursziel ↓ <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMijAFBVV95cUxPV25hRmRSNTQzZ2hsZC1DX00xYlBuZXBoODcyOHdsNWYyV0M4clJMZWFZRkZzblJSbjBzWjdua2dlZ2hrVlJhakxOWGtYV3hqNmJKcmZ1eU8xWG1XSk4za2loRUE5ODFsY1FNMTNFanNxd3QxUzZGSk9mMmlfT0h2TGJjb1FKeWJ0dFVYVQ?oc=5">How Much CoreWeave and Nebius Owe, and When It Comes Due</a><span class="quelle">Stock Titan</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US19247G1076">Coherent Corp.</a></div>
+  <div class="sub">WKN A3DQXS · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Scientific &amp; Technical Instruments</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">219,32 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-6,7 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-18,7 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">43,1 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 35 Artikel</div>
+    <div class="chips"><span class="chip">Quartalszahlen <b>6</b></span><span class="chip">Ausverkauf <b>2</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMi_wFBVV95cUxQQVM4NUdNQjhOUXFKQlU4UHVXSVM3VHJCQmRvNjR2QjFwWGhKamtJS1ZYUTF6eWNlV1ZhaDFDSFJVQ0tiUmJfWkNyR0d5U1VaLWw0NnhjZzRiMHB0TlVZNTh0LXl5U0pRU0lZYkV0dlNtXzY3UGZRWVRYdnA3aU45REliVGtiM0p0bmNKbElqRWlsdC1qallDaDZfS2pqZ21ZbGhsck9JVnNmUmxZUEZ3bVNjLVlKRDF2V3R4YUpXUFp4VUkyMUxTaXZib09wYUJ6SkN5alFtS01RaF9Ra3B4WW1SQVVpUFVsS3ZReWNLTUJ3WmdlUE9CSWU3WWdYNUk?oc=5">Optical Stocks Extend Slide as Money Rotates Into Defensives: Applied Optoelectronics Falls 6%, Coherent Drops 7%, Lumentum Slips 5%</a><span class="quelle">24/7 Wall St.</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US86800U3023">Super Micro Computer, Inc.</a></div>
+  <div class="sub">WKN A40MRM · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Computer Hardware</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">30,40 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-4,8 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-20,4 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">19,9 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 78 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>6</b></span><span class="chip">Abstufung / Kursziel ↓ <b>2</b></span><span class="chip">Quartalszahlen <b>2</b></span><span class="chip">Zinsen / Notenbank <b>2</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxQeFRuNjJRWUYyb2NsUElva09tQ1ZLMnd1LWQ2WlVzbnVHdWJMNFZIdnVOYUQ5VEU1TGRnanlyeTBXNm1LWk1ja0IwRFlCLUdVRUdLQkN6YWpmTDI3alJZUmUxSVFMYUk0ZmVDa0R1czJhQk0wVS05SXBxMDk5dGpNZXBDSy1rbXdwelNZeDhlNi1reWFCemYtRlJYRnE4cTFHbDBWYWRR?oc=5">Metallpulver-Hersteller Amaero kündigt 20-Millionen-Dollar-IPO an der Nasdaq an</a><span class="quelle">aktien.news</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US55024U1097">Lumentum Holdings Inc.</a></div>
+  <div class="sub">WKN A14WK0 · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Communication Equipment</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">761,28 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-4,8 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-18,6 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">68,8 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 28 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>2</b></span><span class="chip">Klage / Ermittlungen <b>1</b></span><span class="chip">Abstufung / Kursziel ↓ <b>1</b></span><span class="chip">Übernahme / Fusion <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMi_wFBVV95cUxQQVM4NUdNQjhOUXFKQlU4UHVXSVM3VHJCQmRvNjR2QjFwWGhKamtJS1ZYUTF6eWNlV1ZhaDFDSFJVQ0tiUmJfWkNyR0d5U1VaLWw0NnhjZzRiMHB0TlVZNTh0LXl5U0pRU0lZYkV0dlNtXzY3UGZRWVRYdnA3aU45REliVGtiM0p0bmNKbElqRWlsdC1qallDaDZfS2pqZ21ZbGhsck9JVnNmUmxZUEZ3bVNjLVlKRDF2V3R4YUpXUFp4VUkyMUxTaXZib09wYUJ6SkN5alFtS01RaF9Ra3B4WW1SQVVpUFVsS3ZReWNLTUJ3WmdlUE9CSWU3WWdYNUk?oc=5">Optical Stocks Extend Slide as Money Rotates Into Defensives: Applied Optoelectronics Falls 6%, Coherent Drops 7%, Lumentum Slips 5%</a><span class="quelle">24/7 Wall St.</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US0382221051">Applied Materials, Inc.</a></div>
+  <div class="sub">WKN 865177 · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Semiconductor Equipment &amp; Materials</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">380,54 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-4,5 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-16,3 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">301,2 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 41 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>4</b></span><span class="chip">Zinsen / Notenbank <b>1</b></span><span class="chip">Quartalszahlen <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxQOVRsWURRQlF4dVFnbEpHRmJRQU1EbFhTLUZxZjdKUVpzU3JJQU1XdDZCQWNpdC1WMnAtbGpKVWlDQXZ4aEJ1UmNDanVkbVJXYVJuTEJ1QlE1RVR3U005WHRsT1F6LUdTbGFpMWdFaEkzUXpWRXhFV0V4cWxSb3k0dW9IQWh6OUVQYkpN?oc=5">Applied Materials Inc Stock (AMAT) Moved Down by 4.39% on Oct 15: Key Drivers Unveiled</a><span class="quelle">TradingKey</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A0LDA7">Ciena Corporation</a></div>
+  <div class="sub">WKN A0LDA7 · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Communication Equipment</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">309,91 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-3,4 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-18,5 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">43,9 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 14 Artikel</div>
+    <div class="chips"><span class="chip leise">keine Signalwörter</span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxOU0hfWXNiSnM0Ui1tUkZNYjZIakVWUkNGQ0RTQjhxNk9XZEc1R2ZjTm5ZYS1pQm5YZ05BRGViR1pVaWRNQldneklCUjJEUnZzUmhvcjQzOHZMSU1ULXpPMldYZlJ1WTBJTmNBWDBWZFZpaFNTQkNxcUVza2d3d0RuSmMwQzlGdVNmenRvZkgyOV9QVTNTSWJQcGJ2dXNjTVRVcXVnZE5pbnNCTkhja1BEbVIyTnJaYmwt?oc=5">Why Ciena, Dell Technologies, and CoreWeave Fell 10% or More</a><span class="quelle">TradingView</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=856840">Olympus Corporation</a></div>
+  <div class="sub">WKN 856840 · Nikkei 225 · Japan · Gesundheit</div>
+  <div class="sub2">Medical Devices</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 08:30</span><span class="val">9,93 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-13,5 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-12,5 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">10,3 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 11 Artikel</div>
+    <div class="chips"><span class="chip">Gewinnwarnung <b>1</b></span><span class="chip">Ausverkauf <b>1</b></span><span class="chip">Übernahme / Fusion <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMiigFBVV95cUxNbEVBQVRWX0pqNWsyb1pyQlFYS0lDYV8tR0JhU2t2R3M5S1paQ09jTEpMS3RXS3dSVzlPTGx4NVBfR3lfRWZKbjZsYlh6MWNIYWRrUFUwaWZrR216d0FDRjh3VFBDZVphY0JXQjIyZnZKUWdVVVU4X2pPNW42YS1oSnBQWXU3emtCT0E?oc=5">FDA issues warning letter to Olympus after inspections</a><span class="quelle">Medical Buyer</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US0404132054">Arista Networks, Inc.</a></div>
+  <div class="sub">WKN A40V33 · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Computer Hardware</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">162,87 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-6,6 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-13,5 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">205,1 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 25 Artikel</div>
+    <div class="chips"><span class="chip">Übernahme / Fusion <b>5</b></span><span class="chip">Zinsen / Notenbank <b>1</b></span><span class="chip">Quartalszahlen <b>1</b></span><span class="chip">Gewinnerwartung <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxPa0phQzY0YkFYOHFOWldObXhiVE5hQjdkR3BZRVd2U3FaZHNtNHJKaGljdWVyYzQ0bjRFbVNHVzlETjhmU2d3YmhNMGdhU1hadHJHaVl5dmJqT3lPVzZrUngwREZzdHV6VzZlZkVSU2IzQ2lOYmhfaEExamVUQXhxMWRzaEZzODA2VHFxMzBqamM4Z2FXRWpfaURqaDhXckVOQlFPdDhR?oc=5">NETGEAR-Aktie steht vor Zahlen am 28.10.2026</a><span class="quelle">ad-hoc-news.de</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=868730">ASM International NV</a></div>
+  <div class="sub">WKN 868730 · AEX · Niederlande · Technologie</div>
+  <div class="sub2">Semiconductor Equipment &amp; Materials</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:16</span><span class="val">764,60 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-7,3 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-14,9 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">37,4 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 16 Artikel</div>
+    <div class="chips"><span class="chip">Quartalszahlen <b>1</b></span><span class="chip">Ausverkauf <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNQ2g4YW5QNlVmUFdubks3aWVsdVdhTEhKSVdRalo0Y1RkaDBqZGJmLWZ5OW8yS3h5NHN3b3R4UjVJT2RhbmZZVWlEN2ptNVhXYlZfekE4ZERBSklrZ25jdVdqUk5WWWMtalNVS3BLZXFsS2V6eFM1cTIxWkZtQ1VWU2E3SVdZRkZhTzJjUUVLcDZ6ZzBhbWhacg?oc=5">Globale Tech-Aktien unter Druck: KI-Rallye stockt nach Inflationsdaten</a><span class="quelle">aktien.news</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A40L1V">Lam Research Corporation</a></div>
+  <div class="sub">WKN A40L1V · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Semiconductor Equipment &amp; Materials</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">242,22 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-5,4 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-15,3 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">302,5 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 68 Artikel</div>
+    <div class="chips"><span class="chip">Quartalszahlen <b>3</b></span><span class="chip">Gewinnerwartung <b>1</b></span><span class="chip">Zinsen / Notenbank <b>1</b></span><span class="chip">Erwartungen verfehlt <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxOM1lDWmdlS25oc2QxUGNlZXRNUUV3b1FYZWl3OThmSmZZNXQ4RmhzTVJxbklYNG1IOWtUal9FcWtOR2JQTHRwbHkweEFVOG4wV1VXZldvRW9CQUt6TGV6NkFxaXB2dFJIR3Z3Q2FueDlXcmJINjJra2tyM0kwd0tKcDNXRi12MXRYeE44ZVB0cWV0WWJ1bzdWQjRVR19nYWl3cWszYmUwOVI5LVAzVzZSeHN4ZnNYZThrRjFDa1o5SG94QzdFZUhKYzN2c2wxeHNuaFlRbXZzbEpVWlVjM3hBb0d1UQ?oc=5">Technologiewechsel bei Infineon: Wolfspeed-Belieferung auf 200-mm-Wafer umgestellt - Aktien uneins</a><span class="quelle">finanzen.ch</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A2JQTG">Bloom Energy Corporation</a></div>
+  <div class="sub">WKN A2JQTG · S&amp;P 500 · USA · Industrie</div>
+  <div class="sub2">Electrical Equipment &amp; Parts</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">206,69 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-3,2 %</span></div>
     <div><span class="lbl">1 Woche</span><span class="val neg">-15,1 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">52,3 Mrd €</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">60,6 Mrd €</span></div>
   </div>
-</a>
-
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A3D9VL">
-  <div class="kopf"><span class="titel">MINEBEA MITSUMI Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A3D9VL · Nikkei 225</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">18,39 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-8,0 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-15,5 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">7,4 Mrd €</span></div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 38 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>6</b></span><span class="chip">Quartalszahlen <b>4</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNRUVOYWh0dnkyR3dnLWJIQ29ObFBYeGtCYmk1R1Z5RElTWEkweXZKY0NmeXZWeFJtNGIwdXZkVl9iM0JrRkpJaVhiTXhwanlNWVJvSUtxbTVBeHU5eldIYU9nd0JRVmN4Y2UydlFFWEZyWmtMems5MkdFZERrQVd5Mld1b2xoMXJ0eUUwOFJzMXBaRVE?oc=5">EnergyPathways will Wasserstoff und Graphit schon 2029 vermarkten</a><span class="quelle">aktien.news</span>
   </div>
-</a>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US1491231015">
-  <div class="kopf"><span class="titel">Caterpillar Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 850598 · S&amp;P 500</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A2PZ5A">Vertiv Holdings Co</a></div>
+  <div class="sub">WKN A2PZ5A · S&amp;P 500 · USA · Industrie</div>
+  <div class="sub2">Electrical Equipment &amp; Parts</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">635,30 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-4,9 %</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">187,80 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-5,6 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-13,7 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">72,4 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 21 Artikel</div>
+    <div class="chips"><span class="chip">Abstufung / Kursziel ↓ <b>3</b></span><span class="chip">Quartalszahlen <b>1</b></span><span class="chip">Klage / Ermittlungen <b>1</b></span><span class="chip">Übernahme / Fusion <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQUEZ4eWRwNDFUVEJpd0FfdEhsRUtQWF9XM1paSHBKSDZiRmhQNXVBWndHQ05EV2Y5ZmJUczhRTXdYNUJUZWYwdTE4SUNuOVR0Zk1lbWR4QXVvSUxFeHR1OWhTMVJPWWNIRDBQZ3RVT01QdWN3b2VzaXNyOF9JNzQwbnlCRFB6SUdSOUU1SktuNHdSZWlSQ2NaRWR2RQ?oc=5">Why is Vertiv stock sliding today?</a><span class="quelle">Investing.com</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A3CNLD">Marvell Technology, Inc.</a></div>
+  <div class="sub">WKN A3CNLD · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Semiconductors</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">210,93 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-3,6 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-13,9 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">189,5 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 26 Artikel</div>
+    <div class="chips"><span class="chip">Quartalszahlen <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxNZEV6S0o3SWl4X05FRktSaW9BbzNOamx1QjhPV2FISGpVcHNvV2s3WVZtWkFsekp0TFRpTVdUYUUxcVJwQTlFbTkwN0ZIMnBJTnRhNjUxeUxzX1JDWkdrN04tTi00SVh2bktoSVdSVV82Nk0wWmMxNm9BYjQ0UFdFb3V1REFhVlNLVXVTWkI1MTR5RnZhTjFSSS1QODNVeV9GbW5RM0tPSzJzb28?oc=5">Why is Marvell Technology stock sliding today?</a><span class="quelle">Investing.com</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=CA83390C1077">SoftBank Group Corp.</a></div>
+  <div class="sub">WKN A40D98 · Nikkei 225 · Japan · Kommunikation</div>
+  <div class="sub2">Telecom Services</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 08:30</span><span class="val">30,20 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val pos">+0,8 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-15,0 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">156,1 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 46 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>20</b></span><span class="chip">Zinsen / Notenbank <b>3</b></span><span class="chip">Klage / Ermittlungen <b>1</b></span><span class="chip">KI-Blase <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxQTmNwUjRtZjhTb25PcTByUjRiM1NUR3dYSmlPNENhR0VwU0tjaWJxTmZlMkNfa3FMZDYzZEhLeFRxanV0Sl9sYlBoQVZHVlZnTWZaWUtSdnd3U0hia3ZzNUN5eDc1cDFpZkdJcldZekduNmRFZHBEUnJ0ZFkwSkh5Z3ZQamcwaW52anNuS1VBQWVTcFJvYUM1ek1vSUhiMGdISWxWc0Q0a1A1MXVONkdfYVh2eTc1ZWJLN3ZHUVZ6UHVNNWc?oc=5">CoreWeave&#x27;s Default Insurance Costs Explode Above 1,000 Basis Points as AI Debt Market Shows Stress</a><span class="quelle">Coinpaper</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A0HGFA">Sumco Corporation</a></div>
+  <div class="sub">WKN A0HGFA · Nikkei 225 · Japan · Technologie</div>
+  <div class="sub2">Semiconductor Equipment &amp; Materials</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 08:30</span><span class="val">17,38 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-1,6 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-17,3 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">5,2 Mrd €</span></div>
+  </div><div class="news"><div class="lbl">Keine Nachrichten in den letzten 24 Std. gefunden</div></div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US8807701029">Teradyne, Inc.</a></div>
+  <div class="sub">WKN 859892 · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Semiconductor Equipment &amp; Materials</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">303,94 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-5,2 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-14,6 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">47,5 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 13 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>1</b></span><span class="chip">Quartalszahlen <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNRlJpOVFPTTNOQzBzb3FtSnFmSVp0UTRXWkk4ckRRVl9tLUdUUVcybldzNFlpd3lHamJ2cDgxc0R0SzZOT29TQlhSM0tsaHFLSUw2b2dUd1RCYVdyM2VYeElxcnhsc1NZbjZlOFFSRWF2ZUZ1YWlRQS1qdlZVXzZqTTU4eUJPYnFUeEY0bmQ5VEc1NWFUVU9TaA?oc=5">Form 144 TERADYNE For: 15 October By Investing.com</a><span class="quelle">Investing.com Canada</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US49338L1035">Keysight Technologies, Inc.</a></div>
+  <div class="sub">WKN A12B6J · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Scientific &amp; Technical Instruments</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">299,15 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-6,3 %</span></div>
     <div><span class="lbl">1 Woche</span><span class="val neg">-10,5 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">291,4 Mrd €</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">50,9 Mrd €</span></div>
   </div>
-</a>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 15 Artikel</div>
+    <div class="chips"><span class="chip">Quartalszahlen <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMizwFBVV95cUxPakxpRmJWSmhpYmszSWhkNklwRDVoSHM4bWNrdzdSUXZBN2FxWkJYaDNhb1JnR3AyNThOZFlBYlRLNXlqQ1Bqc0ZJTlJRal9NSXZOMlZVUVZFUmhfWENkcVI5MkZkejVxOHpzTUt2S21FdDdiUEF4U3ZkSnJ2RHdvTFg0YlRMRERkWUVXWmcwcllHUVdoOTMyWXlDWVVud3VQRU04RkF5XzhrVXNxWkRfTVZ3YzlncXRDMWpPLXJqQlpkUXFybE8tVlVWVVgxYVU?oc=5">Aktien New York: Rückschlag der Technologie-Aktien geht etwas weiter</a><span class="quelle">MarketScreener Schweiz</span>
+  </div>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=857716">
-  <div class="kopf"><span class="titel">Sumitomo Electric Industries, Ltd.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 857716 · Nikkei 225</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A0NDYQ">EchoStar Corporation</a></div>
+  <div class="sub">WKN A0NDYQ · S&amp;P 500 · USA · Kommunikation</div>
+  <div class="sub2">Telecom Services</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">11,92 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-9,1 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-15,1 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">37,2 Mrd €</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">75,66 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-3,5 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-9,2 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">21,9 Mrd €</span></div>
   </div>
-</a>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 9 Artikel</div>
+    <div class="chips"><span class="chip leise">keine Signalwörter</span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMi3AFBVV95cUxQVFJNaGtTY1Z4XzN5TENxbjY0cHg1STEyNDBHczBLNEIwZzdPV1V4Vm9sRXBJNVZPV2pBR1FyZWtCQnhaelBTc09JSV8tM2t6djFHbW9ha2R5NldldkpNdUpqZVlRN3NTTU9FRUhBeDNRREs3WUxMdk9kYmFDaGM1V2J3aThQWDZXdDlxcmF4R2VRZ1VJb01rbzJKanVTYkZuazBRcTZpZm1WNHR5SXltRkNlZ01qdEwwSElpRjlRS1dCbC1KZEE3cjlmV1V5NXg4WGJXVnNmYjNiRlR6?oc=5">Why Is EchoStar (NASDAQ:ECHO) Down 11.11% in a Week Including a 4.04% Drop on October 14, and Is More Selling Ahead?</a><span class="quelle">kalkine.ca</span>
+  </div>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US8807701029">
-  <div class="kopf"><span class="titel">Teradyne, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 859892 · S&amp;P 500</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=863060">Western Digital Corporation</a></div>
+  <div class="sub">WKN 863060 · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Computer Hardware</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">305,82 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-4,6 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-14,0 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">47,7 Mrd €</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">307,86 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-5,3 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-12,3 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">115,2 Mrd €</span></div>
   </div>
-</a>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 44 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>8</b></span><span class="chip">Quartalszahlen <b>6</b></span><span class="chip">Zinsen / Notenbank <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxNTTBSNWsxQU1VSHFZVmhMbVE4OWFjR2RyWkFHbG85Mnk1R2RabW96QkVKZ3B2aVliRWhXRFgtVWpieU1WcDV3ckk3djNXb0Y5c1EtcjF0ajh3eWdrNHVoaHh0bEtLajlXWV9BazFkd05ReGhqOWtpWmlKaEttejVyQzg0ckdfeFdjWHZhNGdQalgzcjU0a2phSGdBeXNqZEpUX3NxQkk0ZVIwajNtd0ZuNHFCVUJLdGNiUl81ckMxQlhxdENxcWFUaXhuTlFrOWs1RmFieE53VEw0ZnF4VDNfZ2xDREN1Um1T?oc=5">Memory Stocks Extend Selloff on China Competition Fears: Western Digital Slides 5%, SanDisk Drops 3%, Micron Slips</a><span class="quelle">24/7 Wall St.</span>
+  </div>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=863060">
-  <div class="kopf"><span class="titel">Western Digital Corporation</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN 863060 · S&amp;P 500</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US1999081045">Comfort Systems USA, Inc.</a></div>
+  <div class="sub">WKN 907784 · S&amp;P 500 · USA · Industrie</div>
+  <div class="sub2">Engineering &amp; Construction</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">308,65 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-5,0 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-12,0 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">115,7 Mrd €</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">1.303,37 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-5,3 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-14,4 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">45,9 Mrd €</span></div>
   </div>
-</a>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 17 Artikel</div>
+    <div class="chips"><span class="chip">Quartalszahlen <b>3</b></span><span class="chip">Zinsen / Notenbank <b>2</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMizwFBVV95cUxPakxpRmJWSmhpYmszSWhkNklwRDVoSHM4bWNrdzdSUXZBN2FxWkJYaDNhb1JnR3AyNThOZFlBYlRLNXlqQ1Bqc0ZJTlJRal9NSXZOMlZVUVZFUmhfWENkcVI5MkZkejVxOHpzTUt2S21FdDdiUEF4U3ZkSnJ2RHdvTFg0YlRMRERkWUVXWmcwcllHUVdoOTMyWXlDWVVud3VQRU04RkF5XzhrVXNxWkRfTVZ3YzlncXRDMWpPLXJqQlpkUXFybE8tVlVWVVgxYVU?oc=5">Aktien New York: Rückschlag der Technologie-Aktien geht etwas weiter</a><span class="quelle">MarketScreener Schweiz</span>
+  </div>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=US64110D1046">
-  <div class="kopf"><span class="titel">NetApp, Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A0NHKR · S&amp;P 500</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US4663131039">Jabil Inc.</a><span class="neu">NEU</span></div>
+  <div class="sub">WKN 886423 · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Electronic Components</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">191,95 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-3,1 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-6,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">37,8 Mrd €</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">252,97 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-3,6 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-5,2 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">26,5 Mrd €</span></div>
   </div>
-</a>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 9 Artikel</div>
+    <div class="chips"><span class="chip">Quartalszahlen <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMi0gFBVV95cUxOd1NjTFlwOXQxU1k4U1p4T1pLZFgwcUFBMG9WZE9BNlo5RUoteDkxbTZ4U09qcGprb1JZZEhfYnRMUDc0ZGczUUNQTGh3Q1R1UlZpRUd0bWlTYU82cFJLNGtjNkZqLUpmeUZ3MVNaRVlCbmJlcUM4eWRoaXdHMFFLOEUwV2FxeEZqNFhaQXVkQlB2NmFaVk1tWjZxc0VlOFNPRjNhVkdFX3NyZzBXZEJQN2liZDA1ZlBtY29fbFNGTlVHQlV1Z1ZtVm4zQTJWMFRXVHc?oc=5">Adani Enterprises signs Jabil AI venture: multi-gigawatt plans shape Adani Enterprises stock</a><span class="quelle">ad-hoc-news.de</span>
+  </div>
+</div>
 
-<a class="card" href="https://www.onvista.de/suche/?searchValue=A404PC">
-  <div class="kopf"><span class="titel">GE Vernova Inc.</span><span class="neu">NEU</span></div>
-  <div class="sub">WKN A404PC · S&amp;P 500</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=928906">Akamai Technologies, Inc.</a></div>
+  <div class="sub">WKN 928906 · S&amp;P 500 · USA · Technologie</div>
+  <div class="sub2">Software - Infrastructure</div>
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">805,90 €</span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-4,1 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-9,6 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">213,8 Mrd €</span></div>
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">80,97 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-1,1 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-10,1 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">11,6 Mrd €</span></div>
   </div>
-</a>
-<footer>Daten: Yahoo Finance (teils verzögert), Indexlisten: Wikipedia. Keine Anlageberatung.</footer>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 16 Artikel</div>
+    <div class="chips"><span class="chip">Zinsen / Notenbank <b>2</b></span><span class="chip">Quartalszahlen <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMipgFBVV95cUxQcS0xQTFrMko3WHRpX2ZfSXg3UXA1RVZpM3RIcW9TRUNkbm44elZzUmc5SWJOQVFlMDVZSEVyMEZRUnNNdFoyQzlJZ2RVdkRYQTFoUDJRY0hkbnRXclZqWjk0WDVWcnRVUmIzZS11NU1NZFR2Sy1tOUtMYXVueE5wS1dUWWJFWEFjelZYdU1WbnRwaDd6b1VGZ3dRU1VrVGg5WGlzNE53?oc=5">A developer platform is moving core systems to Akamai to scale nearly 1,500 active software components.</a><span class="quelle">Stock Titan</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=812960">Renesas Electronics Corporation</a></div>
+  <div class="sub">WKN 812960 · Nikkei 225 · Japan · Technologie</div>
+  <div class="sub2">Semiconductors</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 08:30</span><span class="val">18,90 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-1,1 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-16,2 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">31,1 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 8 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>2</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMiygFBVV95cUxNOGdLMXlhRnk0S0MxbkdCY3czYW1TblJkZEkyMTc3RXZOMUFRMmpXSkhfRFRxN3lwaTVKVTl2empVcGU0VUg5b0t3UXZmT0xwenJZb244VmlaMWwwV1RkZE5LSE1xcU9oZVRRSW9BcXBMbllxUkppSU1iZDM0U1NjUGZwNnNPZEIyUUV0RmpTTE5NZ2JKWGc5eklXVUhEVEU4ek5BT3dVdmNzZDJjRHpVc2FkR2U0V1h4SGFGVl9mbEhxWDI1OFF2Wmp3?oc=5">AM Markets Need to Know: AI credit stress, chip stocks slide, and more</a><span class="quelle">TradingView</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A0MP84">Prysmian S.p.A.</a></div>
+  <div class="sub">WKN A0MP84 · FTSE MIB · Italien · Industrie</div>
+  <div class="sub2">Electrical Equipment &amp; Parts</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:16</span><span class="val">109,90 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-2,9 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-10,1 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">32,9 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 10 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>3</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMi-AFBVV95cUxQTW13NFBlUU81UTBmakJxcFkyMDBRejZzWm5vVjc5b2gzSk9Zcl8zSnBYeF9DVVN1TzFxSVdEWWNCZUoxQVdlWk9Ya19ob0VRY3RyMjdYaldlY0xCbFRoUllfaGVmVDhDRV9GcGdMZkJGUjlJWlNPcV9MbDBrZFE1WWNwY0xXZFdIeVVmckVITm5tTmlhLTRGdno4MWhyeUV5blZKcFZpTWlKcm0tZDRXaEJ2VTlZVlMzMVhTQm54bldzS1FWY25mbGdweTRjUUMxZ1VLZzJBYjBDMjNDenVoM3A5bG40Nmp2LVFjdGViVmlrMlAweXNYVg?oc=5">Mailänder Börse weitet Verluste aus, da Nasdaq-Rückgang erwartet wird - Technoprobe, Stm und Prysmian brechen ein</a><span class="quelle">MarketScreener Schweiz</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US04626A1034">Astera Labs, Inc.</a><span class="neu">NEU</span></div>
+  <div class="sub">WKN A404AF · Nasdaq-100 · USA · Technologie</div>
+  <div class="sub2">Semiconductors</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">260,65 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-2,7 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-15,8 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">45,1 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 13 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>2</b></span><span class="chip">Quartalszahlen <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNVEptQkgzVDVEQ2M5SUJiX1lHdWlXM3hvMzBGWnVwYUgyM0ZURXppSWh4eks3c0dmZnU4VzJlcmhXNVc1YWRtUkNUbWhCdC1Yd0gzbHlhd0U4RzIwWHgyc20yT2pUQzVvMnhRMnRBeHNMdzZ0OEEycm41VUtFNzdNSjdhZGF5RGZtNGRmN3RWdk5zNkM5dFpMaW5R?oc=5">Lumentum: Aktie bricht im KI-Ausverkauf ein</a><span class="quelle">Börse Express</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=ENER6Y">Siemens Energy AG</a></div>
+  <div class="sub">WKN ENER6Y · DAX · Deutschland · Industrie</div>
+  <div class="sub2">Specialty Industrial Machinery</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:16</span><span class="val">131,80 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-2,6 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-7,5 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">112,2 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 55 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>6</b></span><span class="chip">Zinsen / Notenbank <b>3</b></span><span class="chip">Gewinnwarnung <b>1</b></span><span class="chip">Übernahme / Fusion <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMikgJBVV95cUxPSUc2Z1g4aW5RTEgxMnFFQmh4OVgtRmNkUXE5M2FiN0U3NHFXNG1wekNUREMwQ20zNVRSZGZONDJRNldKdW8ybUZENVkxU2ctejRQdVllSFE4WU42OHBIcDg0N2NTYzJBalFoV0dWcURGdGpaTTVXWnc5ZkV6TEpfdmkzeHBvVjBxWmpWQ2FISGREcGdnNDNNeFVZMkVVVVFPU2NORm5DWXp4Z1N3Q1MwX3RYREtyMzhIbEhsMHFodGNoYzVnOGNfNWgxaE90aVVTdmtPNlRSTWVYTERHMl9mZzVfQzNBSHY0WHplazRsWW5KS2RrSnFjODd4NXRKOHliQ0hFN2hlelV5WUhWcVgtX2JR?oc=5">Zinsangst sorgt für Kursrutsch bei der Siemens-Energy-Aktie: Wie gefährlich wird der teurere KI-Ausbau?</a><span class="quelle">Finanzen.net</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=JP3190600001">ROHM Co., Ltd.</a></div>
+  <div class="sub">WKN 869082 · Nikkei 225 · Japan · Technologie</div>
+  <div class="sub2">Semiconductors</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 08:30</span><span class="val">25,85 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val pos">+0,3 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-14,3 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">8,9 Mrd €</span></div>
+  </div><div class="news"><div class="lbl">Keine Nachrichten in den letzten 24 Std. gefunden</div></div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=A3CQU7">Seagate Technology Holdings plc</a></div>
+  <div class="sub">WKN A3CQU7 · S&amp;P 500 · Singapur · Technologie</div>
+  <div class="sub2">Computer Hardware</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">604,41 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-5,1 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-12,6 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">137,2 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 17 Artikel</div>
+    <div class="chips"><span class="chip">Quartalszahlen <b>2</b></span><span class="chip">Zinsen / Notenbank <b>1</b></span><span class="chip">Gewinnerwartung <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxPT2U3cFRFT3ZwWXFNM2JkWWNkaWFENVZkOHpueXl4a0hoX0RxM3NtaURmcUltR2kySE1UdDRSX05lbnV3Q2RTY3NSRnE3U2hxZVk3NzRWTXJCa2dGa1JrQWo4YUdoa09lWmhqNTJwMDlXRTJyN3ZCZEh4LWNULWp0QmdOQ0RrNF9CSFlQTWg5U04wMXAyMHFQeTh0OHF0QkRCdnNDOWtGTTVsRDBXZWpYVWdhRS1BbnEtN2VjTDFfcldFakFrSDFCRS1HVW9qNTNBUkJWNw?oc=5">Seagate mit über 400 Prozent Gewinn und ein trendstarker Neukauf im Erfolgsdepot</a><span class="quelle">Der Aktionär</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=US3687361044">Generac Holdings Inc.</a></div>
+  <div class="sub">WKN A0YGR4 · S&amp;P 500 · USA · Industrie</div>
+  <div class="sub2">Specialty Industrial Machinery</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs · 15.10. 17:31</span><span class="val">175,25 €</span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-0,8 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-12,5 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">10,3 Mrd €</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 10 Artikel</div>
+    <div class="chips"><span class="chip">Abstufung / Kursziel ↓ <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMizgFBVV95cUxPdU91ei1xZ3g5QUY2TXVscHhCY0VMdkVhZkFiYXY0OFFBdTBpRmtmLV9FN3gxQ3NpdzNBWXY0UVpwZGJNR1ExQUxGSDlHNXdJSHRMVGdqX096SmlkaTFJRVg5dGxwSzJoaWJsZURtRzcxVVFIZEFTUVBrbmJYM2R2WWtqTG1WaVd2S2hTUkdPRmFCemt5OFEtRTB3M2FUZ2UxXzhld3B2bGZqci1uX2NrMXd1T0FXZy1MRUk0LVZSRVZFRS13b1NBZzlRRGZIdw?oc=5">ZWJ Investment Counsel Inc. Buys 6,010 Shares of Generac Holdings Inc. $GNRC</a><span class="quelle">MarketBeat</span>
+  </div>
+</div>
+<footer>Kurse: Yahoo Finance (teils verzögert), Uhrzeit = letzter Kurs in deutscher Zeit. Nachrichten: Google News &amp; Yahoo Finance, Zahl = Anzahl Artikel mit diesem Signalwort. Indexlisten: Wikipedia. Keine Anlageberatung.</footer>
 </main></body></html>

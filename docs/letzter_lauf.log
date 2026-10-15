@@ -14,44 +14,23 @@ $ECV.DE: No data found, symbol may be delisted
   Kurse 751–900 von 1177 …
   Kurse 901–1050 von 1177 …
   Kurse 1051–1177 von 1177 …
-   69 Titel mit ≥10 % Verlust
+   40 Titel mit ≥10 % Verlust
 
 3) Stammdaten & Marktkapitalisierung …
   0992.HK    Lenovo Group Limited
   285A.T     Kioxia Holdings Corporation
   3436.T     Sumco Corporation
-  4004.T     Resonac Holdings Corporation
-  5301.T     Tokai Carbon Co., Ltd.
-  5706.T     Mitsui Kinzoku Company, Limited
-  5801.T     Furukawa Electric Co., Ltd.
-  5802.T     Sumitomo Electric Industries, Ltd.
-  5803.T     Fujikura Ltd.
-  6146.T     Disco Corporation
-  6361.T     Ebara Corporation
-  6479.T     MINEBEA MITSUMI Inc.
-  6506.T     YASKAWA Electric Corporation
-  6526.T     Socionext Inc.
   6723.T     Renesas Electronics Corporation
-  6752.T     Panasonic Holdings Corporation
-  6762.T     TDK Corporation
-  6857.T     Advantest Corporation
-  6920.T     Lasertec Corporation
   6963.T     ROHM Co., Ltd.
-  6976.T     Taiyo Yuden Co., Ltd.
-  6981.T     Murata Manufacturing Co., Ltd.
   7733.T     Olympus Corporation
-  7735.T     SCREEN Holdings Co., Ltd.
-  8035.T     Tokyo Electron Limited
   9984.T     SoftBank Group Corp.
   AIXA.DE    AIXTRON SE
   AKAM       Akamai Technologies, Inc.
+  ALAB       Astera Labs, Inc.
   AMAT       Applied Materials, Inc.
   ANET       Arista Networks, Inc.
-  ANTO.L     Antofagasta plc
   ASM.AS     ASM International NV
   BE         Bloom Energy Corporation
-  CAT        Caterpillar Inc.
-  CCC.L      Computacenter plc
   CIEN       Ciena Corporation
   COHR       Coherent Corp.
   CRWV       CoreWeave, Inc.
@@ -60,27 +39,19 @@ $ECV.DE: No data found, symbol may be delisted
   ENR.DE     Siemens Energy AG
   FIX        Comfort Systems USA, Inc.
   FLEX       Flex Ltd.
-  GEV        GE Vernova Inc.
   GNRC       Generac Holdings Inc.
-  HOOD       Robinhood Markets, Inc.
   HPE        Hewlett Packard Enterprise Company
-  IFX.DE     Infineon Technologies AG
+  JBL        Jabil Inc.
   KEYS       Keysight Technologies, Inc.
   LITE       Lumentum Holdings Inc.
   LRCX       Lam Research Corporation
   MRVL       Marvell Technology, Inc.
-  MU         Micron Technology, Inc.
   NBIS       Nebius Group N.V.
-  NTAP       NetApp, Inc.
   P          Everpure, Inc.
   PRY.MI     Prysmian S.p.A.
   RKLB       Rocket Lab Corporation
   SKYD       Skydance Corporation
   SMCI       Super Micro Computer, Inc.
-  SNDK       Sandisk Corporation
-  SPCX       Space Exploration Technologies Corp.
-  STMMI.MI   STMicroelectronics N.V.
-  STMPA.PA   STMicroelectronics N.V.
   STX        Seagate Technology Holdings plc
   TER        Teradyne, Inc.
   VRT        Vertiv Holdings Co
@@ -89,74 +60,50 @@ $ECV.DE: No data found, symbol may be delisted
 
 4) WKN ermitteln …
 
-=== Kursrutsch ≥10 % in 3 Tagen, Marktkap. > 5 Mrd. € (Stand 15.10.2026 15:42) ===
+5) Nachrichten der letzten 24 Std. auswerten …
 
-                           Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €)
-     Kioxia Holdings Corporation A2QB8W    72,83  -12,3 % -28,0 %               38,8
-            Skydance Corporation A412AL     6,33   +0,5 % -23,6 %               32,1
-                 CoreWeave, Inc. A413X6    54,90   -6,4 % -24,6 %               30,2
-               Sumco Corporation A0HGFA    15,00  -13,9 % -28,0 %                5,2
-          Rocket Lab Corporation A419CG    45,98  -12,9 % -24,6 %               29,3
-            Lenovo Group Limited A3ENBE     2,95  -14,5 % -19,6 %               36,6
-            Lasertec Corporation 887360   221,75  -13,6 % -16,0 %               19,9
-               Nebius Group N.V. A1JGSL   151,71   -8,6 % -22,6 %               41,0
-                       Flex Ltd. 890331    84,74   -5,3 % -17,2 %               31,3
-          Dell Technologies Inc. A2N6WP   417,89   -7,8 % -18,5 %              265,1
-       SCREEN Holdings Co., Ltd. 859619    76,70  -10,6 % -14,8 %               14,5
-                  ROHM Co., Ltd. 869082    22,98  -11,3 % -24,4 %                8,9
-          Lumentum Holdings Inc. A14WK0   731,40   -8,5 % -21,8 %               66,3
-     Furukawa Electric Co., Ltd. 854857    19,09  -13,1 % -24,0 %               13,4
-           Advantest Corporation 868805   194,16  -15,0 % -16,8 %              140,2
-          Tokyo Electron Limited 257110    58,61   -7,8 % -17,1 %               26,6
-Hewlett Packard Enterprise Compa A140KD    52,31   -7,1 % -17,4 %               69,4
-      Super Micro Computer, Inc. A40MRM    29,77   -6,7 % -22,0 %               19,2
-            SoftBank Group Corp. A40D98    27,43   -9,3 % -23,1 %              156,3
- Renesas Electronics Corporation 812960    17,04  -10,0 % -23,2 %               31,1
-                   Fujikura Ltd. 876144    25,67  -12,7 % -20,4 %               42,5
-               Ciena Corporation A0LDA7   304,65   -5,0 % -19,8 %               43,4
-        Bloom Energy Corporation A2JQTG   198,57   -7,0 % -18,4 %               58,4
-             Olympus Corporation 856840     9,73   -2,2 % -13,9 %               10,3
-  Murata Manufacturing Co., Ltd. 853657    38,16  -10,0 % -22,3 %               69,1
-                  Coherent Corp. A3DQXS   219,09   -6,7 % -18,8 %               43,1
-                  Everpure, Inc. A14YFN   118,66   -6,0 % -11,6 %               39,5
- Mitsui Kinzoku Company, Limited 860971    12,78  -13,1 % -18,6 %                7,3
-    Resonac Holdings Corporation 859554    84,95   -8,9 % -16,9 %               16,1
-            ASM International NV 868730   749,60   -9,1 % -16,6 %               36,5
-               Ebara Corporation 858656    23,40  -10,5 % -14,4 %               10,7
-               Disco Corporation A42FT5   300,69   -8,5 % -13,4 %               32,6
-           Generac Holdings Inc. A0YGR4   168,65   -4,5 % -15,7 %               10,0
-         Applied Materials, Inc. 865177   384,68   -3,4 % -15,4 %              304,5
-           Arista Networks, Inc. A40V33   163,37   -6,3 % -13,2 %              206,2
-         Robinhood Markets, Inc. A3CVQC    85,63   -5,0 % -10,3 %               77,3
-              Vertiv Holdings Co A2PZ5A   186,09   -6,4 % -14,4 %               71,5
-         STMicroelectronics N.V. 893438    39,82   -7,5 % -17,0 %               35,7
-                 Antofagasta plc 564734    39,34   -6,8 %  -7,7 %               38,8
-             Sandisk Corporation A429HK 1.162,78   -7,1 % -19,0 %              168,6
-       Akamai Technologies, Inc. 928906    79,55   -2,7 % -11,6 %               11,4
-        Lam Research Corporation A40L1V   242,50   -5,2 % -15,2 %              303,6
-Space Exploration Technologies C A42LQA   128,02   -5,7 % -10,6 %            1.687,9
-       Comfort Systems USA, Inc. 907784 1.284,39   -6,6 % -15,6 %               45,1
-                 Prysmian S.p.A. A0MP84   107,65   -4,9 % -12,0 %               32,2
-        Marvell Technology, Inc. A3CNLD   210,84   -3,6 % -13,9 %              188,8
-               Siemens Energy AG ENER6Y   129,30   -4,4 %  -9,3 %              110,0
-        Infineon Technologies AG 623100    50,46   -8,8 % -14,3 %               65,4
- Seagate Technology Holdings plc A3CQU7   593,16   -6,8 % -14,2 %              135,3
-    YASKAWA Electric Corporation 857658    24,17   -9,3 % -13,6 %                6,3
-         Micron Technology, Inc. 869020   780,96   -4,2 % -15,5 %              880,6
-           Taiyo Yuden Co., Ltd. 863428    55,77  -10,1 % -13,9 %                7,4
-                 TDK Corporation 857032    16,42   -7,9 % -17,7 %               31,2
-     Keysight Technologies, Inc. A12B6J   299,31   -6,2 % -10,4 %               51,0
-               Computacenter plc A14NH6    59,83   -7,4 %  -7,7 %                6,3
-            EchoStar Corporation A0NDYQ    75,40   -3,8 %  -9,4 %               22,1
-  Panasonic Holdings Corporation 853666    22,41   -7,0 % -15,1 %               52,3
-            MINEBEA MITSUMI Inc. A3D9VL    18,39   -8,0 % -15,5 %                7,4
-                Caterpillar Inc. 850598   635,30   -4,9 % -10,5 %              291,4
-Sumitomo Electric Industries, Lt 857716    11,92   -9,1 % -15,1 %               37,2
-                  Teradyne, Inc. 859892   305,82   -4,6 % -14,0 %               47,7
-     Western Digital Corporation 863060   308,65   -5,0 % -12,0 %              115,7
-                    NetApp, Inc. A0NHKR   191,95   -3,1 %  -6,6 %               37,8
-                 GE Vernova Inc. A404PC   805,90   -4,1 %  -9,6 %              213,8
+=== Kursrutsch ≥10 % in 3 Tagen, Marktkap. > 5 Mrd. € (Stand 15.10.2026 17:29) ===
 
-Neu seit letztem Lauf: 64
+                           Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €)        Land     Kurszeit                                           News
+                 CoreWeave, Inc. A413X6    56,36   -4,0 % -22,6 %               30,9         USA 15.10. 17:31            128: Ausverkauf 45, Gewinnwarnung 4
+            Skydance Corporation A412AL     6,56   +4,1 % -20,8 %               33,0         USA 15.10. 17:31         43: Ausverkauf 9, Übernahme / Fusion 2
+            Lenovo Group Limited A3ENBE     2,95  -14,5 % -19,6 %               36,7    Hongkong 15.10. 10:08         23: Ausverkauf 7, Zinsen / Notenbank 1
+          Dell Technologies Inc. A2N6WP   415,31   -8,4 % -19,0 %              263,8         USA 15.10. 17:31   62: Ausverkauf 13, Abstufung / Kursziel ↓ 11
+          Rocket Lab Corporation A419CG    47,36  -10,3 % -22,4 %               30,2         USA 15.10. 17:31           110: Ausverkauf 24, Quartalszahlen 2
+                       Flex Ltd. 890331    84,52   -5,6 % -17,5 %               31,2         USA 15.10. 17:31     34: Übernahme / Fusion 4, Quartalszahlen 1
+     Kioxia Holdings Corporation A2QB8W    82,90   -3,2 % -21,6 %               38,7       Japan 15.10. 08:30            39: Ausverkauf 19, Quartalszahlen 1
+                  Everpure, Inc. A14YFN   116,92   -7,4 % -13,0 %               39,1         USA 15.10. 17:31                          20: Kapitalerhöhung 1
+Hewlett Packard Enterprise Compa A140KD    52,39   -7,0 % -17,3 %               69,6         USA 15.10. 17:31     33: Abstufung / Kursziel ↓ 9, Ausverkauf 3
+               Nebius Group N.V. A1JGSL   156,88   -5,5 % -20,0 %               42,5 Niederlande 15.10. 17:31        45: Ausverkauf 11, Zinsen / Notenbank 2
+                  Coherent Corp. A3DQXS   219,32   -6,7 % -18,7 %               43,1         USA 15.10. 17:31             35: Quartalszahlen 6, Ausverkauf 2
+      Super Micro Computer, Inc. A40MRM    30,40   -4,8 % -20,4 %               19,9         USA 15.10. 17:31     78: Ausverkauf 6, Abstufung / Kursziel ↓ 2
+          Lumentum Holdings Inc. A14WK0   761,28   -4,8 % -18,6 %               68,8         USA 15.10. 17:31       28: Ausverkauf 2, Klage / Ermittlungen 1
+         Applied Materials, Inc. 865177   380,54   -4,5 % -16,3 %              301,2         USA 15.10. 17:31         41: Ausverkauf 4, Zinsen / Notenbank 1
+               Ciena Corporation A0LDA7   309,91   -3,4 % -18,5 %               43,9         USA 15.10. 17:31                                           14: 
+             Olympus Corporation 856840     9,93  -13,5 % -12,5 %               10,3       Japan 15.10. 08:30              11: Gewinnwarnung 1, Ausverkauf 1
+           Arista Networks, Inc. A40V33   162,87   -6,6 % -13,5 %              205,1         USA 15.10. 17:31 25: Übernahme / Fusion 5, Zinsen / Notenbank 1
+            ASM International NV 868730   764,60   -7,3 % -14,9 %               37,4 Niederlande 15.10. 17:16             16: Quartalszahlen 1, Ausverkauf 1
+        Lam Research Corporation A40L1V   242,22   -5,4 % -15,3 %              302,5         USA 15.10. 17:31        68: Quartalszahlen 3, Gewinnerwartung 1
+        Bloom Energy Corporation A2JQTG   206,69   -3,2 % -15,1 %               60,6         USA 15.10. 17:31             38: Ausverkauf 6, Quartalszahlen 4
+              Vertiv Holdings Co A2PZ5A   187,80   -5,6 % -13,7 %               72,4         USA 15.10. 17:31 21: Abstufung / Kursziel ↓ 3, Quartalszahlen 1
+        Marvell Technology, Inc. A3CNLD   210,93   -3,6 % -13,9 %              189,5         USA 15.10. 17:31                           26: Quartalszahlen 1
+            SoftBank Group Corp. A40D98    30,20   +0,8 % -15,0 %              156,1       Japan 15.10. 08:30        46: Ausverkauf 20, Zinsen / Notenbank 3
+               Sumco Corporation A0HGFA    17,38   -1,6 % -17,3 %                5,2       Japan 15.10. 08:30                                            0: 
+                  Teradyne, Inc. 859892   303,94   -5,2 % -14,6 %               47,5         USA 15.10. 17:31             13: Ausverkauf 1, Quartalszahlen 1
+     Keysight Technologies, Inc. A12B6J   299,15   -6,3 % -10,5 %               50,9         USA 15.10. 17:31                           15: Quartalszahlen 1
+            EchoStar Corporation A0NDYQ    75,66   -3,5 %  -9,2 %               21,9         USA 15.10. 17:31                                            9: 
+     Western Digital Corporation 863060   307,86   -5,3 % -12,3 %              115,2         USA 15.10. 17:31             44: Ausverkauf 8, Quartalszahlen 6
+       Comfort Systems USA, Inc. 907784 1.303,37   -5,3 % -14,4 %               45,9         USA 15.10. 17:31     17: Quartalszahlen 3, Zinsen / Notenbank 2
+                      Jabil Inc. 886423   252,97   -3,6 %  -5,2 %               26,5         USA 15.10. 17:31                            9: Quartalszahlen 1
+       Akamai Technologies, Inc. 928906    80,97   -1,1 % -10,1 %               11,6         USA 15.10. 17:31     16: Zinsen / Notenbank 2, Quartalszahlen 1
+ Renesas Electronics Corporation 812960    18,90   -1,1 % -16,2 %               31,1       Japan 15.10. 08:30                                8: Ausverkauf 2
+                 Prysmian S.p.A. A0MP84   109,90   -2,9 % -10,1 %               32,9     Italien 15.10. 17:16                               10: Ausverkauf 3
+               Astera Labs, Inc. A404AF   260,65   -2,7 % -15,8 %               45,1         USA 15.10. 17:31             13: Ausverkauf 2, Quartalszahlen 1
+               Siemens Energy AG ENER6Y   131,80   -2,6 %  -7,5 %              112,2 Deutschland 15.10. 17:16         55: Ausverkauf 6, Zinsen / Notenbank 3
+                  ROHM Co., Ltd. 869082    25,85   +0,3 % -14,3 %                8,9       Japan 15.10. 08:30                                            0: 
+ Seagate Technology Holdings plc A3CQU7   604,41   -5,1 % -12,6 %              137,2    Singapur 15.10. 17:31     17: Quartalszahlen 2, Zinsen / Notenbank 1
+           Generac Holdings Inc. A0YGR4   175,25   -0,8 % -12,5 %               10,3         USA 15.10. 17:31                   10: Abstufung / Kursziel ↓ 1
+
+Neu seit letztem Lauf: 2
 Seite geschrieben: docs/index.html
 Push-Nachricht gesendet.
