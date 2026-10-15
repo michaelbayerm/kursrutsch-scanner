@@ -255,19 +255,27 @@ def deutsche_kurse(df, tage):
     grenze = datetime.now() - timedelta(days=4)
     heim_eur = dict(zip(df["ticker"], df["kurs_eur"]))
     heim_datum = dict(zip(df["ticker"], df["datum"]))
-    gewaehlt, verworfen = {}, []
+    gewaehlt, verworfen, gruende = {}, [], {}
     for t, b in basen.items():
-        optionen = []
+        optionen, grund = [], []
+        gruende[t] = grund
+        if not b:
+            grund.append("keine Notierung an Stuttgart, Frankfurt oder München gefunden")
         for rang, (suf, ort) in enumerate(DE_BOERSEN):
             sym = b + suf if b else None
-            if not sym or sym not in closes:
+            if not sym:
+                continue
+            if sym not in closes or len(closes[sym].dropna()) < 7:
+                grund.append(f"{ort}: keine Kursdaten")
                 continue
             ser = closes[sym].dropna()
-            if len(ser) < 7 or ser.index[-1] < grenze:
+            if ser.index[-1] < grenze:
+                grund.append(f"{ort}: zuletzt gehandelt am {ser.index[-1]:%d.%m.}")
                 continue
             ref = heim_eur.get(t)
             if ref and not pd.isna(ref) and not (0.8 <= ser.iloc[-1] / ref <= 1.25):
                 verworfen.append(f"{sym} ({de(ser.iloc[-1], 2)} € statt ~{de(ref, 2)} €)")
+                grund.append(f"{ort}: Kurs passt nicht zur Aktie ({de(ser.iloc[-1], 2)} € statt ~{de(ref, 2)} €)")
                 continue                            # anderes Papier (z. B. ADR) oder Fehlkurs
             optionen.append((ser.index[-1], -rang, sym, ort, ser))
         # aktuellster Kurs zuerst, bei Gleichstand Stuttgart > Frankfurt > München;
@@ -282,6 +290,7 @@ def deutsche_kurse(df, tage):
             hd = heim_datum.get(t)
             if zeit and hd is not None and not pd.isna(hd) and zeit.date() < pd.Timestamp(hd).date():
                 verworfen.append(f"{sym} (letzter Handel {zeit:%d.%m. %H:%M}, veraltet)")
+                grund.append(f"{ort}: letzter Handel {zeit:%d.%m. %H:%M} Uhr, veraltet")
                 continue
             gewaehlt[t] = (sym, ort, ser, zeit)
             break
@@ -297,12 +306,15 @@ def deutsche_kurse(df, tage):
             for key, val in k.items():
                 r[key] = val
             r["kurs_eur"] = k["kurs"]
-            r["kurs_symbol"], r["boerse"] = sym, ort
+            r["kurs_symbol"], r["boerse"], r["boerse_typ"] = sym, ort, "de"
             r["kurszeit"] = zeit
+            sg = [g.split(": ", 1)[1] for g in gruende.get(r["ticker"], []) if g.startswith("Stuttgart:")]
+            r["boerse_hinweis"] = ("; ".join(sg) or "keine Kursdaten") if ort != "Stuttgart" else ""
         else:
             r["kurs_symbol"] = r["ticker"]
             heim = r.get("heim") if isinstance(r.get("heim"), str) and r.get("heim") else "Heimatbörse"
-            r["boerse"] = f"{heim} (umgerechnet)"
+            r["boerse"], r["boerse_typ"] = heim, "heim"
+            r["boerse_hinweis"] = "; ".join(gruende.get(r["ticker"], [])) or "keine deutsche Notierung gefunden"
         zeilen.append(r)
     out = pd.DataFrame(zeilen)
     print(f"   {len(gewaehlt)} von {len(df)} Titeln mit deutschem Börsenkurs "
@@ -534,7 +546,7 @@ def wochen_kurven(tickers):
     return out
 
 
-def sparkline(kurve, vorschluss):
+def sparkline(kurve, vorschluss, ort=""):
     """Kleines SVG-Diagramm; gestrichelte Linie = Schlusskurs vor einer Woche."""
     if not kurve:
         return ""
@@ -552,7 +564,7 @@ def sparkline(kurve, vorschluss):
     fmt = "%d.%m."
     return f"""
   <div class="chart">
-    <div class="lbl">Wochenverlauf {von.strftime(fmt)} – {bis.strftime(fmt)} · gestrichelt = Kurs vor 1 Woche</div>
+    <div class="lbl">Wochenverlauf {ort} {von.strftime(fmt)} – {bis.strftime(fmt)} · gestrichelt = Kurs vor 1 Woche</div>
     <svg viewBox="0 0 {w} {h}" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
       <polygon points="{flaeche}" fill="{farbe}" opacity="0.12"/>
       <line x1="{pad}" x2="{w - pad}" y1="{y(basis):.1f}" y2="{y(basis):.1f}" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
@@ -671,7 +683,7 @@ def write_html(path, df, neu, a, stand, gesamt=None):
         return "neg" if x < 0 else "pos"
 
     if df.empty:
-        body = f'<p class="leer">Aktuell kein Titel mit ≥ {a.schwelle:g} % Verlust in {a.tage} Tagen und &gt; {a.min_kap:g} Mrd. € Marktkap.</p>'
+        body = f'<p class="leer">Aktuell kein Titel mit ≥ {a.schwelle_de:g} % Verlust in {a.tage} Tagen und &gt; {a.min_kap:g} Mrd. € Marktkap.</p>'
     else:
         cards = []
         for _, r in df.iterrows():
@@ -681,6 +693,17 @@ def write_html(path, df, neu, a, stand, gesamt=None):
             esc = lambda x: html.escape(str(x)) if isinstance(x, str) and x else ""
             herkunft = " · ".join(x for x in (esc(r.get("land")), esc(r.get("sektor"))) if x)
             branche = esc(r.get("branche"))
+
+            ort = html.escape(str(r.get("boerse") or "–"))
+            hinweis = html.escape(str(r.get("boerse_hinweis") or ""))
+            if r.get("boerse_typ") == "de":
+                quelle_html = (f'<div class="q-de"><b>Börse {ort}</b>Kurs, Veränderungen und Wochenverlauf von hier, in €'
+                               + (f'<span class="grund">Stuttgart nicht verwendet: {hinweis}</span>' if hinweis else "") + '</div>')
+            else:
+                quelle_html = (f'<div class="q-heim"><b>⚠ Ausweichkurs: {ort} (Heimatbörse)</b>'
+                               f'Kurs, Veränderungen und Wochenverlauf von dort, in € umgerechnet.'
+                               f'<span class="grund">Grund: {hinweis}</span></div>')
+            ort_kurz = ort if r.get("boerse_typ") == "de" else f"{ort} (umgerechnet)"
 
             nw = r.get("news") or {}
             if nw.get("n"):
@@ -709,13 +732,13 @@ def write_html(path, df, neu, a, stand, gesamt=None):
   <div class="kopf"><a class="titel" href="{link}">{html.escape(str(r['titel']))}</a>{badge}</div>
   <div class="sub">WKN {html.escape(str(r['wkn']))} · {html.escape(str(r['index']))}{' · ' + herkunft if herkunft else ''}</div>
   {f'<div class="sub2">{branche}</div>' if branche else ''}
-  <div class="boerse">Börse {html.escape(str(r.get('boerse') or '–'))}</div>
+  {quelle_html}
   <div class="werte">
-    <div><span class="lbl">Kurs · {kurszeit_text(r)}</span><span class="val">{de(r['kurs_eur'], 2)} €</span></div>
+    <div><span class="lbl">Kurs {ort_kurz} · {kurszeit_text(r)}</span><span class="val">{de(r['kurs_eur'], 2)} €</span></div>
     <div><span class="lbl">Intraday</span><span class="val {color(r['intraday'])}">{pct(r['intraday'])}</span></div>
     <div><span class="lbl">1 Woche</span><span class="val {color(r['woche'])}">{pct(r['woche'])}</span></div>
     <div><span class="lbl">Marktkap.</span><span class="val">{de(r['kap_eur_mrd'])} Mrd €</span></div>
-  </div>{sparkline(r.get('kurve'), r['kurs'] / (1 + r['woche']) if r.get('woche') is not None else None)}{news_html}
+  </div>{sparkline(r.get('kurve'), r['kurs'] / (1 + r['woche']) if r.get('woche') is not None else None, ort_kurz)}{news_html}
 </div>""")
         body = "\n".join(cards)
 
@@ -724,8 +747,8 @@ def write_html(path, df, neu, a, stand, gesamt=None):
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kursrutsch-Scanner</title>
 <style>
-:root {{ --bg:#f6f6f4; --card:#fff; --text:#1b1b1b; --mut:#6b6b6b; --line:#e4e4e0; --neg:#c62828; --pos:#2e7d32; --acc:#1f5fbf; --chip:#fdecea; --chiptext:#8e1c1c; }}
-@media (prefers-color-scheme: dark) {{ :root {{ --bg:#141414; --card:#1f1f1f; --text:#eee; --mut:#9a9a9a; --line:#2e2e2e; --neg:#ef6b6b; --pos:#6fcf73; --acc:#7aa7ff; --chip:#3a2222; --chiptext:#f3b3b3; }} }}
+:root {{ --bg:#f6f6f4; --card:#fff; --text:#1b1b1b; --mut:#6b6b6b; --line:#e4e4e0; --neg:#c62828; --pos:#2e7d32; --acc:#1f5fbf; --chip:#fdecea; --chiptext:#8e1c1c; --de:#1f5fbf; --de-bg:#eaf1fc; --hm:#b45f00; --hm-bg:#fff3e0; }}
+@media (prefers-color-scheme: dark) {{ :root {{ --bg:#141414; --card:#1f1f1f; --text:#eee; --mut:#9a9a9a; --line:#2e2e2e; --neg:#ef6b6b; --pos:#6fcf73; --acc:#7aa7ff; --chip:#3a2222; --chiptext:#f3b3b3; --de:#7aa7ff; --de-bg:#1b2638; --hm:#ffb04d; --hm-bg:#33260f; }} }}
 * {{ box-sizing:border-box; }}
 body {{ margin:0; background:var(--bg); color:var(--text); font:15px/1.4 -apple-system,system-ui,Segoe UI,Roboto,sans-serif; }}
 main {{ max-width:720px; margin:0 auto; padding:16px; }}
@@ -737,7 +760,14 @@ h1 {{ font-size:22px; margin:4px 0 2px; }}
 .neu {{ background:var(--acc); color:#fff; font-size:11px; font-weight:700; padding:2px 7px; border-radius:99px; }}
 .sub {{ color:var(--mut); font-size:12.5px; margin:2px 0 0; }}
 .sub2 {{ color:var(--mut); font-size:12px; margin:1px 0 0; font-style:italic; }}
-.boerse {{ display:inline-block; margin-top:6px; font-size:11.5px; color:var(--mut); border:1px solid var(--line); border-radius:6px; padding:1px 7px; }}
+.q-de, .q-heim {{ margin-top:8px; font-size:12.5px; line-height:1.4; padding:6px 9px; border-radius:8px; border-left:4px solid; }}
+.q-de {{ background:var(--de-bg); border-color:var(--de); color:var(--text); }}
+.q-heim {{ background:var(--hm-bg); border-color:var(--hm); color:var(--text); }}
+.q-de b, .q-heim b {{ display:block; }}
+.q-de b {{ color:var(--de); }} .q-heim b {{ color:var(--hm); }}
+.grund {{ display:block; color:var(--mut); font-size:11.5px; margin-top:2px; }}
+.mini {{ display:inline-block; margin:0 4px 0 0; padding:0 7px; font-size:11.5px; font-weight:600; border-left-width:3px; }}
+.legende {{ color:var(--mut); font-size:12px; margin:-6px 0 14px; line-height:1.9; }}
 .werte {{ margin-top:10px; }}
 .titel {{ color:inherit; text-decoration:none; }}
 .news {{ border-top:1px solid var(--line); margin-top:10px; padding-top:8px; }}
@@ -760,7 +790,9 @@ footer {{ color:var(--mut); font-size:12px; margin-top:18px; }}
 </style></head>
 <body><main>
 <h1>Kursrutsch-Scanner</h1>
-<div class="meta">≥ {a.schwelle:g} % Verlust in {a.tage} Handelstagen · Marktkap. &gt; {a.min_kap:g} Mrd. € · Stand {stand:%d.%m.%Y, %H:%M} Uhr · {gesamt if gesamt is not None else len(df)} Treffer{f", die {len(df)} wichtigsten angezeigt (neue zuerst, dann nach Tagesminus)" if gesamt and gesamt > len(df) else " (neue zuerst, dann nach Tagesminus)"}</div>
+<div class="meta">Kursrutsch in {a.tage} Handelstagen: ≥ {a.schwelle_de:g} % an deutscher Börse (≥ {a.schwelle:g} % an der Heimatbörse, wenn es keinen deutschen Kurs gibt) · Marktkap. &gt; {a.min_kap:g} Mrd. € · Stand {stand:%d.%m.%Y, %H:%M} Uhr · {gesamt if gesamt is not None else len(df)} Treffer{f", die {len(df)} wichtigsten angezeigt (neue zuerst, dann nach Tagesminus)" if gesamt and gesamt > len(df) else " (neue zuerst, dann nach Tagesminus)"}</div>
+<div class="legende"><span class="q-de mini">Deutsche Börse</span> Kurs, Veränderungen und Wochenverlauf von Stuttgart, Frankfurt oder München, in €.
+<span class="q-heim mini">Ausweichkurs</span> kein brauchbarer deutscher Kurs – Werte von der Heimatbörse, in € umgerechnet.</div>
 {body}
 <footer>Kurse und Veränderungen: deutsche Börse (Stuttgart, ersatzweise Frankfurt oder München) über Yahoo Finance, teils verzögert; Uhrzeit = letzter Kurs in deutscher Zeit. Ohne deutsche Notierung: Heimatbörse, in Euro umgerechnet. Nachrichten: Google News &amp; Yahoo Finance, Zahl = Anzahl Artikel mit diesem Signalwort. Indexlisten: Wikipedia. Keine Anlageberatung.</footer>
 </main></body></html>"""
@@ -797,10 +829,9 @@ def scan(a):
     print(f"   {len(tickers)} Titel insgesamt\n")
 
     print("2) Kurse abrufen …")
-    # Vorauswahl an der Heimatbörse etwas großzügiger, weil sich der Euro-Kurs
-    # an der deutschen Börse durch den Wechselkurs leicht anders bewegen kann
-    hits = analyse(download_closes(tickers), a.tage, max(a.schwelle - 2, 1) / 100)
-    print(f"   {len(hits)} Titel mit ≥{a.schwelle:g} % Verlust\n")
+    # Vorauswahl an der Heimatbörse, Endauswahl mit der (strengeren) Schwelle an der deutschen Börse
+    hits = analyse(download_closes(tickers), a.tage, a.schwelle / 100)
+    print(f"   {len(hits)} Titel mit ≥{a.schwelle:g} % Verlust an der Heimatbörse\n")
     if hits.empty:
         return pd.DataFrame()
 
@@ -823,8 +854,10 @@ def scan(a):
 
     print("\n5) Kurse an deutscher Börse (Stuttgart › Frankfurt › München) …")
     df = deutsche_kurse(df, a.tage)
-    df = df[df["fall"] <= -a.schwelle / 100]
-    print(f"   {len(df)} Titel erfüllen ≥{a.schwelle:g} % Verlust auf Basis der deutschen Kurse")
+    grenze = df["boerse_typ"].map({"de": a.schwelle_de, "heim": a.schwelle}) / 100
+    df = df[df["fall"] <= -grenze]
+    print(f"   {len(df)} Titel erfüllen die Schwelle (≥{a.schwelle_de:g} % an deutscher Börse, "
+          f"≥{a.schwelle:g} % an der Heimatbörse, falls kein deutscher Kurs)")
     return df.sort_values("fall")
 
 
@@ -872,7 +905,8 @@ def bundesweiter_feiertag(tag):
 def main():
     ap = argparse.ArgumentParser(description="Sucht Aktien mit starkem Kursrutsch in großen Indizes.")
     ap.add_argument("--tage", type=int, default=3, help="Zeitfenster in Handelstagen (Standard 3)")
-    ap.add_argument("--schwelle", type=float, default=10, help="Mindestverlust in %% (Standard 10)")
+    ap.add_argument("--schwelle", type=float, default=10, help="Mindestverlust an der Heimatbörse in %% (Standard 10)")
+    ap.add_argument("--schwelle-de", type=float, default=12, help="Mindestverlust an deutscher Börse in %% (Standard 12)")
     ap.add_argument("--min-kap", type=float, default=5, help="Mindest-Marktkap. in Mrd. EUR (Standard 5)")
     ap.add_argument("--indizes", nargs="+", default=list(INDIZES), choices=list(INDIZES))
     ap.add_argument("--max", type=int, default=25, help="Höchstens so viele Titel anzeigen (Standard 25)")
