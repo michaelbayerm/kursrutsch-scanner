@@ -1,0 +1,78 @@
+1) Indexmitglieder laden …
+  S&P 500         503 Titel
+  Nasdaq-100        0 Titel
+  DAX              40 Titel
+  MDAX             50 Titel
+  Euro Stoxx 50    50 Titel
+  FTSE 100        100 Titel
+  CAC 40           40 Titel
+  SMI              20 Titel
+  AEX              25 Titel
+  IBEX 35          35 Titel
+  FTSE MIB         40 Titel
+  Hang Seng        85 Titel
+  Nikkei 225        0 Titel
+   937 Titel insgesamt
+
+2) Kurse abrufen …
+  Kurse 1–150 von 937 …
+  Kurse 151–300 von 937 …
+  Kurse 301–450 von 937 …
+$ECV.DE: No data found, symbol may be delisted
+
+1 Failed download:
+['ECV.DE']: No data found, symbol may be delisted
+  Kurse 451–600 von 937 …
+  Kurse 601–750 von 937 …
+  Kurse 751–900 von 937 …
+  Kurse 901–937 von 937 …
+   32 Titel mit ≥10 % Verlust
+
+3) Stammdaten & Marktkapitalisierung …
+  0992.HK    Lenovo Group Limited
+  AIXA.DE    AIXTRON SE
+  AKAM       Akamai Technologies, Inc.
+  AMAT       Applied Materials, Inc.
+  ANTO.L     Antofagasta plc
+  ASM.AS     ASM International NV
+  BE         Bloom Energy Corporation
+  CCC.L      Computacenter plc
+  CIEN       Ciena Corporation
+  COHR       Coherent Corp.
+  DELL       Dell Technologies Inc.
+  ENR.DE     Siemens Energy AG
+  FIX        Comfort Systems USA, Inc.
+  FLEX       Flex Ltd.
+  GLW        Corning Incorporated
+  GNRC       Generac Holdings Inc.
+  HPE        Hewlett Packard Enterprise Company
+  IFX.DE     Infineon Technologies AG
+  LITE       Lumentum Holdings Inc.
+  LRCX       Lam Research Corporation
+  MPWR       Monolithic Power Systems, Inc.
+  MRVL       Marvell Technology, Inc.
+  MU         Micron Technology, Inc.
+  PANW       Palo Alto Networks, Inc.
+  PRY.MI     Prysmian S.p.A.
+  SKYD       Skydance Corporation
+  SMCI       Super Micro Computer, Inc.
+  SNDK       Sandisk Corporation
+  STMMI.MI   STMicroelectronics N.V.
+  STMPA.PA   STMicroelectronics N.V.
+  TER        Teradyne, Inc.
+  WAF.DE     Siltronic AG
+
+4) WKN ermitteln …
+Traceback (most recent call last):
+  File "/home/runner/work/kursrutsch-scanner/kursrutsch-scanner/aktien_crash_scanner.py", line 463, in <module>
+    main()
+  File "/home/runner/work/kursrutsch-scanner/kursrutsch-scanner/aktien_crash_scanner.py", line 427, in main
+    df = scan(a)
+         ^^^^^^^
+  File "/home/runner/work/kursrutsch-scanner/kursrutsch-scanner/aktien_crash_scanner.py", line 400, in scan
+    df["wkn"] = [lookup_wkn(i, n, wkn_cache) for i, n in zip(df["isin"], df["titel"])]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/kursrutsch-scanner/kursrutsch-scanner/aktien_crash_scanner.py", line 224, in lookup_wkn
+    if isin and isin.startswith("DE000") and len(isin) == 12:
+                ^^^^^^^^^^^^^^^
+AttributeError: 'float' object has no attribute 'startswith'
