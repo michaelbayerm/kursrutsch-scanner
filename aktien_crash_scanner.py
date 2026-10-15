@@ -220,7 +220,7 @@ def deutsches_kuerzel(ticker, isin, name, cache):
         return cache[ticker]
     erstes = (short_name(name).split(" ")[0].lower() if isinstance(name, str) else "")
     basis = ""
-    for q in (isin, short_name(name) if isinstance(name, str) else None):
+    for q in (isin, short_name(name) if isinstance(name, str) else None, ticker.split(".")[0]):
         if not q or basis:
             continue
         try:
@@ -253,16 +253,27 @@ def deutsche_kurse(df, tage):
     kandidaten = [b + suf for b in set(basen.values()) if b for suf, _ in DE_BOERSEN]
     closes = download_closes(kandidaten) if kandidaten else pd.DataFrame()
     grenze = datetime.now() - timedelta(days=4)
-    gewaehlt = {}
+    heim_eur = dict(zip(df["ticker"], df["kurs_eur"]))
+    gewaehlt, verworfen = {}, []
     for t, b in basen.items():
-        for suf, ort in DE_BOERSEN:
+        optionen = []
+        for rang, (suf, ort) in enumerate(DE_BOERSEN):
             sym = b + suf if b else None
             if not sym or sym not in closes:
                 continue
             ser = closes[sym].dropna()
-            if len(ser) >= 7 and ser.index[-1] >= grenze:
-                gewaehlt[t] = (sym, ort, ser)
-                break
+            if len(ser) < 7 or ser.index[-1] < grenze:
+                continue
+            ref = heim_eur.get(t)
+            if ref and not pd.isna(ref) and not (0.8 <= ser.iloc[-1] / ref <= 1.25):
+                verworfen.append(f"{sym} ({de(ser.iloc[-1], 2)} € statt ~{de(ref, 2)} €)")
+                continue                            # anderes Papier (z. B. ADR) oder Fehlkurs
+            optionen.append((ser.index[-1], -rang, sym, ort, ser))
+        if optionen:                                # aktuellster Kurs, bei Gleichstand Stuttgart > Frankfurt > München
+            _, _, sym, ort, ser = max(optionen, key=lambda o: (o[0], o[1]))
+            gewaehlt[t] = (sym, ort, ser)
+    if verworfen:
+        print("   Unplausibel, verworfen: " + ", ".join(verworfen))
 
     zeilen = []
     for _, r in df.iterrows():
