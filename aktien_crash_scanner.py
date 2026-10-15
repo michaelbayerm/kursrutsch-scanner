@@ -198,6 +198,7 @@ def analyse(closes, tage, schwelle):
                 intraday=last / s.iloc[-2] - 1,  # heute vs. Vortagesschluss
                 woche=last / s.iloc[-6] - 1,     # vs. Schluss vor 5 Handelstagen
                 kurs=last,
+                datum=s.index[-1],
             ))
     return pd.DataFrame(rows)
 
@@ -289,11 +290,155 @@ def lookup_wkn(isin, name, ticker, cache):
     return "–"                                       # Fehlschläge nicht cachen
 
 
+SEKTOREN = {
+    "Technology": "Technologie", "Healthcare": "Gesundheit", "Financial Services": "Finanzen",
+    "Consumer Cyclical": "Zyklischer Konsum", "Consumer Defensive": "Basiskonsum",
+    "Industrials": "Industrie", "Energy": "Energie", "Utilities": "Versorger",
+    "Basic Materials": "Grundstoffe", "Real Estate": "Immobilien",
+    "Communication Services": "Kommunikation",
+}
+LAENDER = {
+    "United States": "USA", "Germany": "Deutschland", "Japan": "Japan", "China": "China",
+    "Hong Kong": "Hongkong", "United Kingdom": "Großbritannien", "France": "Frankreich",
+    "Switzerland": "Schweiz", "Netherlands": "Niederlande", "Spain": "Spanien", "Italy": "Italien",
+    "Ireland": "Irland", "Belgium": "Belgien", "Finland": "Finnland", "Luxembourg": "Luxemburg",
+    "Canada": "Kanada", "Israel": "Israel", "Taiwan": "Taiwan", "South Korea": "Südkorea",
+    "Singapore": "Singapur", "Australia": "Australien", "Bermuda": "Bermuda", "Cayman Islands":
+    "Kaimaninseln", "Jersey": "Jersey", "Denmark": "Dänemark", "Sweden": "Schweden",
+    "Norway": "Norwegen", "Austria": "Österreich", "Uruguay": "Uruguay", "Argentina": "Argentinien",
+    "Brazil": "Brasilien", "Mexico": "Mexiko", "India": "Indien", "Chile": "Chile",
+}
+
+# --------------------------------------------------------------------------
+# Nachrichten: Signalwörter der letzten Stunden
+# --------------------------------------------------------------------------
+NEWS_STUNDEN = 24
+SIGNALE = {
+    "Gewinnwarnung":         [r"gewinnwarnung", r"profit warning", r"\bwarns?\b", r"\bwarnt\b"],
+    "Prognose gesenkt":      [r"prognose\w* (ge)?senk", r"senk\w* \w* ?(jahres|umsatz|gewinn)?(prognose|ausblick)", r"senk\w* \w* ?(jahres|umsatz|gewinn)ziel",
+                              r"(cut|lower|slash|trim)s? \w* ?(guidance|outlook|forecast)",
+                              r"(weak|soft|disappointing) (guidance|outlook|forecast)",
+                              r"schwache[rn]? (ausblick|prognose)"],
+    "Erwartungen verfehlt":  [r"enttäusch", r"disappoint", r"verfehlt", r"unter (den )?erwartungen",
+                              r"miss(es|ed)? (estimates|expectations|forecasts)",
+                              r"falls? short of", r"below (estimates|expectations)"],
+    "Quartalszahlen":        [r"quartal", r"\bearnings\b", r"\bresults\b", r"\bq[1-4]\b", r"bilanz"],
+    "Gewinnerwartung":       [r"gewinnerwartung", r"gewinnprognose", r"gewinnschätzung",
+                              r"earnings (estimate|expectation|forecast)", r"\beps\b"],
+    "Abstufung / Kursziel ↓": [r"downgrade", r"abgestuft", r"abstufung", r"herabgestuft",
+                              r"kursziel\w* (ge)?senk", r"senk\w* \w* ?kursziel",
+                              r"(cut|lower|slash)s? \w* ?(price )?target", r"price target cut"],
+    "Gewinnmitnahmen":       [r"gewinnmitnahme", r"profit[- ]taking"],
+    "Ausverkauf":            [r"sell-?off", r"ausverkauf", r"\brout\b", r"\bslump", r"\btumbl", r"\bplung",
+                              r"\bsink", r"absturz", r"bricht ein", r"einbruch", r"kurssturz", r"\bcrash"],
+    "KI-Blase":              [r"ai bubble", r"ki-blase", r"\bbubble\b", r"blase"],
+    "Zölle / Handelsstreit": [r"tariff", r"\bzoll", r"\bzölle", r"trade war", r"handelsstreit",
+                              r"export (control|curb|restriction|ban)", r"exportbeschränk",
+                              r"sanktion", r"sanction"],
+    "Klage / Ermittlungen":  [r"lawsuit", r"\bklage", r"investigation", r"ermittlung", r"\bprobe\b",
+                              r"\bfraud", r"betrug", r"class action", r"sammelklage"],
+    "Short-Seller":          [r"short[- ]sell", r"short report", r"leerverkäuf"],
+    "Kapitalerhöhung":       [r"kapitalerhöhung", r"(stock|share) (offering|sale|placement)",
+                              r"platzierung", r"dilut", r"verwässer"],
+    "Management-Wechsel":    [r"ceo \w* ?(step|resign|exit|depart|out)", r"rücktritt", r"tritt \w* ?zurück",
+                              r"\bresign"],
+    "Übernahme / Fusion":    [r"übernahme", r"takeover", r"acquisition", r"\bmerger", r"fusion",
+                              r"\bacquire"],
+    "Schwache Nachfrage":    [r"weak(er|ening)? demand", r"schwache\w* nachfrage", r"nachfrageschwäche",
+                              r"demand (slow|weak|cool)"],
+    "Zinsen / Notenbank":    [r"\bfed\b", r"\bzins", r"rate (cut|hike)", r"interest rate", r"\bezb\b", r"\bboj\b"],
+    "Rückruf / Störung":     [r"\brecall", r"rückruf", r"outage", r"störung"],
+    "Dividende gekürzt":     [r"dividend (cut|suspen)", r"dividende\w* (gekürzt|gestrichen|ausgesetzt)",
+                              r"kürz\w* \w* ?dividende"],
+}
+SIGNAL_RE = {k: re.compile("|".join(v), re.I) for k, v in SIGNALE.items()}
+
+
+def _google_news(query, sprache):
+    import xml.etree.ElementTree as ET
+    from email.utils import parsedate_to_datetime
+    lang = {"de": ("de", "DE", "DE:de"), "en": ("en-US", "US", "US:en")}[sprache]
+    r = requests.get("https://news.google.com/rss/search",
+                     params={"q": f"{query} when:1d", "hl": lang[0], "gl": lang[1], "ceid": lang[2]},
+                     headers=HEADERS, timeout=15)
+    r.raise_for_status()
+    out = []
+    for item in ET.fromstring(r.content).iter("item"):
+        titel = item.findtext("title") or ""
+        quelle = item.findtext("source") or ""
+        if quelle and titel.endswith(" - " + quelle):
+            titel = titel[: -len(quelle) - 3]
+        try:
+            zeit = parsedate_to_datetime(item.findtext("pubDate"))
+        except Exception:
+            zeit = None
+        out.append(dict(titel=titel, text=titel, link=item.findtext("link"), quelle=quelle, zeit=zeit))
+    return out
+
+
+def _yahoo_news(tk):
+    out = []
+    for n in (tk.news or []):
+        c = n.get("content", n) if isinstance(n, dict) else {}
+        titel = c.get("title") or ""
+        text = f"{titel} {c.get('summary') or c.get('description') or ''}"
+        zeit = None
+        if c.get("pubDate"):
+            try:
+                zeit = datetime.fromisoformat(str(c["pubDate"]).replace("Z", "+00:00"))
+            except Exception:
+                pass
+        elif c.get("providerPublishTime"):
+            zeit = datetime.fromtimestamp(int(c["providerPublishTime"]), BERLIN)
+        link = (c.get("canonicalUrl") or {}).get("url") if isinstance(c.get("canonicalUrl"), dict) else c.get("link")
+        quelle = (c.get("provider") or {}).get("displayName") if isinstance(c.get("provider"), dict) else c.get("publisher")
+        out.append(dict(titel=titel, text=text, link=link, quelle=quelle or "Yahoo Finance", zeit=zeit))
+    return out
+
+
+def news_signale(titel, ticker):
+    """Artikel der letzten Stunden laden und Signalwörter zählen (Anzahl Artikel je Signal)."""
+    import time
+    name = short_name(titel) or titel
+    artikel, fehler = [], []
+    for sprache, zusatz in (("de", "(Aktie OR Aktien)"), ("en", "(stock OR shares)")):
+        try:
+            artikel += _google_news(f'"{name}" {zusatz}', sprache)
+        except Exception as e:
+            fehler.append(f"Google-{sprache}: {type(e).__name__}")
+        time.sleep(0.4)
+    try:
+        artikel += _yahoo_news(yf.Ticker(ticker))
+    except Exception as e:
+        fehler.append(f"Yahoo: {type(e).__name__}")
+
+    grenze = datetime.now(BERLIN) - timedelta(hours=NEWS_STUNDEN)
+    gesehen, frisch = set(), []
+    for a in artikel:
+        key = re.sub(r"\W+", "", a["titel"].lower())[:80]
+        if not key or key in gesehen or (a["zeit"] and a["zeit"] < grenze):
+            continue
+        gesehen.add(key)
+        frisch.append(a)
+
+    zaehler = {}
+    for a in frisch:
+        for label, rx in SIGNAL_RE.items():
+            if rx.search(a["text"]):
+                zaehler[label] = zaehler.get(label, 0) + 1
+    top = sorted(zaehler.items(), key=lambda kv: -kv[1])[:4]
+    frisch.sort(key=lambda a: a["zeit"] or grenze, reverse=True)
+    if fehler:
+        print(f"  News-Fehler {name}: {', '.join(fehler)}")
+    return dict(n=len(frisch), top=top, schlagzeile=frisch[0] if frisch else None)
+
+
 def enrich(hits):
     infos = []
     for t in hits["ticker"]:
         tk = yf.Ticker(t)
         name, cap, cur, isin = t, None, None, None
+        sektor, branche, land, kurszeit = None, None, None, None
         try:
             fi = tk.fast_info
             cap, cur = fi.market_cap, fi.currency
@@ -304,6 +449,12 @@ def enrich(hits):
             name = info.get("longName") or info.get("shortName") or t
             if not cap:
                 cap, cur = info.get("marketCap"), info.get("currency")
+            sektor = SEKTOREN.get(info.get("sector"), info.get("sector"))
+            branche = info.get("industry")
+            land = LAENDER.get(info.get("country"), info.get("country"))
+            ts = info.get("regularMarketTime")
+            if ts:
+                kurszeit = datetime.fromtimestamp(int(ts), BERLIN)
         except Exception:
             pass
         try:
@@ -315,7 +466,8 @@ def enrich(hits):
             cur, teiler = SUB_UNITS[cur]
             if cap:
                 cap = cap / teiler
-        infos.append(dict(ticker=t, titel=name, kap=cap, waehrung=cur, teiler=teiler, isin=isin))
+        infos.append(dict(ticker=t, titel=name, kap=cap, waehrung=cur, teiler=teiler, isin=isin,
+                          sektor=sektor, branche=branche, land=land, kurszeit=kurszeit))
         print(f"  {t:<10} {name}")
 
     df = hits.merge(pd.DataFrame(infos), on="ticker")
@@ -339,6 +491,14 @@ def pct(x):
     return "–" if x is None or pd.isna(x) else f"{x * 100:+.1f} %".replace(".", ",")
 
 
+def kurszeit_text(r):
+    kz = r.get("kurszeit")
+    if isinstance(kz, datetime) and not pd.isna(kz):
+        return kz.astimezone(BERLIN).strftime("%d.%m. %H:%M")
+    d = r.get("datum")
+    return pd.Timestamp(d).strftime("%d.%m.") if d is not None and not pd.isna(d) else "–"
+
+
 def write_html(path, df, neu, a, stand):
     def color(x):
         return "neg" if x < 0 else "pos"
@@ -351,17 +511,44 @@ def write_html(path, df, neu, a, stand):
             badge = '<span class="neu">NEU</span>' if r["ticker"] in neu else ""
             such = r["isin"] if isinstance(r["isin"], str) else (r["wkn"] if r["wkn"] != "–" else r["titel"])
             link = f'https://www.onvista.de/suche/?searchValue={html.escape(str(such))}'
+            esc = lambda x: html.escape(str(x)) if isinstance(x, str) and x else ""
+            herkunft = " · ".join(x for x in (esc(r.get("land")), esc(r.get("sektor"))) if x)
+            branche = esc(r.get("branche"))
+
+            nw = r.get("news") or {}
+            if nw.get("n"):
+                chips = "".join(f'<span class="chip">{html.escape(k)} <b>{v}</b></span>' for k, v in nw["top"])
+                if not chips:
+                    chips = '<span class="chip leise">keine Signalwörter</span>'
+                sz = nw.get("schlagzeile") or {}
+                headline = ""
+                if sz.get("titel"):
+                    h = html.escape(sz["titel"])
+                    q = html.escape(sz.get("quelle") or "")
+                    hl = html.escape(sz.get("link") or "")
+                    headline = (f'<a class="headline" href="{hl}">{h}</a>' if hl else f'<div class="headline">{h}</div>') \
+                        + (f'<span class="quelle">{q}</span>' if q else "")
+                news_html = f"""
+  <div class="news">
+    <div class="lbl">Nachrichten {NEWS_STUNDEN} Std. · {nw['n']} Artikel</div>
+    <div class="chips">{chips}</div>
+    {headline}
+  </div>"""
+            else:
+                news_html = f'<div class="news"><div class="lbl">Keine Nachrichten in den letzten {NEWS_STUNDEN} Std. gefunden</div></div>'
+
             cards.append(f"""
-<a class="card" href="{link}">
-  <div class="kopf"><span class="titel">{html.escape(str(r['titel']))}</span>{badge}</div>
-  <div class="sub">WKN {html.escape(str(r['wkn']))} · {html.escape(str(r['index']))}</div>
+<div class="card">
+  <div class="kopf"><a class="titel" href="{link}">{html.escape(str(r['titel']))}</a>{badge}</div>
+  <div class="sub">WKN {html.escape(str(r['wkn']))} · {html.escape(str(r['index']))}{' · ' + herkunft if herkunft else ''}</div>
+  {f'<div class="sub2">{branche}</div>' if branche else ''}
   <div class="werte">
-    <div><span class="lbl">Kurs</span><span class="val">{de(r['kurs_eur'], 2)} €</span></div>
+    <div><span class="lbl">Kurs · {kurszeit_text(r)}</span><span class="val">{de(r['kurs_eur'], 2)} €</span></div>
     <div><span class="lbl">Intraday</span><span class="val {color(r['intraday'])}">{pct(r['intraday'])}</span></div>
     <div><span class="lbl">1 Woche</span><span class="val {color(r['woche'])}">{pct(r['woche'])}</span></div>
     <div><span class="lbl">Marktkap.</span><span class="val">{de(r['kap_eur_mrd'])} Mrd €</span></div>
-  </div>
-</a>""")
+  </div>{news_html}
+</div>""")
         body = "\n".join(cards)
 
     page = f"""<!doctype html>
@@ -369,8 +556,8 @@ def write_html(path, df, neu, a, stand):
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kursrutsch-Scanner</title>
 <style>
-:root {{ --bg:#f6f6f4; --card:#fff; --text:#1b1b1b; --mut:#6b6b6b; --line:#e4e4e0; --neg:#c62828; --pos:#2e7d32; --acc:#1f5fbf; }}
-@media (prefers-color-scheme: dark) {{ :root {{ --bg:#141414; --card:#1f1f1f; --text:#eee; --mut:#9a9a9a; --line:#2e2e2e; --neg:#ef6b6b; --pos:#6fcf73; --acc:#7aa7ff; }} }}
+:root {{ --bg:#f6f6f4; --card:#fff; --text:#1b1b1b; --mut:#6b6b6b; --line:#e4e4e0; --neg:#c62828; --pos:#2e7d32; --acc:#1f5fbf; --chip:#fdecea; --chiptext:#8e1c1c; }}
+@media (prefers-color-scheme: dark) {{ :root {{ --bg:#141414; --card:#1f1f1f; --text:#eee; --mut:#9a9a9a; --line:#2e2e2e; --neg:#ef6b6b; --pos:#6fcf73; --acc:#7aa7ff; --chip:#3a2222; --chiptext:#f3b3b3; }} }}
 * {{ box-sizing:border-box; }}
 body {{ margin:0; background:var(--bg); color:var(--text); font:15px/1.4 -apple-system,system-ui,Segoe UI,Roboto,sans-serif; }}
 main {{ max-width:720px; margin:0 auto; padding:16px; }}
@@ -380,7 +567,17 @@ h1 {{ font-size:22px; margin:4px 0 2px; }}
 .kopf {{ display:flex; justify-content:space-between; gap:8px; align-items:baseline; }}
 .titel {{ font-weight:600; font-size:16px; }}
 .neu {{ background:var(--acc); color:#fff; font-size:11px; font-weight:700; padding:2px 7px; border-radius:99px; }}
-.sub {{ color:var(--mut); font-size:12.5px; margin:2px 0 10px; }}
+.sub {{ color:var(--mut); font-size:12.5px; margin:2px 0 0; }}
+.sub2 {{ color:var(--mut); font-size:12px; margin:1px 0 0; font-style:italic; }}
+.werte {{ margin-top:10px; }}
+.titel {{ color:inherit; text-decoration:none; }}
+.news {{ border-top:1px solid var(--line); margin-top:10px; padding-top:8px; }}
+.chips {{ display:flex; flex-wrap:wrap; gap:5px; margin:5px 0 6px; }}
+.chip {{ font-size:12px; padding:2px 8px; border-radius:99px; background:var(--chip); color:var(--chiptext); }}
+.chip b {{ font-weight:700; }}
+.chip.leise {{ background:transparent; border:1px dashed var(--line); color:var(--mut); }}
+.headline {{ display:block; font-size:13px; color:var(--text); text-decoration:none; line-height:1.35; }}
+.quelle {{ display:block; color:var(--mut); font-size:11.5px; margin-top:2px; }}
 .werte {{ display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }}
 .werte div {{ display:flex; flex-direction:column; }}
 .lbl {{ color:var(--mut); font-size:11.5px; }}
@@ -394,14 +591,17 @@ footer {{ color:var(--mut); font-size:12px; margin-top:18px; }}
 <h1>Kursrutsch-Scanner</h1>
 <div class="meta">≥ {a.schwelle:g} % Verlust in {a.tage} Handelstagen · Marktkap. &gt; {a.min_kap:g} Mrd. € · Stand {stand:%d.%m.%Y, %H:%M} Uhr · {len(df)} Treffer</div>
 {body}
-<footer>Daten: Yahoo Finance (teils verzögert), Indexlisten: Wikipedia. Keine Anlageberatung.</footer>
+<footer>Kurse: Yahoo Finance (teils verzögert), Uhrzeit = letzter Kurs in deutscher Zeit. Nachrichten: Google News &amp; Yahoo Finance, Zahl = Anzahl Artikel mit diesem Signalwort. Indexlisten: Wikipedia. Keine Anlageberatung.</footer>
 </main></body></html>"""
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     Path(path).write_text(page, encoding="utf-8")
 
 
 def notify(topic, neu_df, page_url):
-    zeilen = [f"{r['titel'][:28]}: {pct(r['fall'])} ({de(r['kurs_eur'], 2)} EUR)" for _, r in neu_df.iterrows()]
+    def signal(r):
+        top = (r.get("news") or {}).get("top") or []
+        return f" – {top[0][0]}" if top else ""
+    zeilen = [f"{r['titel'][:28]}: {pct(r['fall'])} ({de(r['kurs_eur'], 2)} EUR){signal(r)}" for _, r in neu_df.iterrows()]
     msg = "\n".join(zeilen[:10]) + (f"\n… und {len(zeilen) - 10} weitere" if len(zeilen) > 10 else "")
     headers = {"Title": f"Kursrutsch-Scanner: {len(zeilen)} neue Titel",
                "Tags": "chart_with_downwards_trend", "Priority": "high"}
@@ -445,7 +645,11 @@ def scan(a):
     df = df.sort_values("fall")
     # Doppelt gelistete Aktien (z. B. Mailand + Paris) nur einmal zeigen
     df["_key"] = df["isin"].where(df["isin"].notna(), df["titel"])
-    return df.drop_duplicates("_key").drop(columns="_key")
+    df = df.drop_duplicates("_key").drop(columns="_key")
+
+    print(f"\n5) Nachrichten der letzten {NEWS_STUNDEN} Std. auswerten …")
+    df["news"] = [news_signale(n, t) for n, t in zip(df["titel"], df["ticker"])]
+    return df
 
 
 def main():
@@ -484,6 +688,9 @@ def main():
             "Intraday": df["intraday"].map(pct),
             "1 Woche": df["woche"].map(pct),
             "Marktkap. (Mrd. €)": df["kap_eur_mrd"].map(de),
+            "Land": df["land"].fillna("–"),
+            "Kurszeit": [kurszeit_text(r) for _, r in df.iterrows()],
+            "News": [f"{(n or {}).get('n', 0)}: " + ", ".join(f"{k} {v}" for k, v in (n or {}).get("top", [])[:2]) for n in df["news"]],
         })
         print(f"\n=== Kursrutsch ≥{a.schwelle:g} % in {a.tage} Tagen, Marktkap. > {a.min_kap:g} Mrd. € "
               f"(Stand {jetzt:%d.%m.%Y %H:%M}) ===\n")

@@ -2,10 +2,15 @@ name: Kursrutsch-Scanner
 
 on:
   schedule:
-    # GitHub rechnet in UTC. Zwei Zeiten, damit es Sommer- wie Winterzeit
-    # um 17 Uhr Berlin trifft – das Skript läuft trotzdem nur einmal pro Tag.
-    - cron: "0 15 * * *"   # 17:00 Sommerzeit (MESZ)
-    - cron: "0 16 * * *"   # 17:00 Winterzeit (MEZ)
+    # GitHub rechnet in UTC und startet geplante Läufe oft verspätet oder gar nicht,
+    # besonders zur vollen Stunde. Deshalb mehrere Startzeiten ab 17 Uhr deutscher Zeit
+    # (Sommer- und Winterzeit). Das Skript scannt trotzdem nur EINMAL pro Tag.
+    - cron: "7 15 * * *"    # 17:07 MESZ
+    - cron: "37 15 * * *"   # 17:37 MESZ
+    - cron: "7 16 * * *"    # 17:07 MEZ / 18:07 MESZ
+    - cron: "37 16 * * *"   # 17:37 MEZ
+    - cron: "7 17 * * *"    # Reserve
+    - cron: "7 18 * * *"    # Reserve
   workflow_dispatch:        # manueller Start über "Run workflow"
 
 permissions:
@@ -47,4 +52,4 @@ jobs:
           git config user.name "scanner-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs cache
-          git diff --cached --quiet || (git commit -m "Scan $(TZ=Europe/Berlin date '+%d.%m.%Y %H:%M')" && git push)
+          git diff --cached --quiet || (git commit -m "Scan $(TZ=Europe/Berlin date '+%d.%m.%Y %H:%M')" && (git push || (git pull --rebase -X theirs && git push)))
