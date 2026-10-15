@@ -1,5 +1,5 @@
 {
- "letzter_lauf": null,
+ "letzter_lauf": "2026-10-15",
  "ticker": [
   "285A.T",
   "3436.T",
@@ -21,11 +21,14 @@
   "HPE",
   "KEYS",
   "LITE",
+  "LRCX",
+  "MRVL",
   "NBIS",
   "P",
   "RKLB",
   "SKYD",
   "SMCI",
-  "TER"
+  "TER",
+  "VRT"
  ]
 }
