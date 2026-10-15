@@ -188,19 +188,108 @@ def analyse(closes, tage, schwelle):
         s = closes[t].dropna()
         if len(s) < 7 or s.index[-1] < grenze:
             continue
-        last = s.iloc[-1]
-        ref = s.iloc[-(tage + 1):-1].max()       # höchster Schluss der letzten 1–N Tage
-        fall = last / ref - 1
-        if fall <= -schwelle:
-            rows.append(dict(
-                ticker=t,
-                fall=fall,
-                intraday=last / s.iloc[-2] - 1,  # heute vs. Vortagesschluss
-                woche=last / s.iloc[-6] - 1,     # vs. Schluss vor 5 Handelstagen
-                kurs=last,
-                datum=s.index[-1],
-            ))
+        k = kennzahlen(s, tage)
+        if k["fall"] <= -schwelle:
+            rows.append(dict(ticker=t, **k))
     return pd.DataFrame(rows)
+
+
+def kennzahlen(s, tage):
+    """Kennzahlen aus einer Reihe von Tagesschlusskursen (letzter Wert = aktueller Kurs)."""
+    last = s.iloc[-1]
+    return dict(fall=last / s.iloc[-(tage + 1):-1].max() - 1,
+                intraday=last / s.iloc[-2] - 1,
+                woche=last / s.iloc[-6] - 1,
+                kurs=last, datum=s.index[-1])
+
+
+# --------------------------------------------------------------------------
+# Deutsche Börsenplätze: Stuttgart, sonst Frankfurt, sonst München
+# --------------------------------------------------------------------------
+DE_BOERSEN = [(".SG", "Stuttgart"), (".F", "Frankfurt"), (".MU", "München")]
+DE_SUFFIXE = (".SG", ".F", ".MU", ".DE", ".BE", ".DU", ".HM", ".HA")
+BOERSEN_CACHE = CACHE_DIR / "boersen.json"
+
+
+def deutsches_kuerzel(ticker, isin, name, cache):
+    """Yahoo-Grundsymbol der deutschen Notierung (z. B. 'MTE' für Micron) oder ''."""
+    if ticker in cache:
+        return cache[ticker]
+    if ticker.endswith(".DE"):
+        cache[ticker] = ticker[:-3]
+        return cache[ticker]
+    erstes = (short_name(name).split(" ")[0].lower() if isinstance(name, str) else "")
+    basis = ""
+    for q in (isin, short_name(name) if isinstance(name, str) else None):
+        if not q or basis:
+            continue
+        try:
+            quotes = yf.Search(q, max_results=25, news_count=0).quotes
+        except Exception as e:
+            print(f"  Börsensuche {q!r}: {type(e).__name__}")
+            continue
+        for x in quotes:
+            sym = str(x.get("symbol", ""))
+            if x.get("quoteType") not in (None, "EQUITY") or not sym.endswith(DE_SUFFIXE):
+                continue
+            if q != isin:                               # Namenssuche: Name muss passen
+                n = f"{x.get('longname') or ''} {x.get('shortname') or ''}".lower()
+                if erstes and erstes not in n:
+                    continue
+            basis = sym.rsplit(".", 1)[0]
+            break
+    if basis:                                       # Fehlschläge nicht dauerhaft merken
+        cache[ticker] = basis
+    return basis
+
+
+def deutsche_kurse(df, tage):
+    """Ersetzt Kurs und Veränderungen durch Werte einer deutschen Börse (in EUR)."""
+    cache = json.loads(BOERSEN_CACHE.read_text()) if BOERSEN_CACHE.exists() else {}
+    basen = {t: deutsches_kuerzel(t, ISIN_FUND.get(t) or (i if isinstance(i, str) else None), n, cache)
+             for t, i, n in zip(df["ticker"], df["isin"], df["titel"])}
+    BOERSEN_CACHE.write_text(json.dumps(cache, ensure_ascii=False, indent=0))
+
+    kandidaten = [b + suf for b in set(basen.values()) if b for suf, _ in DE_BOERSEN]
+    closes = download_closes(kandidaten) if kandidaten else pd.DataFrame()
+    grenze = datetime.now() - timedelta(days=4)
+    gewaehlt = {}
+    for t, b in basen.items():
+        for suf, ort in DE_BOERSEN:
+            sym = b + suf if b else None
+            if not sym or sym not in closes:
+                continue
+            ser = closes[sym].dropna()
+            if len(ser) >= 7 and ser.index[-1] >= grenze:
+                gewaehlt[t] = (sym, ort, ser)
+                break
+
+    zeilen = []
+    for _, r in df.iterrows():
+        r = r.copy()
+        if r["ticker"] in gewaehlt:
+            sym, ort, ser = gewaehlt[r["ticker"]]
+            k = kennzahlen(ser, tage)
+            for key, val in k.items():
+                r[key] = val
+            r["kurs_eur"] = k["kurs"]
+            r["kurs_symbol"], r["boerse"] = sym, ort
+            r["kurszeit"] = None
+            try:
+                ts = yf.Ticker(sym).info.get("regularMarketTime")
+                if ts:
+                    r["kurszeit"] = datetime.fromtimestamp(int(ts), BERLIN)
+            except Exception:
+                pass
+        else:
+            r["kurs_symbol"] = r["ticker"]
+            heim = r.get("heim") if isinstance(r.get("heim"), str) and r.get("heim") else "Heimatbörse"
+            r["boerse"] = f"{heim} (umgerechnet)"
+        zeilen.append(r)
+    out = pd.DataFrame(zeilen)
+    print(f"   {len(gewaehlt)} von {len(df)} Titeln mit deutschem Börsenkurs "
+          f"({', '.join(f'{o}: {sum(1 for v in gewaehlt.values() if v[1] == o)}' for _, o in DE_BOERSEN)})")
+    return out
 
 
 def fx_to_eur(currencies):
@@ -257,6 +346,9 @@ def onvista_search(q):
     return None, "HTTP 429"
 
 
+ISIN_FUND = {}
+
+
 def lookup_wkn(isin, name, ticker, cache):
     isin = isin if isinstance(isin, str) and isin.strip() else None
     name = name if isinstance(name, str) and name.strip() else None
@@ -285,6 +377,8 @@ def lookup_wkn(isin, name, ticker, cache):
                 if erstes and erstes not in str(x.get("name", "")).lower():
                     continue
             cache[key] = x["wkn"]
+            if x.get("isin"):
+                ISIN_FUND[ticker] = x["isin"]
             return x["wkn"]
     print(f"  WKN nicht gefunden für {name or ticker} – " + "; ".join(protokoll))
     return "–"                                       # Fehlschläge nicht cachen
@@ -492,7 +586,7 @@ def enrich(hits):
     for t in hits["ticker"]:
         tk = yf.Ticker(t)
         name, cap, cur, isin = t, None, None, None
-        sektor, branche, land, kurszeit = None, None, None, None
+        sektor, branche, land, kurszeit, heim = None, None, None, None, None
         try:
             fi = tk.fast_info
             cap, cur = fi.market_cap, fi.currency
@@ -506,6 +600,7 @@ def enrich(hits):
             sektor = SEKTOREN.get(info.get("sector"), info.get("sector"))
             branche = info.get("industry")
             land = LAENDER.get(info.get("country"), info.get("country"))
+            heim = info.get("fullExchangeName") or info.get("exchange")
             ts = info.get("regularMarketTime")
             if ts:
                 kurszeit = datetime.fromtimestamp(int(ts), BERLIN)
@@ -521,7 +616,7 @@ def enrich(hits):
             if cap:
                 cap = cap / teiler
         infos.append(dict(ticker=t, titel=name, kap=cap, waehrung=cur, teiler=teiler, isin=isin,
-                          sektor=sektor, branche=branche, land=land, kurszeit=kurszeit))
+                          sektor=sektor, branche=branche, land=land, kurszeit=kurszeit, heim=heim))
         print(f"  {t:<10} {name}")
 
     df = hits.merge(pd.DataFrame(infos), on="ticker")
@@ -596,6 +691,7 @@ def write_html(path, df, neu, a, stand, gesamt=None):
   <div class="kopf"><a class="titel" href="{link}">{html.escape(str(r['titel']))}</a>{badge}</div>
   <div class="sub">WKN {html.escape(str(r['wkn']))} · {html.escape(str(r['index']))}{' · ' + herkunft if herkunft else ''}</div>
   {f'<div class="sub2">{branche}</div>' if branche else ''}
+  <div class="boerse">Börse {html.escape(str(r.get('boerse') or '–'))}</div>
   <div class="werte">
     <div><span class="lbl">Kurs · {kurszeit_text(r)}</span><span class="val">{de(r['kurs_eur'], 2)} €</span></div>
     <div><span class="lbl">Intraday</span><span class="val {color(r['intraday'])}">{pct(r['intraday'])}</span></div>
@@ -623,6 +719,7 @@ h1 {{ font-size:22px; margin:4px 0 2px; }}
 .neu {{ background:var(--acc); color:#fff; font-size:11px; font-weight:700; padding:2px 7px; border-radius:99px; }}
 .sub {{ color:var(--mut); font-size:12.5px; margin:2px 0 0; }}
 .sub2 {{ color:var(--mut); font-size:12px; margin:1px 0 0; font-style:italic; }}
+.boerse {{ display:inline-block; margin-top:6px; font-size:11.5px; color:var(--mut); border:1px solid var(--line); border-radius:6px; padding:1px 7px; }}
 .werte {{ margin-top:10px; }}
 .titel {{ color:inherit; text-decoration:none; }}
 .news {{ border-top:1px solid var(--line); margin-top:10px; padding-top:8px; }}
@@ -647,7 +744,7 @@ footer {{ color:var(--mut); font-size:12px; margin-top:18px; }}
 <h1>Kursrutsch-Scanner</h1>
 <div class="meta">≥ {a.schwelle:g} % Verlust in {a.tage} Handelstagen · Marktkap. &gt; {a.min_kap:g} Mrd. € · Stand {stand:%d.%m.%Y, %H:%M} Uhr · {gesamt if gesamt is not None else len(df)} Treffer{f", die {len(df)} wichtigsten angezeigt (neue zuerst, dann nach Tagesminus)" if gesamt and gesamt > len(df) else " (neue zuerst, dann nach Tagesminus)"}</div>
 {body}
-<footer>Kurse: Yahoo Finance (teils verzögert), Uhrzeit = letzter Kurs in deutscher Zeit. Nachrichten: Google News &amp; Yahoo Finance, Zahl = Anzahl Artikel mit diesem Signalwort. Indexlisten: Wikipedia. Keine Anlageberatung.</footer>
+<footer>Kurse und Veränderungen: deutsche Börse (Stuttgart, ersatzweise Frankfurt oder München) über Yahoo Finance, teils verzögert; Uhrzeit = letzter Kurs in deutscher Zeit. Ohne deutsche Notierung: Heimatbörse, in Euro umgerechnet. Nachrichten: Google News &amp; Yahoo Finance, Zahl = Anzahl Artikel mit diesem Signalwort. Indexlisten: Wikipedia. Keine Anlageberatung.</footer>
 </main></body></html>"""
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     Path(path).write_text(page, encoding="utf-8")
@@ -682,7 +779,9 @@ def scan(a):
     print(f"   {len(tickers)} Titel insgesamt\n")
 
     print("2) Kurse abrufen …")
-    hits = analyse(download_closes(tickers), a.tage, a.schwelle / 100)
+    # Vorauswahl an der Heimatbörse etwas großzügiger, weil sich der Euro-Kurs
+    # an der deutschen Börse durch den Wechselkurs leicht anders bewegen kann
+    hits = analyse(download_closes(tickers), a.tage, max(a.schwelle - 2, 1) / 100)
     print(f"   {len(hits)} Titel mit ≥{a.schwelle:g} % Verlust\n")
     if hits.empty:
         return pd.DataFrame()
@@ -698,19 +797,26 @@ def scan(a):
     df["wkn"] = [lookup_wkn(i, n, t, wkn_cache) for i, n, t in zip(df["isin"], df["titel"], df["ticker"])]
     WKN_CACHE.write_text(json.dumps(wkn_cache, ensure_ascii=False, indent=0))
     df["index"] = df["ticker"].map(mapping)
-    df = df.sort_values("fall")
+    df["isin"] = [i if isinstance(i, str) else ISIN_FUND.get(t) for i, t in zip(df["isin"], df["ticker"])]
     # Doppelt gelistete Aktien (z. B. Mailand + Paris) nur einmal zeigen
+    df = df.sort_values("fall")
     df["_key"] = df["isin"].where(df["isin"].notna(), df["titel"])
-    return df.drop_duplicates("_key").drop(columns="_key")
+    df = df.drop_duplicates("_key").drop(columns="_key")
+
+    print("\n5) Kurse an deutscher Börse (Stuttgart › Frankfurt › München) …")
+    df = deutsche_kurse(df, a.tage)
+    df = df[df["fall"] <= -a.schwelle / 100]
+    print(f"   {len(df)} Titel erfüllen ≥{a.schwelle:g} % Verlust auf Basis der deutschen Kurse")
+    return df.sort_values("fall")
 
 
 def details(df):
     """Nachrichten und Wochenverlauf – nur für die angezeigten Titel."""
-    print(f"\n5) Nachrichten der letzten {NEWS_STUNDEN} Std. auswerten …")
+    print(f"\n6) Nachrichten der letzten {NEWS_STUNDEN} Std. auswerten …")
     df["news"] = [news_signale(n, t) for n, t in zip(df["titel"], df["ticker"])]
-    print("\n6) Wochenverläufe laden …")
-    kurven = wochen_kurven(df["ticker"].tolist())
-    df["kurve"] = df["ticker"].map(lambda t: kurven.get(t))
+    print("\n7) Wochenverläufe laden …")
+    kurven = wochen_kurven(df["kurs_symbol"].tolist())
+    df["kurve"] = df["kurs_symbol"].map(lambda t: kurven.get(t))
     print(f"   {len(kurven)} von {len(df)} Verläufen geladen")
     return df
 
@@ -796,6 +902,7 @@ def main():
             "Intraday": df["intraday"].map(pct),
             "1 Woche": df["woche"].map(pct),
             "Marktkap. (Mrd. €)": df["kap_eur_mrd"].map(de),
+            "Börse": df["boerse"].fillna("–").str.slice(0, 14),
             "Land": df["land"].fillna("–"),
             "Kurszeit": [kurszeit_text(r) for _, r in df.iterrows()],
             "News": [f"{(n or {}).get('n', 0)}: " + ", ".join(f"{k} {v}" for k, v in (n or {}).get("top", [])[:2]) for n in df["news"]],
