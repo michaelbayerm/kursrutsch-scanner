@@ -254,6 +254,7 @@ def deutsche_kurse(df, tage):
     closes = download_closes(kandidaten) if kandidaten else pd.DataFrame()
     grenze = datetime.now() - timedelta(days=4)
     heim_eur = dict(zip(df["ticker"], df["kurs_eur"]))
+    heim_datum = dict(zip(df["ticker"], df["datum"]))
     gewaehlt, verworfen = {}, []
     for t, b in basen.items():
         optionen = []
@@ -269,29 +270,35 @@ def deutsche_kurse(df, tage):
                 verworfen.append(f"{sym} ({de(ser.iloc[-1], 2)} € statt ~{de(ref, 2)} €)")
                 continue                            # anderes Papier (z. B. ADR) oder Fehlkurs
             optionen.append((ser.index[-1], -rang, sym, ort, ser))
-        if optionen:                                # aktuellster Kurs, bei Gleichstand Stuttgart > Frankfurt > München
-            _, _, sym, ort, ser = max(optionen, key=lambda o: (o[0], o[1]))
-            gewaehlt[t] = (sym, ort, ser)
+        # aktuellster Kurs zuerst, bei Gleichstand Stuttgart > Frankfurt > München;
+        # ein Kurs, dessen letzter Handel älter ist als der letzte Handelstag der Heimatbörse, gilt als veraltet
+        for _, _, sym, ort, ser in sorted(optionen, key=lambda o: (o[0], o[1]), reverse=True):
+            zeit = None
+            try:
+                ts = yf.Ticker(sym).info.get("regularMarketTime")
+                zeit = datetime.fromtimestamp(int(ts), BERLIN) if ts else None
+            except Exception:
+                pass
+            hd = heim_datum.get(t)
+            if zeit and hd is not None and not pd.isna(hd) and zeit.date() < pd.Timestamp(hd).date():
+                verworfen.append(f"{sym} (letzter Handel {zeit:%d.%m. %H:%M}, veraltet)")
+                continue
+            gewaehlt[t] = (sym, ort, ser, zeit)
+            break
     if verworfen:
-        print("   Unplausibel, verworfen: " + ", ".join(verworfen))
+        print("   Verworfen: " + ", ".join(verworfen))
 
     zeilen = []
     for _, r in df.iterrows():
         r = r.copy()
         if r["ticker"] in gewaehlt:
-            sym, ort, ser = gewaehlt[r["ticker"]]
+            sym, ort, ser, zeit = gewaehlt[r["ticker"]]
             k = kennzahlen(ser, tage)
             for key, val in k.items():
                 r[key] = val
             r["kurs_eur"] = k["kurs"]
             r["kurs_symbol"], r["boerse"] = sym, ort
-            r["kurszeit"] = None
-            try:
-                ts = yf.Ticker(sym).info.get("regularMarketTime")
-                if ts:
-                    r["kurszeit"] = datetime.fromtimestamp(int(ts), BERLIN)
-            except Exception:
-                pass
+            r["kurszeit"] = zeit
         else:
             r["kurs_symbol"] = r["ticker"]
             heim = r.get("heim") if isinstance(r.get("heim"), str) and r.get("heim") else "Heimatbörse"
