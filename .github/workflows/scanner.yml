@@ -1,0 +1,48 @@
+name: Kursrutsch-Scanner
+
+on:
+  schedule:
+    # GitHub rechnet in UTC. Zwei Zeiten, damit es Sommer- wie Winterzeit
+    # um 17 Uhr Berlin trifft – das Skript läuft trotzdem nur einmal pro Tag.
+    - cron: "0 15 * * *"   # 17:00 Sommerzeit (MESZ)
+    - cron: "0 16 * * *"   # 17:00 Winterzeit (MEZ)
+  workflow_dispatch:        # manueller Start über "Run workflow"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scanner
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Pakete installieren
+        run: pip install -r requirements.txt
+
+      - name: Scan
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          SCANNER_CACHE: cache
+        run: |
+          EXTRA="--einmal-taeglich-ab 17"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then EXTRA=""; fi
+          python aktien_crash_scanner.py --html docs/index.html --state docs/state.json $EXTRA
+
+      - name: Ergebnis speichern
+        run: |
+          git config user.name "scanner-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs cache
+          git diff --cached --quiet || (git commit -m "Scan $(TZ=Europe/Berlin date '+%d.%m.%Y %H:%M')" && git push)
