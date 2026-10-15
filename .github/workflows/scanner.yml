@@ -4,13 +4,14 @@ on:
   schedule:
     # GitHub rechnet in UTC und startet geplante Läufe oft verspätet oder gar nicht,
     # besonders zur vollen Stunde. Deshalb mehrere Startzeiten ab 17 Uhr deutscher Zeit
-    # (Sommer- und Winterzeit). Das Skript scannt trotzdem nur EINMAL pro Tag.
-    - cron: "7 15 * * *"    # 17:07 MESZ
-    - cron: "37 15 * * *"   # 17:37 MESZ
-    - cron: "7 16 * * *"    # 17:07 MEZ / 18:07 MESZ
-    - cron: "37 16 * * *"   # 17:37 MEZ
-    - cron: "7 17 * * *"    # Reserve
-    - cron: "7 18 * * *"    # Reserve
+    # (Sommer- und Winterzeit), nur Mo–Fr. Das Skript scannt trotzdem nur EINMAL pro Tag
+    # und pausiert zusätzlich an bundesweiten Feiertagen.
+    - cron: "7 15 * * 1-5"    # 17:07 MESZ
+    - cron: "37 15 * * 1-5"   # 17:37 MESZ
+    - cron: "7 16 * * 1-5"    # 17:07 MEZ / 18:07 MESZ
+    - cron: "37 16 * * 1-5"   # 17:37 MEZ
+    - cron: "7 17 * * 1-5"    # Reserve
+    - cron: "7 18 * * 1-5"    # Reserve
   workflow_dispatch:        # manueller Start über "Run workflow"
 
 permissions:

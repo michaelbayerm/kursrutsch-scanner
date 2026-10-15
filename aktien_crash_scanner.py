@@ -396,31 +396,26 @@ def _yahoo_news(tk):
     return out
 
 
-def intraday_kurven(tickers):
-    """Kursverlauf der letzten 24 Std. (15-Min.-Takt) je Ticker; bei geschlossener Börse die letzte Sitzung."""
+def wochen_kurven(tickers):
+    """Kursverlauf der letzten 7 Tage im Stundentakt je Ticker."""
     try:
-        df = yf.download(list(tickers), period="5d", interval="15m", auto_adjust=True,
+        df = yf.download(list(tickers), period="7d", interval="1h", auto_adjust=True,
                          progress=False, threads=True)
         close = df["Close"]
         if isinstance(close, pd.Series):
             close = close.to_frame(list(tickers)[0])
     except Exception as e:
-        print(f"  Intraday-Daten nicht verfügbar: {e}")
+        print(f"  Wochenverläufe nicht verfügbar: {e}")
         return {}
     idx = pd.to_datetime(close.index)
     close.index = idx.tz_localize("UTC") if idx.tz is None else idx.tz_convert("UTC")
-    grenze = pd.Timestamp.now(tz="UTC") - pd.Timedelta(hours=24)
+    grenze = pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=7)
     out = {}
     for t in tickers:
         if t not in close:
             continue
-        ser = close[t].dropna()
-        if ser.empty:
-            continue
-        teil = ser[ser.index >= grenze]
-        if len(teil) < 4:                        # Börse zu: letzte Handelssitzung zeigen
-            letzter_tag = ser.index[-1].tz_convert(BERLIN).date()
-            teil = ser[[ts.tz_convert(BERLIN).date() == letzter_tag for ts in ser.index]]
+        teil = close[t].dropna()
+        teil = teil[teil.index >= grenze]
         if len(teil) >= 2:
             out[t] = dict(werte=[float(v) for v in teil.values],
                           von=teil.index[0].tz_convert(BERLIN), bis=teil.index[-1].tz_convert(BERLIN))
@@ -428,7 +423,7 @@ def intraday_kurven(tickers):
 
 
 def sparkline(kurve, vorschluss):
-    """Kleines SVG-Diagramm; gestrichelte Linie = Vortagesschluss."""
+    """Kleines SVG-Diagramm; gestrichelte Linie = Schlusskurs vor einer Woche."""
     if not kurve:
         return ""
     w, h, pad = 300, 56, 4
@@ -442,10 +437,10 @@ def sparkline(kurve, vorschluss):
     farbe = "var(--neg)" if werte[-1] < basis else "var(--pos)"
     flaeche = f"{x(0):.1f},{h - pad} {pts} {x(len(werte) - 1):.1f},{h - pad}"
     von, bis = kurve["von"], kurve["bis"]
-    fmt = "%d.%m. %H:%M" if von.date() != bis.date() else "%H:%M"
+    fmt = "%d.%m."
     return f"""
   <div class="chart">
-    <div class="lbl">Verlauf {von.strftime(fmt)} – {bis.strftime(fmt)} Uhr · gestrichelt = Vortagesschluss</div>
+    <div class="lbl">Wochenverlauf {von.strftime(fmt)} – {bis.strftime(fmt)} · gestrichelt = Kurs vor 1 Woche</div>
     <svg viewBox="0 0 {w} {h}" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
       <polygon points="{flaeche}" fill="{farbe}" opacity="0.12"/>
       <line x1="{pad}" x2="{w - pad}" y1="{y(basis):.1f}" y2="{y(basis):.1f}" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
@@ -558,7 +553,7 @@ def kurszeit_text(r):
     return pd.Timestamp(d).strftime("%d.%m.") if d is not None and not pd.isna(d) else "–"
 
 
-def write_html(path, df, neu, a, stand):
+def write_html(path, df, neu, a, stand, gesamt=None):
     def color(x):
         return "neg" if x < 0 else "pos"
 
@@ -606,7 +601,7 @@ def write_html(path, df, neu, a, stand):
     <div><span class="lbl">Intraday</span><span class="val {color(r['intraday'])}">{pct(r['intraday'])}</span></div>
     <div><span class="lbl">1 Woche</span><span class="val {color(r['woche'])}">{pct(r['woche'])}</span></div>
     <div><span class="lbl">Marktkap.</span><span class="val">{de(r['kap_eur_mrd'])} Mrd €</span></div>
-  </div>{sparkline(r.get('kurve'), r['kurs'] / (1 + r['intraday']) if r.get('intraday') is not None else None)}{news_html}
+  </div>{sparkline(r.get('kurve'), r['kurs'] / (1 + r['woche']) if r.get('woche') is not None else None)}{news_html}
 </div>""")
         body = "\n".join(cards)
 
@@ -650,7 +645,7 @@ footer {{ color:var(--mut); font-size:12px; margin-top:18px; }}
 </style></head>
 <body><main>
 <h1>Kursrutsch-Scanner</h1>
-<div class="meta">≥ {a.schwelle:g} % Verlust in {a.tage} Handelstagen · Marktkap. &gt; {a.min_kap:g} Mrd. € · Stand {stand:%d.%m.%Y, %H:%M} Uhr · {len(df)} Treffer</div>
+<div class="meta">≥ {a.schwelle:g} % Verlust in {a.tage} Handelstagen · Marktkap. &gt; {a.min_kap:g} Mrd. € · Stand {stand:%d.%m.%Y, %H:%M} Uhr · {gesamt if gesamt is not None else len(df)} Treffer{f", die {len(df)} wichtigsten angezeigt (neue zuerst, dann nach Tagesminus)" if gesamt and gesamt > len(df) else " (neue zuerst, dann nach Tagesminus)"}</div>
 {body}
 <footer>Kurse: Yahoo Finance (teils verzögert), Uhrzeit = letzter Kurs in deutscher Zeit. Nachrichten: Google News &amp; Yahoo Finance, Zahl = Anzahl Artikel mit diesem Signalwort. Indexlisten: Wikipedia. Keine Anlageberatung.</footer>
 </main></body></html>"""
@@ -706,16 +701,48 @@ def scan(a):
     df = df.sort_values("fall")
     # Doppelt gelistete Aktien (z. B. Mailand + Paris) nur einmal zeigen
     df["_key"] = df["isin"].where(df["isin"].notna(), df["titel"])
-    df = df.drop_duplicates("_key").drop(columns="_key")
+    return df.drop_duplicates("_key").drop(columns="_key")
 
+
+def details(df):
+    """Nachrichten und Wochenverlauf – nur für die angezeigten Titel."""
     print(f"\n5) Nachrichten der letzten {NEWS_STUNDEN} Std. auswerten …")
     df["news"] = [news_signale(n, t) for n, t in zip(df["titel"], df["ticker"])]
-
-    print("\n6) Kursverläufe der letzten 24 Std. laden …")
-    kurven = intraday_kurven(df["ticker"].tolist())
+    print("\n6) Wochenverläufe laden …")
+    kurven = wochen_kurven(df["ticker"].tolist())
     df["kurve"] = df["ticker"].map(lambda t: kurven.get(t))
     print(f"   {len(kurven)} von {len(df)} Verläufen geladen")
     return df
+
+
+def ostersonntag(jahr):
+    a, b, c = jahr % 19, jahr // 100, jahr % 100
+    d, e = b // 4, b % 4
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i, k = c // 4, c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * l) // 451
+    monat = (h + l - 7 * m + 114) // 31
+    tag = (h + l - 7 * m + 114) % 31 + 1
+    return date(jahr, monat, tag)
+
+
+def bundesweiter_feiertag(tag):
+    o = ostersonntag(tag.year)
+    feiertage = {
+        date(tag.year, 1, 1): "Neujahr",
+        o - timedelta(days=2): "Karfreitag",
+        o + timedelta(days=1): "Ostermontag",
+        date(tag.year, 5, 1): "Tag der Arbeit",
+        o + timedelta(days=39): "Christi Himmelfahrt",
+        o + timedelta(days=50): "Pfingstmontag",
+        date(tag.year, 10, 3): "Tag der Deutschen Einheit",
+        date(tag.year, 12, 25): "1. Weihnachtstag",
+        date(tag.year, 12, 26): "2. Weihnachtstag",
+    }
+    return feiertage.get(tag)
 
 
 def main():
@@ -724,6 +751,7 @@ def main():
     ap.add_argument("--schwelle", type=float, default=10, help="Mindestverlust in %% (Standard 10)")
     ap.add_argument("--min-kap", type=float, default=5, help="Mindest-Marktkap. in Mrd. EUR (Standard 5)")
     ap.add_argument("--indizes", nargs="+", default=list(INDIZES), choices=list(INDIZES))
+    ap.add_argument("--max", type=int, default=25, help="Höchstens so viele Titel anzeigen (Standard 25)")
     ap.add_argument("--html", help="Ergebnisseite (HTML) hierhin schreiben")
     ap.add_argument("--state", help="Datei, in der die Treffer des letzten Laufs gespeichert werden")
     ap.add_argument("--einmal-taeglich-ab", type=int, metavar="STUNDE",
@@ -735,6 +763,12 @@ def main():
     state = json.loads(state_path.read_text()) if state_path and state_path.exists() else {}
 
     if a.einmal_taeglich_ab is not None:
+        if jetzt.weekday() >= 5:
+            print(f"Übersprungen: Wochenende ({['Samstag', 'Sonntag'][jetzt.weekday() - 5]}, {jetzt:%d.%m.%Y}).")
+            return
+        if bundesweiter_feiertag(jetzt.date()):
+            print(f"Übersprungen: Feiertag ({bundesweiter_feiertag(jetzt.date())}).")
+            return
         if jetzt.hour < a.einmal_taeglich_ab or state.get("letzter_lauf") == str(jetzt.date()):
             print(f"Übersprungen ({jetzt:%H:%M} Uhr Berlin, letzter Lauf {state.get('letzter_lauf')}).")
             return
@@ -746,6 +780,11 @@ def main():
     if not df.empty:
         df["_neu"] = df["ticker"].isin(neu)
         df = df.sort_values(["_neu", "intraday"], ascending=[False, True]).drop(columns="_neu")
+        gesamt = len(df)
+        df = df.head(a.max).copy()
+        details(df)
+    else:
+        gesamt = 0
 
     if df.empty:
         print(f"\nKeine Treffer (≥{a.schwelle:g} %, > {a.min_kap:g} Mrd. €).")
@@ -764,10 +803,10 @@ def main():
         print(f"\n=== Kursrutsch ≥{a.schwelle:g} % in {a.tage} Tagen, Marktkap. > {a.min_kap:g} Mrd. € "
               f"(Stand {jetzt:%d.%m.%Y %H:%M}) ===\n")
         print(out.to_string(index=False))
-        print(f"\nNeu seit letztem Lauf: {len(neu)}")
+        print(f"\nNeu seit letztem Lauf: {len(neu)} · angezeigt {len(df)} von {gesamt}")
 
     if a.html:
-        write_html(a.html, df, neu, a, jetzt)
+        write_html(a.html, df, neu, a, jetzt, gesamt)
         print(f"Seite geschrieben: {a.html}")
 
     topic = os.environ.get("NTFY_TOPIC")
