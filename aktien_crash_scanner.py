@@ -244,7 +244,12 @@ def onvista_search(q):
                 continue
             if r.status_code != 200:
                 return None, f"HTTP {r.status_code}"
-            res = [x for f in r.json().get("facets", []) for x in f.get("results", [])]
+            data = r.json()
+            facets = data.get("facets") if isinstance(data, dict) else None
+            res = []
+            for f in facets or []:
+                if isinstance(f, dict):
+                    res += [x for x in (f.get("results") or []) if isinstance(x, dict)]
             return res, f"{len(res)} Ergebnisse"
         except Exception as e:
             return None, type(e).__name__
