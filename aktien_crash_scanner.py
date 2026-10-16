@@ -2,8 +2,8 @@
 """
 Aktien-Crash-Scanner
 ====================
-Durchsucht große Indizes weltweit nach Aktien, die in den letzten 1–3
-Handelstagen um mehr als X % gefallen sind (Standard 10 %), mit einer
+Durchsucht große Indizes weltweit nach Aktien, die in den letzten 1–2
+Handelstagen stark gefallen sind (Standard: 15 % an deutscher Börse, 12 % an der Heimatbörse), mit einer
 Marktkapitalisierung über Y Mrd. EUR (Standard 5).
 
 Ausgabe je Titel: Titel | WKN | Kurs (€) | Intraday | 1 Woche | Marktkap. (Mrd. €)
@@ -735,6 +735,7 @@ def write_html(path, df, neu, a, stand, gesamt=None):
   {quelle_html}
   <div class="werte">
     <div><span class="lbl">Kurs {ort_kurz} · {kurszeit_text(r)}</span><span class="val">{de(r['kurs_eur'], 2)} €</span></div>
+    <div><span class="lbl">Rutsch {a.tage} Tage</span><span class="val neg"><b>{pct(r['fall'])}</b></span></div>
     <div><span class="lbl">Intraday</span><span class="val {color(r['intraday'])}">{pct(r['intraday'])}</span></div>
     <div><span class="lbl">1 Woche</span><span class="val {color(r['woche'])}">{pct(r['woche'])}</span></div>
     <div><span class="lbl">Marktkap.</span><span class="val">{de(r['kap_eur_mrd'])} Mrd €</span></div>
@@ -779,18 +780,18 @@ h1 {{ font-size:22px; margin:4px 0 2px; }}
 .chip.leise {{ background:transparent; border:1px dashed var(--line); color:var(--mut); }}
 .headline {{ display:block; font-size:13px; color:var(--text); text-decoration:none; line-height:1.35; }}
 .quelle {{ display:block; color:var(--mut); font-size:11.5px; margin-top:2px; }}
-.werte {{ display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }}
+.werte {{ display:grid; grid-template-columns:repeat(5,1fr); gap:6px; }}
 .werte div {{ display:flex; flex-direction:column; }}
 .lbl {{ color:var(--mut); font-size:11.5px; }}
 .val {{ font-variant-numeric:tabular-nums; font-weight:600; font-size:14px; }}
 .neg {{ color:var(--neg); }} .pos {{ color:var(--pos); }}
 .leer {{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px; color:var(--mut); }}
 footer {{ color:var(--mut); font-size:12px; margin-top:18px; }}
-@media (max-width:420px) {{ .werte {{ grid-template-columns:repeat(2,1fr); row-gap:10px; }} }}
+@media (max-width:520px) {{ .werte {{ grid-template-columns:repeat(3,1fr); row-gap:10px; }} }}
 </style></head>
 <body><main>
 <h1>Kursrutsch-Scanner</h1>
-<div class="meta">Kursrutsch in {a.tage} Handelstagen: ≥ {a.schwelle_de:g} % an deutscher Börse (≥ {a.schwelle:g} % an der Heimatbörse, wenn es keinen deutschen Kurs gibt) · Marktkap. &gt; {a.min_kap:g} Mrd. € · Stand {stand:%d.%m.%Y, %H:%M} Uhr · {gesamt if gesamt is not None else len(df)} Treffer{f", die {len(df)} wichtigsten angezeigt (neue zuerst, dann nach Tagesminus)" if gesamt and gesamt > len(df) else " (neue zuerst, dann nach Tagesminus)"}</div>
+<div class="meta">Kriterium „Rutsch“: aktueller Kurs gegenüber dem höchsten Schlusskurs der letzten {a.tage} Handelstage – ≥ {a.schwelle_de:g} % an deutscher Börse (≥ {a.schwelle:g} % an der Heimatbörse, wenn es keinen deutschen Kurs gibt) · Marktkap. &gt; {a.min_kap:g} Mrd. € · Stand {stand:%d.%m.%Y, %H:%M} Uhr · {gesamt if gesamt is not None else len(df)} Treffer{f", die {len(df)} wichtigsten angezeigt (neue zuerst, dann nach Tagesminus)" if gesamt and gesamt > len(df) else " (neue zuerst, dann nach Tagesminus)"}</div>
 <div class="legende"><span class="q-de mini">Deutsche Börse</span> Kurs, Veränderungen und Wochenverlauf von Stuttgart, Frankfurt oder München, in €.
 <span class="q-heim mini">Ausweichkurs</span> kein brauchbarer deutscher Kurs – Werte von der Heimatbörse, in € umgerechnet.</div>
 {body}
@@ -904,9 +905,9 @@ def bundesweiter_feiertag(tag):
 
 def main():
     ap = argparse.ArgumentParser(description="Sucht Aktien mit starkem Kursrutsch in großen Indizes.")
-    ap.add_argument("--tage", type=int, default=3, help="Zeitfenster in Handelstagen (Standard 3)")
-    ap.add_argument("--schwelle", type=float, default=10, help="Mindestverlust an der Heimatbörse in %% (Standard 10)")
-    ap.add_argument("--schwelle-de", type=float, default=12, help="Mindestverlust an deutscher Börse in %% (Standard 12)")
+    ap.add_argument("--tage", type=int, default=2, help="Zeitfenster in Handelstagen (Standard 2)")
+    ap.add_argument("--schwelle", type=float, default=12, help="Mindestverlust an der Heimatbörse in %% (Standard 12)")
+    ap.add_argument("--schwelle-de", type=float, default=15, help="Mindestverlust an deutscher Börse in %% (Standard 15)")
     ap.add_argument("--min-kap", type=float, default=5, help="Mindest-Marktkap. in Mrd. EUR (Standard 5)")
     ap.add_argument("--indizes", nargs="+", default=list(INDIZES), choices=list(INDIZES))
     ap.add_argument("--max", type=int, default=25, help="Höchstens so viele Titel anzeigen (Standard 25)")
