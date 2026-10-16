@@ -14,50 +14,70 @@ $ECV.DE: No data found, symbol may be delisted
   Kurse 751–900 von 1177 …
   Kurse 901–1050 von 1177 …
   Kurse 1051–1177 von 1177 …
-   12 Titel mit ≥12 % Verlust an der Heimatbörse
+   26 Titel mit ≥10 % Verlust an der Heimatbörse (Vorauswahl)
 
 3) Stammdaten & Marktkapitalisierung …
   0992.HK    Lenovo Group Limited
   285A.T     Kioxia Holdings Corporation
   3436.T     Sumco Corporation
+  5301.T     Tokai Carbon Co., Ltd.
   5706.T     Mitsui Kinzoku Company, Limited
   5801.T     Furukawa Electric Co., Ltd.
   5803.T     Fujikura Ltd.
+  6361.T     Ebara Corporation
+  6506.T     YASKAWA Electric Corporation
+  6723.T     Renesas Electronics Corporation
   6857.T     Advantest Corporation
   6920.T     Lasertec Corporation
+  6963.T     ROHM Co., Ltd.
+  6976.T     Taiyo Yuden Co., Ltd.
+  6981.T     Murata Manufacturing Co., Ltd.
   7733.T     Olympus Corporation
   7735.T     SCREEN Holdings Co., Ltd.
+  8035.T     Tokyo Electron Limited
+  BESI.AS    BE Semiconductor Industries N.V.
+  COHR       Coherent Corp.
+  CRWV       CoreWeave, Inc.
   HPE        Hewlett Packard Enterprise Company
+  P          Everpure, Inc.
   RKLB       Rocket Lab Corporation
+  SMCI       Super Micro Computer, Inc.
+  TWLO       Twilio Inc.
 
 4) WKN ermitteln …
 
 5) Kurse an deutscher Börse (Stuttgart › Frankfurt › München) …
-  Kurse 1–33 von 33 …
-HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: MMG.MU"}}}
-$VANA.SG: No data found, symbol may be delisted
-$6K8.SG: No data found, symbol may be delisted
+  Kurse 1–72 von 72 …
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: S3X0.F"}}}
 $S3X0.F: No data found, symbol may be delisted
-$MMG.MU: No data found, symbol may be delisted
 $S3X0.SG: No data found, symbol may be delisted
+$6K8.SG: No data found, symbol may be delisted
 $FJK.MU: No data found, symbol may be delisted
+$VANA.SG: No data found, symbol may be delisted
+$MMG.MU: No data found, symbol may be delisted
 
 6 Failed downloads:
-['VANA.SG', '6K8.SG', 'S3X0.F', 'MMG.MU', 'S3X0.SG', 'FJK.MU']: No data found, symbol may be delisted
-   Verworfen: S3X0.MU (30,80 € statt ~14,94 €)
-   10 von 12 Titeln mit deutschem Börsenkurs (Stuttgart: 8, Frankfurt: 2, München: 0)
-   2 Titel erfüllen die Schwelle (≥15 % an deutscher Börse, ≥12 % an der Heimatbörse, falls kein deutscher Kurs)
+['S3X0.F', 'S3X0.SG', '6K8.SG', 'FJK.MU', 'VANA.SG', 'MMG.MU']: No data found, symbol may be delisted
+   Verworfen: S3X0.MU (30,80 € statt ~14,94 €), EJI.SG (13,50 € statt ~23,31 €), EJI.F (13,40 € statt ~23,31 €), EJI.MU (13,90 € statt ~23,31 €)
+   22 von 25 Titeln mit deutschem Börsenkurs (Stuttgart: 20, Frankfurt: 2, München: 0)
+   7 Titel erfüllen die Schwelle (≥12 % an deutscher Börse, ≥12 % an der Heimatbörse, falls kein deutscher Kurs)
 
 6) Nachrichten der letzten 24 Std. auswerten …
 
 7) Wochenverläufe laden …
-   2 von 2 Verläufen geladen
+   7 von 7 Verläufen geladen
 
-=== Kursrutsch ≥12 % in 2 Tagen, Marktkap. > 5 Mrd. € (Stand 16.10.2026 18:44) ===
+=== Kursrutsch ≥12 % in 2 Tagen, Marktkap. > 5 Mrd. € (Stand 16.10.2026 18:49) ===
 
-                    Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €) Börse  Land     Kurszeit                                               News
-        Sumco Corporation A0HGFA    14,94  -13,9 % -28,0 %                5,3 Tokyo Japan 16.10. 08:30                                                2: 
-SCREEN Holdings Co., Ltd. 859619    76,41  -10,6 % -14,8 %               14,7 Tokyo Japan 16.10. 08:30 21: Zinsen / Notenbank 1, Abstufung / Kursziel ↓ 1
+                           Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €)     Börse  Land     Kurszeit                                               News
+          Rocket Lab Corporation A419CG    46,20   -6,1 % -24,3 %               29,5 Stuttgart   USA 16.10. 18:35         87: Ausverkauf 5, Abstufung / Kursziel ↓ 3
+Hewlett Packard Enterprise Compa A140KD    49,36   -5,7 % -24,6 %               65,4 Stuttgart   USA 16.10. 18:31         68: Ausverkauf 6, Abstufung / Kursziel ↓ 6
+                   Fujikura Ltd. 876144    24,70   -5,4 % -19,3 %               42,0 Stuttgart Japan 16.10. 18:34                                8: Quartalszahlen 2
+     Furukawa Electric Co., Ltd. 854857    18,48   -3,3 % -19,7 %               13,3 Stuttgart Japan 16.10. 18:31                                3: Quartalszahlen 1
+           Advantest Corporation 868805   195,00   -2,0 % -15,9 %              140,4 Frankfurt Japan 16.10. 08:04                 12: Quartalszahlen 1, Ausverkauf 1
+               Sumco Corporation A0HGFA    14,94  -13,9 % -28,0 %                5,3     Tokyo Japan 16.10. 08:30                                                3: 
+       SCREEN Holdings Co., Ltd. 859619    76,40  -10,6 % -14,8 %               14,7     Tokyo Japan 16.10. 08:30 22: Zinsen / Notenbank 1, Abstufung / Kursziel ↓ 1
 
-Neu seit letztem Lauf: 0 · angezeigt 2 von 2
+Neu seit letztem Lauf: 5 · angezeigt 7 von 7
 Seite geschrieben: docs/index.html
+Push-Nachricht gesendet.
