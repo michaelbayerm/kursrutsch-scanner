@@ -3,7 +3,8 @@
 Aktien-Crash-Scanner
 ====================
 Durchsucht große Indizes weltweit nach Aktien, die in den letzten 1–2
-Handelstagen stark gefallen sind (Standard: 15 % an deutscher Börse, 12 % an der Heimatbörse), mit einer
+Handelstagen stark gefallen sind (Standard: 12 % an deutscher Börse bzw. an der Heimatbörse,
+falls es keinen deutschen Kurs gibt; Vorauswahl großzügiger wegen Wechselkurseffekten), mit einer
 Marktkapitalisierung über Y Mrd. EUR (Standard 5).
 
 Ausgabe je Titel: Titel | WKN | Kurs (€) | Intraday | 1 Woche | Marktkap. (Mrd. €)
@@ -830,9 +831,12 @@ def scan(a):
     print(f"   {len(tickers)} Titel insgesamt\n")
 
     print("2) Kurse abrufen …")
-    # Vorauswahl an der Heimatbörse, Endauswahl mit der (strengeren) Schwelle an der deutschen Börse
-    hits = analyse(download_closes(tickers), a.tage, a.schwelle / 100)
-    print(f"   {len(hits)} Titel mit ≥{a.schwelle:g} % Verlust an der Heimatbörse\n")
+    # Vorauswahl an der Heimatbörse bewusst großzügiger (2 Prozentpunkte unter der niedrigsten Schwelle),
+    # damit kein Titel verloren geht, der nur durch den Wechselkurs in Euro stärker gefallen ist.
+    # Die eigentliche Entscheidung fällt danach mit den deutschen Kursen.
+    vorauswahl = max(min(a.schwelle, a.schwelle_de) - 2, 1)
+    hits = analyse(download_closes(tickers), a.tage, vorauswahl / 100)
+    print(f"   {len(hits)} Titel mit ≥{vorauswahl:g} % Verlust an der Heimatbörse (Vorauswahl)\n")
     if hits.empty:
         return pd.DataFrame()
 
@@ -907,7 +911,7 @@ def main():
     ap = argparse.ArgumentParser(description="Sucht Aktien mit starkem Kursrutsch in großen Indizes.")
     ap.add_argument("--tage", type=int, default=2, help="Zeitfenster in Handelstagen (Standard 2)")
     ap.add_argument("--schwelle", type=float, default=12, help="Mindestverlust an der Heimatbörse in %% (Standard 12)")
-    ap.add_argument("--schwelle-de", type=float, default=15, help="Mindestverlust an deutscher Börse in %% (Standard 15)")
+    ap.add_argument("--schwelle-de", type=float, default=12, help="Mindestverlust an deutscher Börse in %% (Standard 12)")
     ap.add_argument("--min-kap", type=float, default=5, help="Mindest-Marktkap. in Mrd. EUR (Standard 5)")
     ap.add_argument("--indizes", nargs="+", default=list(INDIZES), choices=list(INDIZES))
     ap.add_argument("--max", type=int, default=25, help="Höchstens so viele Titel anzeigen (Standard 25)")
