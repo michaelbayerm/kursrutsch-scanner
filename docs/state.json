@@ -1,34 +1,7 @@
 {
  "letzter_lauf": "2026-10-16",
  "ticker": [
-  "285A.T",
   "3436.T",
-  "5801.T",
-  "6146.T",
-  "6361.T",
-  "6857.T",
-  "7733.T",
-  "7735.T",
-  "AMAT",
-  "ANET",
-  "CIEN",
-  "COHR",
-  "CRWD",
-  "CRWV",
-  "DDOG",
-  "DELL",
-  "FIX",
-  "FLEX",
-  "HPE",
-  "INTC",
-  "LITE",
-  "MRVL",
-  "NBIS",
-  "P",
-  "PANW",
-  "PLTR",
-  "RKLB",
-  "SKYD",
-  "TWLO"
+  "7735.T"
  ]
 }
