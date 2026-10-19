@@ -1,17 +1,4 @@
 1) Indexmitglieder laden …
-  S&P 500         503 Titel
-  Nasdaq-100      101 Titel
-  DAX              40 Titel
-  MDAX             50 Titel
-  Euro Stoxx 50    50 Titel
-  FTSE 100        100 Titel
-  CAC 40           40 Titel
-  SMI              20 Titel
-  AEX              25 Titel
-  IBEX 35          35 Titel
-  FTSE MIB         40 Titel
-  Hang Seng        85 Titel
-  Nikkei 225      225 Titel
    1177 Titel insgesamt
 
 2) Kurse abrufen …
@@ -40,16 +27,16 @@ $ECV.DE: No data found, symbol may be delisted
 
 5) Kurse an deutscher Börse (Stuttgart › Frankfurt › München) …
   Kurse 1–15 von 15 …
-HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: MMG.MU"}}}
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: FJK.MU"}}}
+$FJK.MU: No data found, symbol may be delisted
+$S3X0.F: No data found, symbol may be delisted
 $S3X0.SG: No data found, symbol may be delisted
 $VANA.SG: No data found, symbol may be delisted
 $MMG.MU: No data found, symbol may be delisted
-$FJK.MU: No data found, symbol may be delisted
-$S3X0.F: No data found, symbol may be delisted
 
 5 Failed downloads:
-['S3X0.SG', 'VANA.SG', 'MMG.MU', 'FJK.MU', 'S3X0.F']: No data found, symbol may be delisted
-   Verworfen: S3X0.MU (30,80 € statt ~15,21 €)
+['FJK.MU', 'S3X0.F', 'S3X0.SG', 'VANA.SG', 'MMG.MU']: No data found, symbol may be delisted
+   Verworfen: S3X0.MU (30,80 € statt ~15,22 €)
    4 von 5 Titeln mit deutschem Börsenkurs (Stuttgart: 3, Frankfurt: 1, München: 0)
    1 Titel erfüllen die Schwelle (≥12 % an deutscher Börse, ≥12 % an der Heimatbörse, falls kein deutscher Kurs)
 
@@ -58,10 +45,11 @@ $S3X0.F: No data found, symbol may be delisted
 7) Wochenverläufe laden …
    1 von 1 Verläufen geladen
 
-=== Kursrutsch ≥12 % in 2 Tagen, Marktkap. > 5 Mrd. € (Stand 19.10.2026 17:38) ===
+=== Kursrutsch ≥12 % in 2 Tagen, Marktkap. > 5 Mrd. € (Stand 19.10.2026 17:51) ===
 
             Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €) Börse  Land     Kurszeit News
-Sumco Corporation A0HGFA    15,21   +1,9 % -22,2 %                5,2 Tokyo Japan 19.10. 08:30  0: 
+Sumco Corporation A0HGFA    15,22   +1,9 % -22,2 %                5,2 Tokyo Japan 19.10. 08:30  0: 
 
 Neu seit letztem Lauf: 0 · angezeigt 1 von 1
 Seite geschrieben: docs/index.html
+Info-Nachricht (nichts Neues) gesendet.
