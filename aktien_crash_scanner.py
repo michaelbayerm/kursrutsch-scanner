@@ -802,6 +802,25 @@ footer {{ color:var(--mut); font-size:12px; margin-top:18px; }}
     Path(path).write_text(page, encoding="utf-8")
 
 
+def notify_ruhig(topic, df, gesamt, jetzt, page_url):
+    """Tägliche Lebenszeichen-Nachricht, wenn es keine neuen Titel gibt."""
+    if df.empty:
+        msg = "Keine Titel erfüllen heute das Kriterium."
+    else:
+        namen = ", ".join(str(t)[:24] for t in df["titel"].head(5))
+        rest = f" und {gesamt - 5} weitere" if gesamt > 5 else ""
+        msg = f"{gesamt} Treffer, alle schon bekannt: {namen}{rest}."
+    headers = {"Title": f"Kursrutsch-Scanner {jetzt:%d.%m. %H:%M}: nichts Neues",
+               "Tags": "white_check_mark", "Priority": "low"}
+    if page_url:
+        headers["Click"] = page_url
+    try:
+        requests.post(f"https://ntfy.sh/{topic}", data=msg.encode("utf-8"), headers=headers, timeout=15)
+        print("Info-Nachricht (nichts Neues) gesendet.")
+    except Exception as e:
+        print(f"Push fehlgeschlagen: {e}")
+
+
 def notify(topic, neu_df, page_url):
     def signal(r):
         top = (r.get("news") or {}).get("top") or []
@@ -932,9 +951,19 @@ def main():
         if bundesweiter_feiertag(jetzt.date()):
             print(f"Übersprungen: Feiertag ({bundesweiter_feiertag(jetzt.date())}).")
             return
-        if jetzt.hour < a.einmal_taeglich_ab or state.get("letzter_lauf") == str(jetzt.date()):
-            print(f"Übersprungen ({jetzt:%H:%M} Uhr Berlin, letzter Lauf {state.get('letzter_lauf')}).")
+        if state.get("letzter_lauf") == str(jetzt.date()):
+            print(f"Übersprungen: heute schon gelaufen ({jetzt:%H:%M} Uhr Berlin).")
             return
+        ziel = jetzt.replace(hour=a.einmal_taeglich_ab, minute=0, second=0, microsecond=0)
+        if jetzt < ziel:
+            warte = (ziel - jetzt).total_seconds()
+            if warte > 50 * 60:                     # zu früh (z. B. Startzeit für die andere Jahreszeit)
+                print(f"Übersprungen: zu früh ({jetzt:%H:%M} Uhr Berlin).")
+                return
+            print(f"Warte {warte / 60:.0f} Min. bis {ziel:%H:%M} Uhr …", flush=True)
+            import time
+            time.sleep(warte)
+            jetzt = datetime.now(BERLIN)
 
     df = scan(a)
     vorher = set(state.get("ticker", []))
@@ -978,6 +1007,8 @@ def main():
         print("Hinweis: NTFY_TOPIC ist nicht gesetzt – keine Push-Nachricht.")
     elif neu:
         notify(topic, df[df["ticker"].isin(neu)], os.environ.get("PAGE_URL"))
+    else:
+        notify_ruhig(topic, df, gesamt, jetzt, os.environ.get("PAGE_URL"))
 
     if state_path:
         state_path.parent.mkdir(parents=True, exist_ok=True)
