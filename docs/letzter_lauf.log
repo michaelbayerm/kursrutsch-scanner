@@ -1,1 +1,35 @@
-Übersprungen: heute schon gelaufen (19:31 Uhr Berlin).
+1) Indexmitglieder laden …
+  S&P 500         503 Titel
+  Nasdaq-100      101 Titel
+  DAX              40 Titel
+  MDAX             50 Titel
+  Euro Stoxx 50    50 Titel
+  FTSE 100        100 Titel
+  CAC 40           40 Titel
+  SMI              20 Titel
+  AEX              25 Titel
+  IBEX 35          35 Titel
+  FTSE MIB         40 Titel
+  Hang Seng        85 Titel
+  Nikkei 225      225 Titel
+   1177 Titel insgesamt
+
+2) Kurse abrufen …
+  Kurse 1–150 von 1177 …
+  Kurse 151–300 von 1177 …
+  Kurse 301–450 von 1177 …
+  Kurse 451–600 von 1177 …
+$ECV.DE: No data found, symbol may be delisted
+
+1 Failed download:
+['ECV.DE']: No data found, symbol may be delisted
+  Kurse 601–750 von 1177 …
+  Kurse 751–900 von 1177 …
+  Kurse 901–1050 von 1177 …
+  Kurse 1051–1177 von 1177 …
+   0 Titel mit ≥10 % Verlust an der Heimatbörse (Vorauswahl)
+
+
+Keine Treffer (≥12 %, > 5 Mrd. €).
+Seite geschrieben: docs/index.html
+Info-Nachricht (nichts Neues) gesendet.
