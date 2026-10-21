@@ -1,1 +1,55 @@
-Übersprungen: heute schon gelaufen (19:37 Uhr Berlin).
+1) Indexmitglieder laden …
+  S&P 500         503 Titel
+  Nasdaq-100      101 Titel
+  DAX              40 Titel
+  MDAX             50 Titel
+  Euro Stoxx 50    50 Titel
+  FTSE 100        100 Titel
+  CAC 40           40 Titel
+  SMI              20 Titel
+  AEX              25 Titel
+  IBEX 35          35 Titel
+  FTSE MIB         40 Titel
+  Hang Seng        85 Titel
+  Nikkei 225      225 Titel
+   1177 Titel insgesamt
+
+2) Kurse abrufen …
+  Kurse 1–150 von 1177 …
+  Kurse 151–300 von 1177 …
+  Kurse 301–450 von 1177 …
+  Kurse 451–600 von 1177 …
+$ECV.DE: No data found, symbol may be delisted
+
+1 Failed download:
+['ECV.DE']: No data found, symbol may be delisted
+  Kurse 601–750 von 1177 …
+  Kurse 751–900 von 1177 …
+  Kurse 901–1050 von 1177 …
+  Kurse 1051–1177 von 1177 …
+   2 Titel mit ≥10 % Verlust an der Heimatbörse (Vorauswahl)
+
+3) Stammdaten & Marktkapitalisierung …
+  4004.T     Resonac Holdings Corporation
+  CA.PA      Carrefour SA
+
+4) WKN ermitteln …
+
+5) Kurse an deutscher Börse (Stuttgart › Frankfurt › München) …
+  Kurse 1–3 von 3 …
+   1 von 2 Titeln mit deutschem Börsenkurs (Stuttgart: 1, Frankfurt: 0, München: 0)
+   1 Titel erfüllen die Schwelle (≥12 % an deutscher Börse, ≥12 % an der Heimatbörse, falls kein deutscher Kurs)
+
+6) Nachrichten der letzten 24 Std. auswerten …
+
+7) Wochenverläufe laden …
+   1 von 1 Verläufen geladen
+
+=== Kursrutsch ≥12 % in 2 Tagen, Marktkap. > 5 Mrd. € (Stand 21.10.2026 17:01) ===
+
+       Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €) Börse       Land     Kurszeit                                  News
+Carrefour SA 852362    14,14  -13,3 % -12,6 %               10,0 Paris Frankreich 21.10. 16:48 41: Ausverkauf 12, Prognose gesenkt 6
+
+Neu seit letztem Lauf: 1 · angezeigt 1 von 1
+Seite geschrieben: docs/index.html
+Push-Nachricht gesendet.
