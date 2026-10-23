@@ -747,6 +747,7 @@ def write_html(path, df, neu, a, stand, gesamt=None):
     page = f"""<!doctype html>
 <html lang="de"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache"><meta name="scan-id" content="{stand:%Y%m%d%H%M%S}">
 <title>Kursrutsch-Scanner</title>
 <style>
 :root {{ --bg:#f6f6f4; --card:#fff; --text:#1b1b1b; --mut:#6b6b6b; --line:#e4e4e0; --neg:#c62828; --pos:#2e7d32; --acc:#1f5fbf; --chip:#fdecea; --chiptext:#8e1c1c; --de:#1f5fbf; --de-bg:#eaf1fc; --hm:#b45f00; --hm-bg:#fff3e0; }}
@@ -802,6 +803,17 @@ footer {{ color:var(--mut); font-size:12px; margin-top:18px; }}
     Path(path).write_text(page, encoding="utf-8")
 
 
+def push_senden(topic, msg, headers):
+    """Sendet sofort – oder legt die Nachricht in PUSH_FILE ab, damit der Workflow sie erst
+    verschickt, wenn die neue Seite online ist."""
+    ziel = os.environ.get("PUSH_FILE")
+    if ziel:
+        Path(ziel).write_text(json.dumps({"msg": msg, "headers": headers}, ensure_ascii=False), encoding="utf-8")
+        print(f"Push vorbereitet ({ziel}), Versand nach Veröffentlichung der Seite.")
+        return
+    requests.post(f"https://ntfy.sh/{topic}", data=msg.encode("utf-8"), headers=headers, timeout=15)
+
+
 def notify_ruhig(topic, df, gesamt, jetzt, page_url):
     """Tägliche Lebenszeichen-Nachricht, wenn es keine neuen Titel gibt."""
     if df.empty:
@@ -815,7 +827,7 @@ def notify_ruhig(topic, df, gesamt, jetzt, page_url):
     if page_url:
         headers["Click"] = page_url
     try:
-        requests.post(f"https://ntfy.sh/{topic}", data=msg.encode("utf-8"), headers=headers, timeout=15)
+        push_senden(topic, msg, headers)
         print("Info-Nachricht (nichts Neues) gesendet.")
     except Exception as e:
         print(f"Push fehlgeschlagen: {e}")
@@ -832,7 +844,7 @@ def notify(topic, neu_df, page_url):
     if page_url:
         headers["Click"] = page_url
     try:
-        requests.post(f"https://ntfy.sh/{topic}", data=msg.encode("utf-8"), headers=headers, timeout=15)
+        push_senden(topic, msg, headers)
         print("Push-Nachricht gesendet.")
     except Exception as e:
         print(f"Push fehlgeschlagen: {e}")
@@ -936,7 +948,7 @@ def main():
     ap.add_argument("--max", type=int, default=25, help="Höchstens so viele Titel anzeigen (Standard 25)")
     ap.add_argument("--html", help="Ergebnisseite (HTML) hierhin schreiben")
     ap.add_argument("--state", help="Datei, in der die Treffer des letzten Laufs gespeichert werden")
-    ap.add_argument("--einmal-taeglich-ab", type=int, metavar="STUNDE",
+    ap.add_argument("--einmal-taeglich-ab", type=str, metavar="HH:MM",
                     help="Nur laufen, wenn es in Berlin mind. STUNDE Uhr ist und heute noch kein Lauf war")
     a = ap.parse_args()
 
@@ -954,7 +966,8 @@ def main():
         if state.get("letzter_lauf") == str(jetzt.date()):
             print(f"Übersprungen: heute schon gelaufen ({jetzt:%H:%M} Uhr Berlin).")
             return
-        ziel = jetzt.replace(hour=a.einmal_taeglich_ab, minute=0, second=0, microsecond=0)
+        hh, _, mm = str(a.einmal_taeglich_ab).partition(":")
+        ziel = jetzt.replace(hour=int(hh), minute=int(mm or 0), second=0, microsecond=0)
         if jetzt < ziel:
             warte = (ziel - jetzt).total_seconds()
             if warte > 50 * 60:                     # zu früh (z. B. Startzeit für die andere Jahreszeit)

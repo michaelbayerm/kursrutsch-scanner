@@ -2,16 +2,16 @@ name: Kursrutsch-Scanner
 
 on:
   schedule:
-    # GitHub startet geplante Läufe oft 5–30 Min. zu spät. Deshalb wird schon gegen
-    # 16:30 Uhr gestartet; das Skript wartet dann bis genau 17:00 Uhr deutscher Zeit.
-    # Spätere Zeiten sind Reserve, falls GitHub einen Start auslässt. Gescannt wird nur
-    # EINMAL pro Tag, Mo–Fr, nicht an bundesweiten Feiertagen. (Zeiten in UTC)
-    - cron: "27 14 * * 1-5"   # Sommerzeit 16:27 · Winterzeit 15:27 (zu früh, übersprungen)
-    - cron: "42 14 * * 1-5"   # Sommerzeit 16:42
-    - cron: "27 15 * * 1-5"   # Winterzeit 16:27 · Sommerzeit Reserve 17:27
-    - cron: "42 15 * * 1-5"   # Winterzeit 16:42
-    - cron: "17 16 * * 1-5"   # Reserve
-    - cron: "7 17 * * 1-5"    # Reserve
+    # Ziel: Scan startet 19:15 Uhr, Push kommt um 19:30 Uhr (deutsche Zeit), sobald die
+    # neue Seite online ist. GitHub startet geplante Läufe oft 5–30 Min. zu spät, deshalb
+    # wird früher angestoßen und das Skript wartet. Spätere Zeiten = Reserve. Gescannt wird
+    # nur EINMAL pro Tag, Mo–Fr, nicht an bundesweiten Feiertagen. (Zeiten in UTC)
+    - cron: "40 16 * * 1-5"   # Sommerzeit 18:40 · Winterzeit 17:40 (zu früh, übersprungen)
+    - cron: "55 16 * * 1-5"   # Sommerzeit 18:55
+    - cron: "40 17 * * 1-5"   # Winterzeit 18:40 · Sommerzeit Reserve
+    - cron: "55 17 * * 1-5"   # Winterzeit 18:55
+    - cron: "25 18 * * 1-5"   # Reserve
+    - cron: "55 18 * * 1-5"   # Reserve
   workflow_dispatch:        # manueller Start über "Run workflow"
 
 permissions:
@@ -24,7 +24,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 100
     steps:
       - uses: actions/checkout@v5
 
@@ -41,8 +41,9 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
           SCANNER_CACHE: cache
+          PUSH_FILE: ${{ runner.temp }}/push.json
         run: |
-          EXTRA="--einmal-taeglich-ab 17"
+          EXTRA="--einmal-taeglich-ab 19:15"
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then EXTRA=""; fi
           set -o pipefail
           python -u aktien_crash_scanner.py --html docs/index.html --state docs/state.json $EXTRA 2>&1 | tee docs/letzter_lauf.log
@@ -63,3 +64,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs cache
           git diff --cached --quiet || (git commit -m "Scan $(TZ=Europe/Berlin date '+%d.%m.%Y %H:%M')" && (git push || (git pull --rebase -X theirs && git push)))
+
+      - name: Push senden, sobald die Seite online ist
+        if: success()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+        run: |
+          NICHT_VOR="19:30"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then NICHT_VOR=""; fi
+          python -u push_nach_veroeffentlichung.py "${{ runner.temp }}/push.json" docs/index.html $NICHT_VOR
