@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Cache-Control" content="no-cache"><meta name="scan-id" content="20261023171338">
+<meta http-equiv="Cache-Control" content="no-cache"><meta name="scan-id" content="20261023191500">
 <title>Kursrutsch-Scanner</title>
 <style>
 :root { --bg:#f6f6f4; --card:#fff; --text:#1b1b1b; --mut:#6b6b6b; --line:#e4e4e0; --neg:#c62828; --pos:#2e7d32; --acc:#1f5fbf; --chip:#fdecea; --chiptext:#8e1c1c; --de:#1f5fbf; --de-bg:#eaf1fc; --hm:#b45f00; --hm-bg:#fff3e0; }
@@ -29,7 +29,8 @@ h1 { font-size:22px; margin:4px 0 2px; }
 .titel { color:inherit; text-decoration:none; }
 .news { border-top:1px solid var(--line); margin-top:10px; padding-top:8px; }
 .chart { margin-top:10px; }
-.chart svg { display:block; width:100%; height:56px; margin-top:3px; }
+.chart svg { display:block; width:100%; height:120px; margin:2px 0; background:var(--bg); border-radius:6px; }
+.achse { display:flex; justify-content:space-between; color:var(--mut); font-size:11px; font-variant-numeric:tabular-nums; }
 .chips { display:flex; flex-wrap:wrap; gap:5px; margin:5px 0 6px; }
 .chip { font-size:12px; padding:2px 8px; border-radius:99px; background:var(--chip); color:var(--chiptext); }
 .chip b { font-weight:700; }
@@ -47,7 +48,7 @@ footer { color:var(--mut); font-size:12px; margin-top:18px; }
 </style></head>
 <body><main>
 <h1>Kursrutsch-Scanner</h1>
-<div class="meta">Kriterium „Rutsch“: aktueller Kurs gegenüber dem höchsten Schlusskurs der letzten 2 Handelstage – ≥ 12 % an deutscher Börse (≥ 12 % an der Heimatbörse, wenn es keinen deutschen Kurs gibt) · Marktkap. &gt; 5 Mrd. € · Stand 23.10.2026, 17:13 Uhr · 7 Treffer (neue zuerst, dann nach Tagesminus)</div>
+<div class="meta">Kriterium „Rutsch“: aktueller Kurs gegenüber dem höchsten Schlusskurs der letzten 2 Handelstage – ≥ 12 % an deutscher Börse (≥ 12 % an der Heimatbörse, wenn es keinen deutschen Kurs gibt) · Marktkap. &gt; 5 Mrd. € · Stand 23.10.2026, 19:15 Uhr · 7 Treffer (neue zuerst, dann nach Tagesminus)</div>
 <div class="legende"><span class="q-de mini">Deutsche Börse</span> Kurs, Veränderungen und Wochenverlauf von Stuttgart, Frankfurt oder München, in €.
 <span class="q-heim mini">Ausweichkurs</span> kein brauchbarer deutscher Kurs – Werte von der Heimatbörse, in € umgerechnet.</div>
 
@@ -57,23 +58,25 @@ footer { color:var(--mut); font-size:12px; margin-top:18px; }
   <div class="sub2">Aerospace &amp; Defense</div>
   <div class="q-heim"><b>⚠ Ausweichkurs: Paris (Heimatbörse)</b>Kurs, Veränderungen und Wochenverlauf von dort, in € umgerechnet.<span class="grund">Grund: Stuttgart: keine Kursdaten; Frankfurt: keine Kursdaten; München: keine Kursdaten</span></div>
   <div class="werte">
-    <div><span class="lbl">Kurs Paris (umgerechnet) · 23.10. 17:00</span><span class="val">273,60 €</span></div>
-    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-12,8 %</b></span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-9,4 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-13,7 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">113,4 Mrd €</span></div>
+    <div><span class="lbl">Kurs Paris (umgerechnet) · 23.10. 17:39</span><span class="val">271,80 €</span></div>
+    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-13,4 %</b></span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-10,0 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-14,3 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">112,5 Mrd €</span></div>
   </div>
   <div class="chart">
-    <div class="lbl">Wochenverlauf Paris (umgerechnet) 19.10. – 23.10. · gestrichelt = Kurs vor 1 Woche</div>
-    <svg viewBox="0 0 300 56" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
-      <polygon points="4.0,52 4.0,10.9 10.6,11.4 17.3,10.4 23.9,10.0 30.5,9.3 37.2,7.9 43.8,8.2 50.5,7.7 57.1,5.6 63.7,11.1 70.4,11.1 77.0,11.2 83.6,14.4 90.3,15.1 96.9,14.8 103.5,10.9 110.2,5.0 116.8,8.1 123.5,9.6 130.1,9.8 136.7,9.0 143.4,9.2 150.0,8.7 156.6,7.6 163.3,6.2 169.9,9.7 176.5,8.1 183.2,15.1 189.8,14.9 196.5,14.6 203.1,13.8 209.7,12.9 216.4,14.7 223.0,15.4 229.6,17.7 236.3,19.3 242.9,43.6 249.5,45.2 256.2,50.6 262.8,49.6 269.5,48.0 276.1,49.6 282.7,50.4 289.4,52.0 296.0,51.6 296.0,52" fill="var(--neg)" opacity="0.12"/>
-      <line x1="4" x2="296" y1="4.0" y2="4.0" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
-      <polyline points="4.0,10.9 10.6,11.4 17.3,10.4 23.9,10.0 30.5,9.3 37.2,7.9 43.8,8.2 50.5,7.7 57.1,5.6 63.7,11.1 70.4,11.1 77.0,11.2 83.6,14.4 90.3,15.1 96.9,14.8 103.5,10.9 110.2,5.0 116.8,8.1 123.5,9.6 130.1,9.8 136.7,9.0 143.4,9.2 150.0,8.7 156.6,7.6 163.3,6.2 169.9,9.7 176.5,8.1 183.2,15.1 189.8,14.9 196.5,14.6 203.1,13.8 209.7,12.9 216.4,14.7 223.0,15.4 229.6,17.7 236.3,19.3 242.9,43.6 249.5,45.2 256.2,50.6 262.8,49.6 269.5,48.0 276.1,49.6 282.7,50.4 289.4,52.0 296.0,51.6" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-      <circle cx="296.0" cy="51.6" r="2.6" fill="var(--neg)"/>
+    <div class="lbl">Verlauf letzte 3 Handelstage Paris (umgerechnet) (21.10. · 22.10. · 23.10.) · gestrichelt = Schlusskurs davor</div>
+    <div class="achse"><span>Hoch 315,00 €</span><span>-13,5 % in 3 Tagen</span></div>
+    <svg viewBox="0 0 300 120" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
+      <polygon points="5.0,115 5.0,11.0 10.8,12.5 16.6,12.0 22.4,13.0 28.2,10.5 34.0,11.2 39.8,13.0 45.6,11.7 51.4,12.7 57.2,10.5 63.0,11.2 68.8,8.0 74.6,6.7 80.4,5.0 86.2,9.5 92.0,12.7 97.8,9.2 103.6,26.2 109.4,25.0 115.2,25.0 121.0,24.5 126.8,22.7 132.6,23.7 138.4,23.0 144.2,22.0 150.0,21.0 155.8,20.0 161.6,20.2 167.4,24.0 173.2,22.0 179.0,25.7 184.8,33.2 190.6,30.7 196.4,34.4 202.2,84.6 208.0,88.8 213.8,87.8 219.6,92.6 225.4,98.8 231.2,104.5 237.0,100.0 242.8,102.3 248.6,100.8 254.4,98.8 260.2,104.8 266.0,102.3 271.8,109.3 277.6,104.3 283.4,105.3 289.2,107.8 295.0,115.0 295.0,115" fill="var(--neg)" opacity="0.12"/>
+      <line x1="5" x2="295" y1="9.2" y2="9.2" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
+      <polyline points="5.0,11.0 10.8,12.5 16.6,12.0 22.4,13.0 28.2,10.5 34.0,11.2 39.8,13.0 45.6,11.7 51.4,12.7 57.2,10.5 63.0,11.2 68.8,8.0 74.6,6.7 80.4,5.0 86.2,9.5 92.0,12.7 97.8,9.2 103.6,26.2 109.4,25.0 115.2,25.0 121.0,24.5 126.8,22.7 132.6,23.7 138.4,23.0 144.2,22.0 150.0,21.0 155.8,20.0 161.6,20.2 167.4,24.0 173.2,22.0 179.0,25.7 184.8,33.2 190.6,30.7 196.4,34.4 202.2,84.6 208.0,88.8 213.8,87.8 219.6,92.6 225.4,98.8 231.2,104.5 237.0,100.0 242.8,102.3 248.6,100.8 254.4,98.8 260.2,104.8 266.0,102.3 271.8,109.3 277.6,104.3 283.4,105.3 289.2,107.8 295.0,115.0" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <circle cx="295.0" cy="115.0" r="2.6" fill="var(--neg)"/>
     </svg>
+    <div class="achse"><span>Tief 270,90 €</span><span>21.10. 09:00 – 23.10. 17:00 Uhr</span></div>
   </div>
   <div class="news">
-    <div class="lbl">Nachrichten 24 Std. · 32 Artikel</div>
+    <div class="lbl">Nachrichten 24 Std. · 34 Artikel</div>
     <div class="chips"><span class="chip">Quartalszahlen <b>5</b></span><span class="chip">Ausverkauf <b>1</b></span></div>
     <a class="headline" href="https://news.google.com/rss/articles/CBMisgFBVV95cUxOejJsU216cE9EUlItZVpiajRFS0hnekFmb2hKRzc5MnNodWJkNjlVbVhycWFKQmRidC03bjBLbGU0b0NVN1RNQnA3Q0M1djdkNmI1bXlKajVlX2JILTkzQUMxRHFYY0RwWEZDZDhwSXVQQ2ZXSXNsckIxTGVyRHhXeVF3NUw2NFA0ZEZxT1VWRkxTTTRMbHY0b2RhOFIzT1Z3a284Yy1wcjBDNzZYVmtxVVBR?oc=5">Aktien heute: Western Digital zieht an, Safran bricht ein</a><span class="quelle">Wallstreet Online</span>
   </div>
@@ -85,53 +88,27 @@ footer { color:var(--mut); font-size:12px; margin-top:18px; }
   <div class="sub2">Engineering &amp; Construction</div>
   <div class="q-heim"><b>⚠ Ausweichkurs: NYSE (Heimatbörse)</b>Kurs, Veränderungen und Wochenverlauf von dort, in € umgerechnet.<span class="grund">Grund: Stuttgart: keine Kursdaten; Frankfurt: keine Kursdaten; München: keine Kursdaten</span></div>
   <div class="werte">
-    <div><span class="lbl">Kurs NYSE (umgerechnet) · 23.10. 17:15</span><span class="val">1.036,58 €</span></div>
-    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-17,1 %</b></span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-9,2 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-19,3 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">36,3 Mrd €</span></div>
+    <div><span class="lbl">Kurs NYSE (umgerechnet) · 23.10. 19:16</span><span class="val">1.046,33 €</span></div>
+    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-16,4 %</b></span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-8,4 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-18,6 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">36,9 Mrd €</span></div>
   </div>
   <div class="chart">
-    <div class="lbl">Wochenverlauf NYSE (umgerechnet) 16.10. – 23.10. · gestrichelt = Kurs vor 1 Woche</div>
-    <svg viewBox="0 0 300 56" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
-      <polygon points="4.0,52 4.0,8.5 12.6,9.2 21.2,9.8 29.8,11.0 38.4,11.9 46.9,6.5 55.5,4.0 64.1,6.4 72.7,7.4 81.3,7.5 89.9,6.9 98.5,8.3 107.1,12.1 115.6,15.5 124.2,16.4 132.8,17.7 141.4,18.0 150.0,17.9 158.6,17.6 167.2,14.9 175.8,17.6 184.4,17.7 192.9,16.4 201.5,15.4 210.1,15.4 218.7,17.0 227.3,33.0 235.9,33.5 244.5,33.3 253.1,33.1 261.6,34.6 270.2,34.9 278.8,34.2 287.4,52.0 296.0,50.2 296.0,52" fill="var(--neg)" opacity="0.12"/>
-      <line x1="4" x2="296" y1="11.7" y2="11.7" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
-      <polyline points="4.0,8.5 12.6,9.2 21.2,9.8 29.8,11.0 38.4,11.9 46.9,6.5 55.5,4.0 64.1,6.4 72.7,7.4 81.3,7.5 89.9,6.9 98.5,8.3 107.1,12.1 115.6,15.5 124.2,16.4 132.8,17.7 141.4,18.0 150.0,17.9 158.6,17.6 167.2,14.9 175.8,17.6 184.4,17.7 192.9,16.4 201.5,15.4 210.1,15.4 218.7,17.0 227.3,33.0 235.9,33.5 244.5,33.3 253.1,33.1 261.6,34.6 270.2,34.9 278.8,34.2 287.4,52.0 296.0,50.2" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-      <circle cx="296.0" cy="50.2" r="2.6" fill="var(--neg)"/>
+    <div class="lbl">Verlauf letzte 3 Handelstage NYSE (umgerechnet) (21.10. · 22.10. · 23.10.) · gestrichelt = Schlusskurs davor</div>
+    <div class="achse"><span>Hoch 1.422,52 €</span><span>-16,0 % in 3 Tagen</span></div>
+    <svg viewBox="0 0 300 120" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
+      <polygon points="5.0,115 5.0,5.0 13.8,7.5 22.6,9.3 31.4,14.7 40.2,12.2 48.9,15.0 57.7,14.1 66.5,11.6 75.3,12.1 84.1,8.9 92.9,9.0 101.7,8.7 110.5,13.2 119.2,43.0 128.0,56.7 136.8,53.4 145.6,58.0 154.4,57.0 163.2,57.5 172.0,56.5 180.8,57.0 189.5,59.0 198.3,61.3 207.1,63.7 215.9,61.8 224.7,60.0 233.5,115.0 242.3,108.6 251.1,106.1 259.8,95.7 268.6,91.0 277.4,95.2 286.2,96.9 295.0,98.6 295.0,115" fill="var(--neg)" opacity="0.12"/>
+      <line x1="5" x2="295" y1="14.9" y2="14.9" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
+      <polyline points="5.0,5.0 13.8,7.5 22.6,9.3 31.4,14.7 40.2,12.2 48.9,15.0 57.7,14.1 66.5,11.6 75.3,12.1 84.1,8.9 92.9,9.0 101.7,8.7 110.5,13.2 119.2,43.0 128.0,56.7 136.8,53.4 145.6,58.0 154.4,57.0 163.2,57.5 172.0,56.5 180.8,57.0 189.5,59.0 198.3,61.3 207.1,63.7 215.9,61.8 224.7,60.0 233.5,115.0 242.3,108.6 251.1,106.1 259.8,95.7 268.6,91.0 277.4,95.2 286.2,96.9 295.0,98.6" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <circle cx="295.0" cy="98.6" r="2.6" fill="var(--neg)"/>
     </svg>
+    <div class="achse"><span>Tief 1.129,72 €</span><span>21.10. 15:30 – 23.10. 19:00 Uhr</span></div>
   </div>
   <div class="news">
-    <div class="lbl">Nachrichten 24 Std. · 41 Artikel</div>
-    <div class="chips"><span class="chip">Quartalszahlen <b>20</b></span><span class="chip">Übernahme / Fusion <b>1</b></span><span class="chip">Gewinnerwartung <b>1</b></span><span class="chip">Ausverkauf <b>1</b></span></div>
-    <a class="headline" href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxQQVpwS0xxdThOY2hmWHVsclM5ODJRQ3dGVURGQTRHQnMtQTQ4bDE5anczY3l4SVRVZkp1dmw4dGlEcjNCTEdqVEdMbzQ1ZHF5UWl4UUpHLWJiamxBazg3MXJtdmZsX1JiTXlFb3ZXMmZINVlKeDRadVBxUy1ZZU5aOWk5QWdoNFdhOE9V?oc=5">Why Comfort Systems stock is down today after earnings</a><span class="quelle">Opening Bell Daily</span>
-  </div>
-</div>
-
-<div class="card">
-  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=JP3270790003">Kering SA</a></div>
-  <div class="sub">WKN 851223 · CAC 40 · Frankreich · Zyklischer Konsum</div>
-  <div class="sub2">Luxury Goods</div>
-  <div class="q-de"><b>Börse Stuttgart</b>Kurs, Veränderungen und Wochenverlauf von hier, in €</div>
-  <div class="werte">
-    <div><span class="lbl">Kurs Stuttgart · 23.10. 16:55</span><span class="val">179,28 €</span></div>
-    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-17,5 %</b></span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-7,0 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-16,0 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">22,0 Mrd €</span></div>
-  </div>
-  <div class="chart">
-    <div class="lbl">Wochenverlauf Stuttgart 16.10. – 23.10. · gestrichelt = Kurs vor 1 Woche</div>
-    <svg viewBox="0 0 300 56" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
-      <polygon points="4.0,52 4.0,9.1 8.4,8.7 12.8,10.5 17.3,9.5 21.7,8.6 26.1,7.0 30.5,9.4 35.0,9.2 39.4,9.4 43.8,10.1 48.2,10.8 52.7,10.0 57.1,7.1 61.5,7.7 65.9,8.6 70.4,9.2 74.8,9.1 79.2,9.5 83.6,9.1 88.1,4.1 92.5,6.2 96.9,7.2 101.3,5.2 105.8,6.1 110.2,6.4 114.6,6.5 119.0,4.0 123.5,5.4 127.9,4.7 132.3,4.6 136.7,4.9 141.2,5.1 145.6,5.1 150.0,6.2 154.4,5.9 158.8,5.2 163.3,4.9 167.7,4.9 172.1,4.7 176.5,4.9 181.0,6.2 185.4,5.9 189.8,6.2 194.2,4.4 198.7,4.7 203.1,10.1 207.5,12.7 211.9,13.7 216.4,12.8 220.8,12.2 225.2,9.6 229.6,9.1 234.1,8.7 238.5,17.3 242.9,25.0 247.3,25.8 251.8,29.9 256.2,35.2 260.6,29.9 265.0,41.2 269.5,40.4 273.9,42.0 278.3,43.3 282.7,44.8 287.2,50.5 291.6,51.9 296.0,52.0 296.0,52" fill="var(--neg)" opacity="0.12"/>
-      <line x1="4" x2="296" y1="9.5" y2="9.5" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
-      <polyline points="4.0,9.1 8.4,8.7 12.8,10.5 17.3,9.5 21.7,8.6 26.1,7.0 30.5,9.4 35.0,9.2 39.4,9.4 43.8,10.1 48.2,10.8 52.7,10.0 57.1,7.1 61.5,7.7 65.9,8.6 70.4,9.2 74.8,9.1 79.2,9.5 83.6,9.1 88.1,4.1 92.5,6.2 96.9,7.2 101.3,5.2 105.8,6.1 110.2,6.4 114.6,6.5 119.0,4.0 123.5,5.4 127.9,4.7 132.3,4.6 136.7,4.9 141.2,5.1 145.6,5.1 150.0,6.2 154.4,5.9 158.8,5.2 163.3,4.9 167.7,4.9 172.1,4.7 176.5,4.9 181.0,6.2 185.4,5.9 189.8,6.2 194.2,4.4 198.7,4.7 203.1,10.1 207.5,12.7 211.9,13.7 216.4,12.8 220.8,12.2 225.2,9.6 229.6,9.1 234.1,8.7 238.5,17.3 242.9,25.0 247.3,25.8 251.8,29.9 256.2,35.2 260.6,29.9 265.0,41.2 269.5,40.4 273.9,42.0 278.3,43.3 282.7,44.8 287.2,50.5 291.6,51.9 296.0,52.0" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-      <circle cx="296.0" cy="52.0" r="2.6" fill="var(--neg)"/>
-    </svg>
-  </div>
-  <div class="news">
-    <div class="lbl">Nachrichten 24 Std. · 57 Artikel</div>
-    <div class="chips"><span class="chip">Ausverkauf <b>15</b></span><span class="chip">Quartalszahlen <b>9</b></span><span class="chip">Erwartungen verfehlt <b>2</b></span></div>
-    <a class="headline" href="https://news.google.com/rss/articles/CBMi7gFBVV95cUxQV1F4Z0RpQklISEVfMWpKNjdSX0NZdldpN0lyZ3p2UlJpc2dZc2pfaGNzTXpvRUhTdzQ5UFk2bk5pdWpyY1RsZkV4MTFDcjQ1UXhramNfUlMtdnFxc2VQTVVwNlljc25IZDduenlGb2FqR1BLdGswbWo2WGQtRk9yUl9XWHVQNHhtMVY0ZXo2bm1zYnF3aU9rbGFPNDdYVXRrZjNEYVcxSFlRd2owSmtZcG5hSHJha0t6b0hzZFBac29ZaU5UdFhRaUd4Q19acTNYNWF1NTRheVZJcGpDQ2hrcWE3Nzczbk1jR3FIYVJB?oc=5">Kering-Aktie: Umsatz sinkt im dritten Quartal um 1,00 Prozent. Kering-Aktie fällt 16,21 Prozent</a><span class="quelle">AD HOC NEWS</span>
+    <div class="lbl">Nachrichten 24 Std. · 50 Artikel</div>
+    <div class="chips"><span class="chip">Quartalszahlen <b>26</b></span><span class="chip">Ausverkauf <b>2</b></span><span class="chip">Übernahme / Fusion <b>1</b></span><span class="chip">Gewinnerwartung <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQMHNEM0J6MFJXVWxkQnN5U0daZW5RQkVUMVpQcDNWNWxQbEJNeGU3VGlQOXkwUGZicktTOXlPMzhOUlVKNUVMVnpCc3g5QUdYTk5fTUNTd2xvUVBBcmc1bkpzaVBCQ2g0RHlvalExY1Byd1FxWm9KNGM4TWFQQTVEaWZIU3h6TTFkT0pBZnp1dGxWU1BzWFJ6T09leUQzcEcyT3M0RmJtU1RDOFVOcDMxT0dfUi02Q1ozb3d0OXhwcV9nUQ?oc=5">Comfort Systems USA (NYSE:FIX) Shares Gap Down - Here&#x27;s What Happened</a><span class="quelle">MarketBeat</span>
   </div>
 </div>
 
@@ -141,25 +118,57 @@ footer { color:var(--mut); font-size:12px; margin-top:18px; }
   <div class="sub2">Electrical Equipment &amp; Parts</div>
   <div class="q-de"><b>Börse Frankfurt</b>Kurs, Veränderungen und Wochenverlauf von hier, in €<span class="grund">Stuttgart nicht verwendet: keine Kursdaten</span></div>
   <div class="werte">
-    <div><span class="lbl">Kurs Frankfurt · 23.10. 16:47</span><span class="val">175,60 €</span></div>
-    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-18,5 %</b></span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-6,3 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-11,8 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">50,9 Mrd €</span></div>
+    <div><span class="lbl">Kurs Frankfurt · 23.10. 18:28</span><span class="val">173,00 €</span></div>
+    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-19,7 %</b></span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-7,7 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-13,1 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">49,9 Mrd €</span></div>
   </div>
   <div class="chart">
-    <div class="lbl">Wochenverlauf Frankfurt 16.10. – 23.10. · gestrichelt = Kurs vor 1 Woche</div>
-    <svg viewBox="0 0 300 56" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
-      <polygon points="4.0,52 4.0,22.6 12.3,22.6 20.7,23.8 29.0,13.0 37.4,9.4 45.7,15.4 54.1,10.6 62.4,5.8 70.7,17.8 79.1,21.4 87.4,13.6 95.8,21.4 104.1,24.9 112.5,24.2 120.8,29.7 129.1,10.6 137.5,8.8 145.8,16.6 154.2,16.6 162.5,11.8 170.9,11.8 179.2,4.0 187.5,19.0 195.9,21.4 204.2,21.4 212.6,19.0 220.9,19.0 229.3,29.5 237.6,30.0 245.9,37.6 254.3,27.3 262.6,24.2 271.0,29.0 279.3,40.5 287.7,52.0 296.0,51.8 296.0,52" fill="var(--neg)" opacity="0.12"/>
-      <line x1="4" x2="296" y1="23.8" y2="23.8" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
-      <polyline points="4.0,22.6 12.3,22.6 20.7,23.8 29.0,13.0 37.4,9.4 45.7,15.4 54.1,10.6 62.4,5.8 70.7,17.8 79.1,21.4 87.4,13.6 95.8,21.4 104.1,24.9 112.5,24.2 120.8,29.7 129.1,10.6 137.5,8.8 145.8,16.6 154.2,16.6 162.5,11.8 170.9,11.8 179.2,4.0 187.5,19.0 195.9,21.4 204.2,21.4 212.6,19.0 220.9,19.0 229.3,29.5 237.6,30.0 245.9,37.6 254.3,27.3 262.6,24.2 271.0,29.0 279.3,40.5 287.7,52.0 296.0,51.8" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-      <circle cx="296.0" cy="51.8" r="2.6" fill="var(--neg)"/>
+    <div class="lbl">Verlauf letzte 3 Handelstage Frankfurt (21.10. · 22.10. · 23.10.) · gestrichelt = Schlusskurs davor</div>
+    <div class="achse"><span>Hoch 215,50 €</span><span>-10,8 % in 3 Tagen</span></div>
+    <svg viewBox="0 0 300 120" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
+      <polygon points="5.0,115 5.0,18.5 16.2,14.8 27.3,30.7 38.5,30.7 49.6,20.9 60.8,20.9 71.9,5.0 83.1,35.6 94.2,40.5 105.4,43.5 116.5,40.5 127.7,35.6 138.8,35.6 150.0,57.2 161.2,58.2 172.3,73.8 183.5,55.2 194.6,52.8 205.8,46.4 216.9,56.2 228.1,79.7 239.2,79.7 250.4,103.2 261.5,106.7 272.7,102.8 283.8,115.0 295.0,109.1 295.0,115" fill="var(--neg)" opacity="0.12"/>
+      <line x1="5" x2="295" y1="57.7" y2="57.7" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
+      <polyline points="5.0,18.5 16.2,14.8 27.3,30.7 38.5,30.7 49.6,20.9 60.8,20.9 71.9,5.0 83.1,35.6 94.2,40.5 105.4,43.5 116.5,40.5 127.7,35.6 138.8,35.6 150.0,57.2 161.2,58.2 172.3,73.8 183.5,55.2 194.6,52.8 205.8,46.4 216.9,56.2 228.1,79.7 239.2,79.7 250.4,103.2 261.5,106.7 272.7,102.8 283.8,115.0 295.0,109.1" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <circle cx="295.0" cy="109.1" r="2.6" fill="var(--neg)"/>
     </svg>
+    <div class="achse"><span>Tief 170,60 €</span><span>21.10. 08:00 – 23.10. 18:00 Uhr</span></div>
   </div>
   <div class="news">
-    <div class="lbl">Nachrichten 24 Std. · 117 Artikel</div>
-    <div class="chips"><span class="chip">Quartalszahlen <b>52</b></span><span class="chip">Ausverkauf <b>9</b></span><span class="chip">Gewinnerwartung <b>6</b></span><span class="chip">Abstufung / Kursziel ↓ <b>1</b></span></div>
-    <a class="headline" href="https://news.google.com/rss/articles/CBMihwFBVV95cUxQRDI3YUtvQ3RWclFESkdlUjFfaWxydkhiWkxac2NxRlBnZHJmY0tYLTZBSWhYdDNRRHpVbFpmUG1XdGdBWXVMYWl6LWgyQ3dFanN5THV4R0w1UFJUdnItWUprSm9iVjFKRlZRU3hvRVVQZ3FkdlJ2aG1UN2lhcTI3TGRBWDJYWkk?oc=5">Why Bloom Energy stock is down today after a record quarter</a><span class="quelle">Opening Bell Daily</span>
+    <div class="lbl">Nachrichten 24 Std. · 118 Artikel</div>
+    <div class="chips"><span class="chip">Quartalszahlen <b>53</b></span><span class="chip">Ausverkauf <b>9</b></span><span class="chip">Gewinnerwartung <b>5</b></span><span class="chip">Abstufung / Kursziel ↓ <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMi3AFBVV95cUxNWkxhaUo0VG52aFJwdnFSQW1odEFZR0hvX2J5UUhXaE9DNzBHRkpJRVY2VzJEWDZpazZBbzJMSE1KVEUtb2VlQ2J0emdGbVgzTEhpa0Q3cDlYMWp5cktHaTJuMmktY18zNEdGV0lKOHdLVEhHZXZyQUtFbXVMQ1daVDRnQTBCZFpfcmJROU1mclg4TzVyZDFLTTBzdHF6R19SU0UySjB1bURHUzlpbmEtTVhZUk1vUHRHdk9UV3VLRnByUno4QllwLUtERG9nZk5rVlYxRjl4azVtWnNw?oc=5">JPMorgan Chase &amp; Co. Issues Pessimistic Forecast for Bloom Energy (NYSE:BE) Stock Price</a><span class="quelle">MarketBeat</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="kopf"><a class="titel" href="https://www.onvista.de/suche/?searchValue=JP3270790003">Kering SA</a></div>
+  <div class="sub">WKN 851223 · CAC 40 · Frankreich · Zyklischer Konsum</div>
+  <div class="sub2">Luxury Goods</div>
+  <div class="q-de"><b>Börse Stuttgart</b>Kurs, Veränderungen und Wochenverlauf von hier, in €</div>
+  <div class="werte">
+    <div><span class="lbl">Kurs Stuttgart · 23.10. 19:01</span><span class="val">179,60 €</span></div>
+    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-17,4 %</b></span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-6,8 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-15,8 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">21,8 Mrd €</span></div>
+  </div>
+  <div class="chart">
+    <div class="lbl">Verlauf letzte 3 Handelstage Stuttgart (21.10. · 22.10. · 23.10.) · gestrichelt = Schlusskurs davor</div>
+    <div class="achse"><span>Hoch 217,65 €</span><span>-17,2 % in 3 Tagen</span></div>
+    <svg viewBox="0 0 300 120" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
+      <polygon points="5.0,115 5.0,6.8 9.1,7.0 13.2,12.1 17.3,9.6 21.3,8.3 25.4,8.9 29.5,9.1 33.6,7.4 37.7,10.3 41.8,6.6 45.8,6.4 49.9,6.6 54.0,6.2 58.1,6.2 62.2,6.2 66.3,6.6 70.4,8.1 74.4,9.6 78.5,7.7 82.6,8.8 86.7,9.5 90.8,9.5 94.9,9.1 98.9,5.7 103.0,5.0 107.1,6.4 111.2,17.9 115.3,21.3 119.4,23.6 123.5,23.6 127.5,25.8 131.6,25.5 135.7,23.9 139.8,24.3 143.9,22.5 148.0,19.4 152.0,17.0 156.1,18.6 160.2,15.9 164.3,14.8 168.4,15.1 172.5,15.3 176.5,33.7 180.6,50.1 184.7,50.6 188.8,52.3 192.9,61.2 197.0,74.8 201.1,72.8 205.1,61.1 209.2,61.2 213.3,81.9 217.4,85.8 221.5,84.3 225.6,84.2 229.6,85.4 233.7,87.5 237.8,90.9 241.9,90.5 246.0,91.9 250.1,93.6 254.2,103.9 258.2,106.1 262.3,111.4 266.4,109.0 270.5,115.0 274.6,109.3 278.7,109.2 282.7,112.4 286.8,107.7 290.9,107.2 295.0,108.5 295.0,115" fill="var(--neg)" opacity="0.12"/>
+      <line x1="5" x2="295" y1="7.0" y2="7.0" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
+      <polyline points="5.0,6.8 9.1,7.0 13.2,12.1 17.3,9.6 21.3,8.3 25.4,8.9 29.5,9.1 33.6,7.4 37.7,10.3 41.8,6.6 45.8,6.4 49.9,6.6 54.0,6.2 58.1,6.2 62.2,6.2 66.3,6.6 70.4,8.1 74.4,9.6 78.5,7.7 82.6,8.8 86.7,9.5 90.8,9.5 94.9,9.1 98.9,5.7 103.0,5.0 107.1,6.4 111.2,17.9 115.3,21.3 119.4,23.6 123.5,23.6 127.5,25.8 131.6,25.5 135.7,23.9 139.8,24.3 143.9,22.5 148.0,19.4 152.0,17.0 156.1,18.6 160.2,15.9 164.3,14.8 168.4,15.1 172.5,15.3 176.5,33.7 180.6,50.1 184.7,50.6 188.8,52.3 192.9,61.2 197.0,74.8 201.1,72.8 205.1,61.1 209.2,61.2 213.3,81.9 217.4,85.8 221.5,84.3 225.6,84.2 229.6,85.4 233.7,87.5 237.8,90.9 241.9,90.5 246.0,91.9 250.1,93.6 254.2,103.9 258.2,106.1 262.3,111.4 266.4,109.0 270.5,115.0 274.6,109.3 278.7,109.2 282.7,112.4 286.8,107.7 290.9,107.2 295.0,108.5" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <circle cx="295.0" cy="108.5" r="2.6" fill="var(--neg)"/>
+    </svg>
+    <div class="achse"><span>Tief 177,20 €</span><span>21.10. 08:00 – 23.10. 19:00 Uhr</span></div>
+  </div>
+  <div class="news">
+    <div class="lbl">Nachrichten 24 Std. · 63 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>18</b></span><span class="chip">Quartalszahlen <b>5</b></span><span class="chip">Erwartungen verfehlt <b>3</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMigAFBVV95cUxNS1dwMVlhMTh5NnJ4ZXZhVGpON29aNEs0Q1QxbFhqWThrSkxOdWZsZk1KWXRWTVZjLTlUY0Z3ekNqVl9HWjJXOUhHNWtONmFNWlpScXhyQVp1UU5oSzdyWEdGNDVfbjVveUFaOU5QZzlvc3RzZVFrRU9odEtkLXZSSw?oc=5">Must Read: Kering Shares Fall 12% on Sales Drop, Gap Inc. To Receive Innovation Award</a><span class="quelle">Fashionista</span>
   </div>
 </div>
 
@@ -169,23 +178,25 @@ footer { color:var(--mut); font-size:12px; margin-top:18px; }
   <div class="sub2">Chemicals</div>
   <div class="q-de"><b>Börse Stuttgart</b>Kurs, Veränderungen und Wochenverlauf von hier, in €</div>
   <div class="werte">
-    <div><span class="lbl">Kurs Stuttgart · 23.10. 16:33</span><span class="val">71,50 €</span></div>
+    <div><span class="lbl">Kurs Stuttgart · 23.10. 18:47</span><span class="val">71,50 €</span></div>
     <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-13,3 %</b></span></div>
     <div><span class="lbl">Intraday</span><span class="val neg">-1,4 %</span></div>
     <div><span class="lbl">1 Woche</span><span class="val neg">-12,3 %</span></div>
     <div><span class="lbl">Marktkap.</span><span class="val">13,9 Mrd €</span></div>
   </div>
   <div class="chart">
-    <div class="lbl">Wochenverlauf Stuttgart 16.10. – 23.10. · gestrichelt = Kurs vor 1 Woche</div>
-    <svg viewBox="0 0 300 56" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
-      <polygon points="4.0,52 4.0,13.6 9.3,13.6 14.6,13.6 19.9,20.0 25.2,4.0 30.5,4.0 35.9,4.0 41.2,4.0 46.5,4.0 51.8,4.0 57.1,4.0 62.4,4.0 67.7,34.4 73.0,34.4 78.3,24.8 83.6,31.2 88.9,28.0 94.3,28.0 99.6,28.0 104.9,28.0 110.2,20.0 115.5,20.0 120.8,20.0 126.1,20.0 131.4,18.4 136.7,18.4 142.0,16.8 147.3,16.8 152.7,16.8 158.0,15.2 163.3,16.8 168.6,16.8 173.9,16.8 179.2,16.8 184.5,44.0 189.8,48.8 195.1,48.8 200.4,47.2 205.7,47.2 211.1,47.2 216.4,47.2 221.7,48.8 227.0,48.8 232.3,50.4 237.6,48.8 242.9,48.8 248.2,48.8 253.5,50.4 258.8,50.4 264.1,52.0 269.5,52.0 274.8,52.0 280.1,52.0 285.4,52.0 290.7,52.0 296.0,52.0 296.0,52" fill="var(--neg)" opacity="0.12"/>
-      <line x1="4" x2="296" y1="20.0" y2="20.0" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
-      <polyline points="4.0,13.6 9.3,13.6 14.6,13.6 19.9,20.0 25.2,4.0 30.5,4.0 35.9,4.0 41.2,4.0 46.5,4.0 51.8,4.0 57.1,4.0 62.4,4.0 67.7,34.4 73.0,34.4 78.3,24.8 83.6,31.2 88.9,28.0 94.3,28.0 99.6,28.0 104.9,28.0 110.2,20.0 115.5,20.0 120.8,20.0 126.1,20.0 131.4,18.4 136.7,18.4 142.0,16.8 147.3,16.8 152.7,16.8 158.0,15.2 163.3,16.8 168.6,16.8 173.9,16.8 179.2,16.8 184.5,44.0 189.8,48.8 195.1,48.8 200.4,47.2 205.7,47.2 211.1,47.2 216.4,47.2 221.7,48.8 227.0,48.8 232.3,50.4 237.6,48.8 242.9,48.8 248.2,48.8 253.5,50.4 258.8,50.4 264.1,52.0 269.5,52.0 274.8,52.0 280.1,52.0 285.4,52.0 290.7,52.0 296.0,52.0" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-      <circle cx="296.0" cy="52.0" r="2.6" fill="var(--neg)"/>
+    <div class="lbl">Verlauf letzte 3 Handelstage Stuttgart (21.10. · 22.10. · 23.10.) · gestrichelt = Schlusskurs davor</div>
+    <div class="achse"><span>Hoch 83,00 €</span><span>-9,5 % in 3 Tagen</span></div>
+    <svg viewBox="0 0 300 120" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
+      <polygon points="5.0,115 5.0,24.1 8.8,19.3 12.6,19.3 16.4,19.3 20.3,19.3 24.1,19.3 27.9,19.3 31.7,19.3 35.5,19.3 39.3,14.6 43.2,14.6 47.0,14.6 50.8,14.6 54.6,9.8 58.4,9.8 62.2,9.8 66.1,14.6 69.9,9.8 73.7,9.8 77.5,5.0 81.3,9.8 85.1,9.8 88.9,9.8 92.8,9.8 96.6,9.8 100.4,9.8 104.2,9.8 108.0,9.8 111.8,86.3 115.7,91.1 119.5,105.4 123.3,105.4 127.1,105.4 130.9,105.4 134.7,105.4 138.6,100.7 142.4,100.7 146.2,100.7 150.0,100.7 153.8,100.7 157.6,100.7 161.4,100.7 165.3,100.7 169.1,105.4 172.9,105.4 176.7,105.4 180.5,105.4 184.3,110.2 188.2,105.4 192.0,105.4 195.8,105.4 199.6,105.4 203.4,105.4 207.2,105.4 211.1,110.2 214.9,110.2 218.7,110.2 222.5,110.2 226.3,115.0 230.1,115.0 233.9,115.0 237.8,115.0 241.6,115.0 245.4,115.0 249.2,115.0 253.0,115.0 256.8,115.0 260.7,115.0 264.5,115.0 268.3,115.0 272.1,115.0 275.9,115.0 279.7,115.0 283.6,115.0 287.4,115.0 291.2,115.0 295.0,115.0 295.0,115" fill="var(--neg)" opacity="0.12"/>
+      <line x1="5" x2="295" y1="43.3" y2="43.3" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
+      <polyline points="5.0,24.1 8.8,19.3 12.6,19.3 16.4,19.3 20.3,19.3 24.1,19.3 27.9,19.3 31.7,19.3 35.5,19.3 39.3,14.6 43.2,14.6 47.0,14.6 50.8,14.6 54.6,9.8 58.4,9.8 62.2,9.8 66.1,14.6 69.9,9.8 73.7,9.8 77.5,5.0 81.3,9.8 85.1,9.8 88.9,9.8 92.8,9.8 96.6,9.8 100.4,9.8 104.2,9.8 108.0,9.8 111.8,86.3 115.7,91.1 119.5,105.4 123.3,105.4 127.1,105.4 130.9,105.4 134.7,105.4 138.6,100.7 142.4,100.7 146.2,100.7 150.0,100.7 153.8,100.7 157.6,100.7 161.4,100.7 165.3,100.7 169.1,105.4 172.9,105.4 176.7,105.4 180.5,105.4 184.3,110.2 188.2,105.4 192.0,105.4 195.8,105.4 199.6,105.4 203.4,105.4 207.2,105.4 211.1,110.2 214.9,110.2 218.7,110.2 222.5,110.2 226.3,115.0 230.1,115.0 233.9,115.0 237.8,115.0 241.6,115.0 245.4,115.0 249.2,115.0 253.0,115.0 256.8,115.0 260.7,115.0 264.5,115.0 268.3,115.0 272.1,115.0 275.9,115.0 279.7,115.0 283.6,115.0 287.4,115.0 291.2,115.0 295.0,115.0" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <circle cx="295.0" cy="115.0" r="2.6" fill="var(--neg)"/>
     </svg>
+    <div class="achse"><span>Tief 71,50 €</span><span>21.10. 08:00 – 23.10. 19:00 Uhr</span></div>
   </div>
   <div class="news">
-    <div class="lbl">Nachrichten 24 Std. · 4 Artikel</div>
+    <div class="lbl">Nachrichten 24 Std. · 5 Artikel</div>
     <div class="chips"><span class="chip leise">keine Signalwörter</span></div>
     <a class="headline" href="https://news.google.com/rss/articles/CBMikgFBVV95cUxQcHJSeUtPbGRKMzlaVWZUNEdqcGlSSG9HWDlnbE5rVUpkR1JHZnIxZlBnQ0NaVnFvMXNxSGM5V25ZQVFmc0k5dENjc3ZEOUZWcmlRUF80UVhWckdPcTdia1BUTzFmcTllM0RSRUdFQjVwTGMtQThIR0x2bndaYWk2ZEEzQnFjMDU1NGpTTEFfbzl3UQ?oc=5">Sika Aktie News: Sika am Freitagmittag mit Kursabschlägen</a><span class="quelle">finanzen.ch</span>
   </div>
@@ -197,25 +208,27 @@ footer { color:var(--mut); font-size:12px; margin-top:18px; }
   <div class="sub2">Computer Hardware</div>
   <div class="q-de"><b>Börse Stuttgart</b>Kurs, Veränderungen und Wochenverlauf von hier, in €</div>
   <div class="werte">
-    <div><span class="lbl">Kurs Stuttgart · 23.10. 16:33</span><span class="val">2,56 €</span></div>
-    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-13,8 %</b></span></div>
-    <div><span class="lbl">Intraday</span><span class="val neg">-1,3 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-17,2 %</span></div>
+    <div><span class="lbl">Kurs Stuttgart · 23.10. 19:02</span><span class="val">2,59 €</span></div>
+    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-13,0 %</b></span></div>
+    <div><span class="lbl">Intraday</span><span class="val neg">-0,4 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-16,3 %</span></div>
     <div><span class="lbl">Marktkap.</span><span class="val">32,0 Mrd €</span></div>
   </div>
   <div class="chart">
-    <div class="lbl">Wochenverlauf Stuttgart 16.10. – 23.10. · gestrichelt = Kurs vor 1 Woche</div>
-    <svg viewBox="0 0 300 56" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
-      <polygon points="4.0,52 4.0,5.1 8.3,5.9 12.6,7.8 16.9,10.5 21.2,6.7 25.5,5.9 29.8,5.9 34.1,5.9 38.4,5.9 42.6,5.9 46.9,5.9 51.2,4.0 55.5,4.8 59.8,5.5 64.1,5.5 68.4,6.7 72.7,7.0 77.0,7.0 81.3,26.9 85.6,27.6 89.9,28.4 94.2,28.0 98.5,28.4 102.8,28.4 107.1,28.4 111.4,27.2 115.6,25.7 119.9,25.7 124.2,25.7 128.5,25.7 132.8,25.7 137.1,24.6 141.4,22.3 145.7,22.3 150.0,22.7 154.3,22.3 158.6,22.7 162.9,22.7 167.2,22.3 171.5,21.9 175.8,21.5 180.1,19.2 184.4,20.8 188.6,20.4 192.9,20.4 197.2,19.6 201.5,47.8 205.8,47.0 210.1,46.7 214.4,46.7 218.7,47.8 223.0,47.4 227.3,48.2 231.6,45.5 235.9,47.0 240.2,47.0 244.5,47.0 248.8,47.0 253.1,47.0 257.4,48.2 261.6,49.7 265.9,49.3 270.2,50.1 274.5,50.5 278.8,50.5 283.1,52.0 287.4,51.6 291.7,51.6 296.0,50.9 296.0,52" fill="var(--neg)" opacity="0.12"/>
-      <line x1="4" x2="296" y1="10.5" y2="10.5" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
-      <polyline points="4.0,5.1 8.3,5.9 12.6,7.8 16.9,10.5 21.2,6.7 25.5,5.9 29.8,5.9 34.1,5.9 38.4,5.9 42.6,5.9 46.9,5.9 51.2,4.0 55.5,4.8 59.8,5.5 64.1,5.5 68.4,6.7 72.7,7.0 77.0,7.0 81.3,26.9 85.6,27.6 89.9,28.4 94.2,28.0 98.5,28.4 102.8,28.4 107.1,28.4 111.4,27.2 115.6,25.7 119.9,25.7 124.2,25.7 128.5,25.7 132.8,25.7 137.1,24.6 141.4,22.3 145.7,22.3 150.0,22.7 154.3,22.3 158.6,22.7 162.9,22.7 167.2,22.3 171.5,21.9 175.8,21.5 180.1,19.2 184.4,20.8 188.6,20.4 192.9,20.4 197.2,19.6 201.5,47.8 205.8,47.0 210.1,46.7 214.4,46.7 218.7,47.8 223.0,47.4 227.3,48.2 231.6,45.5 235.9,47.0 240.2,47.0 244.5,47.0 248.8,47.0 253.1,47.0 257.4,48.2 261.6,49.7 265.9,49.3 270.2,50.1 274.5,50.5 278.8,50.5 283.1,52.0 287.4,51.6 291.7,51.6 296.0,50.9" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-      <circle cx="296.0" cy="50.9" r="2.6" fill="var(--neg)"/>
+    <div class="lbl">Verlauf letzte 3 Handelstage Stuttgart (21.10. · 22.10. · 23.10.) · gestrichelt = Schlusskurs davor</div>
+    <div class="achse"><span>Hoch 2,97 €</span><span>-11,0 % in 3 Tagen</span></div>
+    <svg viewBox="0 0 300 120" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
+      <polygon points="5.0,115 5.0,8.8 8.7,15.2 12.4,16.5 16.2,15.2 19.9,15.2 23.6,16.5 27.3,15.2 31.0,15.2 34.7,14.0 38.5,16.5 42.2,16.5 45.9,16.5 49.6,15.2 53.3,15.2 57.1,15.2 60.8,14.0 64.5,10.1 68.2,12.7 71.9,12.7 75.6,5.0 79.4,10.1 83.1,10.1 86.8,10.1 90.5,8.8 94.2,8.8 97.9,8.8 101.7,6.3 105.4,6.3 109.1,94.5 112.8,100.9 116.5,100.9 120.3,98.4 124.0,92.0 127.7,97.1 131.4,97.1 135.1,97.1 138.8,100.9 142.6,100.9 146.3,99.7 150.0,99.7 153.7,102.2 157.4,102.2 161.2,99.7 164.9,93.3 168.6,93.3 172.3,98.4 176.0,90.7 179.7,98.4 183.5,98.4 187.2,98.4 190.9,98.4 194.6,98.4 198.3,98.4 202.1,98.4 205.8,98.4 209.5,102.2 213.2,99.7 216.9,107.3 220.6,106.0 224.4,106.0 228.1,109.9 231.8,108.6 235.5,109.9 239.2,109.9 242.9,109.9 246.7,109.9 250.4,113.7 254.1,115.0 257.8,113.7 261.5,113.7 265.3,113.7 269.0,113.7 272.7,113.7 276.4,111.2 280.1,111.2 283.8,111.2 287.6,109.9 291.3,111.2 295.0,104.8 295.0,115" fill="var(--neg)" opacity="0.12"/>
+      <line x1="5" x2="295" y1="22.9" y2="22.9" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
+      <polyline points="5.0,8.8 8.7,15.2 12.4,16.5 16.2,15.2 19.9,15.2 23.6,16.5 27.3,15.2 31.0,15.2 34.7,14.0 38.5,16.5 42.2,16.5 45.9,16.5 49.6,15.2 53.3,15.2 57.1,15.2 60.8,14.0 64.5,10.1 68.2,12.7 71.9,12.7 75.6,5.0 79.4,10.1 83.1,10.1 86.8,10.1 90.5,8.8 94.2,8.8 97.9,8.8 101.7,6.3 105.4,6.3 109.1,94.5 112.8,100.9 116.5,100.9 120.3,98.4 124.0,92.0 127.7,97.1 131.4,97.1 135.1,97.1 138.8,100.9 142.6,100.9 146.3,99.7 150.0,99.7 153.7,102.2 157.4,102.2 161.2,99.7 164.9,93.3 168.6,93.3 172.3,98.4 176.0,90.7 179.7,98.4 183.5,98.4 187.2,98.4 190.9,98.4 194.6,98.4 198.3,98.4 202.1,98.4 205.8,98.4 209.5,102.2 213.2,99.7 216.9,107.3 220.6,106.0 224.4,106.0 228.1,109.9 231.8,108.6 235.5,109.9 239.2,109.9 242.9,109.9 246.7,109.9 250.4,113.7 254.1,115.0 257.8,113.7 261.5,113.7 265.3,113.7 269.0,113.7 272.7,113.7 276.4,111.2 280.1,111.2 283.8,111.2 287.6,109.9 291.3,111.2 295.0,104.8" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <circle cx="295.0" cy="104.8" r="2.6" fill="var(--neg)"/>
     </svg>
+    <div class="achse"><span>Tief 2,55 €</span><span>21.10. 08:00 – 23.10. 19:00 Uhr</span></div>
   </div>
   <div class="news">
-    <div class="lbl">Nachrichten 24 Std. · 23 Artikel</div>
-    <div class="chips"><span class="chip">Ausverkauf <b>4</b></span><span class="chip">Quartalszahlen <b>1</b></span></div>
-    <a class="headline" href="https://news.google.com/rss/articles/CBMidEFVX3lxTFBFV2dlSGRUM2o3ZTdSc0VNbFdVSGczQkttV0hTSnUtN25iOWlyUzQ5aE1FRmt3SENhdHRXYUNNMVpabjNUX1NCc3pNUWNoQ2ZfTmt4cEZYN0hhTXFuZ05CRzduOEljVUgteXlaMXdJX1NTVFo2?oc=5">Lenovo Group Limited Sponsored ADR Estimates – HAN:LHL1</a><span class="quelle">TradingView</span>
+    <div class="lbl">Nachrichten 24 Std. · 24 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>4</b></span><span class="chip">Kapitalerhöhung <b>2</b></span><span class="chip">Quartalszahlen <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMijgFBVV95cUxQV0l3eFNISlBSSTNtV2FDWmRpZmRDX0xXRnpaZkRfX0xERG9GbUVOek9xWG16VklnVXo1alZGZGpta19sZ3ZXZ0pMRlZYeWFKWFgtM2xOdzRNaWVCbGh1NXlMUEFocnRWQVJvNWZXLW4yRlVNWUNnbkRXdEtpdzVjU2poYVpCcS1MNk14VEpR?oc=5">Lenovo Aktie: Wandelanleihen und Optionsscheine belasten</a><span class="quelle">Finanztrends</span>
   </div>
 </div>
 
@@ -225,25 +238,27 @@ footer { color:var(--mut); font-size:12px; margin-top:18px; }
   <div class="sub2">Biotechnology</div>
   <div class="q-de"><b>Börse Stuttgart</b>Kurs, Veränderungen und Wochenverlauf von hier, in €</div>
   <div class="werte">
-    <div><span class="lbl">Kurs Stuttgart · 23.10. 17:00</span><span class="val">181,62 €</span></div>
-    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-19,6 %</b></span></div>
-    <div><span class="lbl">Intraday</span><span class="val pos">+0,8 %</span></div>
-    <div><span class="lbl">1 Woche</span><span class="val neg">-5,3 %</span></div>
-    <div><span class="lbl">Marktkap.</span><span class="val">71,7 Mrd €</span></div>
+    <div><span class="lbl">Kurs Stuttgart · 23.10. 19:01</span><span class="val">182,94 €</span></div>
+    <div><span class="lbl">Rutsch 2 Tage</span><span class="val neg"><b>-19,0 %</b></span></div>
+    <div><span class="lbl">Intraday</span><span class="val pos">+1,5 %</span></div>
+    <div><span class="lbl">1 Woche</span><span class="val neg">-4,6 %</span></div>
+    <div><span class="lbl">Marktkap.</span><span class="val">72,2 Mrd €</span></div>
   </div>
   <div class="chart">
-    <div class="lbl">Wochenverlauf Stuttgart 16.10. – 23.10. · gestrichelt = Kurs vor 1 Woche</div>
-    <svg viewBox="0 0 300 56" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
-      <polygon points="4.0,52 4.0,16.9 8.2,16.9 12.5,16.9 16.7,29.7 20.9,28.1 25.2,28.3 29.4,30.9 33.6,31.3 37.9,32.3 42.1,29.4 46.3,29.9 50.6,21.8 54.8,23.1 59.0,20.7 63.2,23.0 67.5,23.5 71.7,22.1 75.9,22.3 80.2,22.0 84.4,22.7 88.6,22.6 92.9,22.2 97.1,22.3 101.3,22.4 105.6,22.3 109.8,20.1 114.0,21.5 118.3,18.1 122.5,14.0 126.7,12.2 131.0,12.0 135.2,12.8 139.4,11.8 143.7,12.3 147.9,12.9 152.1,12.6 156.3,11.1 160.6,11.7 164.8,12.9 169.0,8.4 173.3,8.7 177.5,8.5 181.7,7.6 186.0,6.7 190.2,4.0 194.4,4.0 198.7,11.1 202.9,11.4 207.1,12.3 211.4,12.5 215.6,11.7 219.8,11.7 224.1,11.7 228.3,14.7 232.5,17.6 236.8,23.6 241.0,42.5 245.2,52.0 249.4,50.1 253.7,38.5 257.9,39.4 262.1,39.3 266.4,42.1 270.6,42.1 274.8,42.1 279.1,42.1 283.3,42.1 287.5,39.8 291.8,42.1 296.0,37.5 296.0,52" fill="var(--neg)" opacity="0.12"/>
-      <line x1="4" x2="296" y1="29.7" y2="29.7" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
-      <polyline points="4.0,16.9 8.2,16.9 12.5,16.9 16.7,29.7 20.9,28.1 25.2,28.3 29.4,30.9 33.6,31.3 37.9,32.3 42.1,29.4 46.3,29.9 50.6,21.8 54.8,23.1 59.0,20.7 63.2,23.0 67.5,23.5 71.7,22.1 75.9,22.3 80.2,22.0 84.4,22.7 88.6,22.6 92.9,22.2 97.1,22.3 101.3,22.4 105.6,22.3 109.8,20.1 114.0,21.5 118.3,18.1 122.5,14.0 126.7,12.2 131.0,12.0 135.2,12.8 139.4,11.8 143.7,12.3 147.9,12.9 152.1,12.6 156.3,11.1 160.6,11.7 164.8,12.9 169.0,8.4 173.3,8.7 177.5,8.5 181.7,7.6 186.0,6.7 190.2,4.0 194.4,4.0 198.7,11.1 202.9,11.4 207.1,12.3 211.4,12.5 215.6,11.7 219.8,11.7 224.1,11.7 228.3,14.7 232.5,17.6 236.8,23.6 241.0,42.5 245.2,52.0 249.4,50.1 253.7,38.5 257.9,39.4 262.1,39.3 266.4,42.1 270.6,42.1 274.8,42.1 279.1,42.1 283.3,42.1 287.5,39.8 291.8,42.1 296.0,37.5" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-      <circle cx="296.0" cy="37.5" r="2.6" fill="var(--neg)"/>
+    <div class="lbl">Verlauf letzte 3 Handelstage Stuttgart (21.10. · 22.10. · 23.10.) · gestrichelt = Schlusskurs davor</div>
+    <div class="achse"><span>Hoch 225,80 €</span><span>-14,6 % in 3 Tagen</span></div>
+    <svg viewBox="0 0 300 120" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
+      <polygon points="5.0,115 5.0,22.9 8.7,22.9 12.4,24.2 16.2,24.1 19.9,24.9 23.6,25.4 27.3,23.2 31.0,24.7 34.7,23.0 38.5,21.3 42.2,22.7 45.9,22.7 49.6,21.9 53.3,25.5 57.1,23.9 60.8,15.0 64.5,18.4 68.2,15.7 71.9,12.6 75.6,15.3 79.4,15.1 83.1,13.2 86.8,13.6 90.5,11.2 94.2,6.6 97.9,5.1 101.7,5.7 105.4,5.0 109.1,21.2 112.8,21.2 116.5,21.6 120.3,21.9 124.0,21.9 127.7,23.9 131.4,24.0 135.1,24.4 138.8,22.9 142.6,22.7 146.3,22.6 150.0,22.6 153.7,22.6 157.4,22.6 161.2,24.9 164.9,29.5 168.6,30.9 172.3,36.3 176.0,39.6 179.7,50.0 183.5,52.6 187.2,93.2 190.9,105.0 194.6,115.0 198.3,104.4 202.1,110.7 205.8,100.6 209.5,84.2 213.2,86.3 216.9,86.1 220.6,82.5 224.4,85.9 228.1,91.7 231.8,92.4 235.5,92.4 239.2,92.4 242.9,92.4 246.7,92.4 250.4,92.4 254.1,92.4 257.8,92.4 261.5,92.4 265.3,92.4 269.0,87.0 272.7,92.4 276.4,92.4 280.1,82.4 283.8,92.4 287.6,78.4 291.3,79.2 295.0,79.5 295.0,115" fill="var(--neg)" opacity="0.12"/>
+      <line x1="5" x2="295" y1="25.2" y2="25.2" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
+      <polyline points="5.0,22.9 8.7,22.9 12.4,24.2 16.2,24.1 19.9,24.9 23.6,25.4 27.3,23.2 31.0,24.7 34.7,23.0 38.5,21.3 42.2,22.7 45.9,22.7 49.6,21.9 53.3,25.5 57.1,23.9 60.8,15.0 64.5,18.4 68.2,15.7 71.9,12.6 75.6,15.3 79.4,15.1 83.1,13.2 86.8,13.6 90.5,11.2 94.2,6.6 97.9,5.1 101.7,5.7 105.4,5.0 109.1,21.2 112.8,21.2 116.5,21.6 120.3,21.9 124.0,21.9 127.7,23.9 131.4,24.0 135.1,24.4 138.8,22.9 142.6,22.7 146.3,22.6 150.0,22.6 153.7,22.6 157.4,22.6 161.2,24.9 164.9,29.5 168.6,30.9 172.3,36.3 176.0,39.6 179.7,50.0 183.5,52.6 187.2,93.2 190.9,105.0 194.6,115.0 198.3,104.4 202.1,110.7 205.8,100.6 209.5,84.2 213.2,86.3 216.9,86.1 220.6,82.5 224.4,85.9 228.1,91.7 231.8,92.4 235.5,92.4 239.2,92.4 242.9,92.4 246.7,92.4 250.4,92.4 254.1,92.4 257.8,92.4 261.5,92.4 265.3,92.4 269.0,87.0 272.7,92.4 276.4,92.4 280.1,82.4 283.8,92.4 287.6,78.4 291.3,79.2 295.0,79.5" fill="none" stroke="var(--neg)" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <circle cx="295.0" cy="79.5" r="2.6" fill="var(--neg)"/>
     </svg>
+    <div class="achse"><span>Tief 162,50 €</span><span>21.10. 08:00 – 23.10. 19:00 Uhr</span></div>
   </div>
   <div class="news">
-    <div class="lbl">Nachrichten 24 Std. · 148 Artikel</div>
-    <div class="chips"><span class="chip">Ausverkauf <b>43</b></span><span class="chip">Erwartungen verfehlt <b>7</b></span><span class="chip">Quartalszahlen <b>5</b></span></div>
-    <a class="headline" href="https://news.google.com/rss/articles/CBMitAFBVV95cUxQX05UY0E5b2E2d2c5UVFNejRtWE5obGlfTjhOZjMxeXE2amcwem9DWUpCUVZWN2tzZjBuQTNlTE5yZFloWnR3cVJxaEJWbGRjVXJHeHR5S2dZQWh0dFlzaG9UYzViR1VXeUFuY19xY25RRHJGbW5NRnpOUU5sQ2dNczQtU2E3TVNuem50V2lkdW5OeWtycnRCZF8tTjZtWXd0ejkyMmpBU2wxaG1aOGV6d0ItcmI?oc=5">Moderna-Aktie bricht nach Impfstoffdaten ein - So reagiert die BioNTech-Aktie</a><span class="quelle">Finanzen.net</span>
+    <div class="lbl">Nachrichten 24 Std. · 147 Artikel</div>
+    <div class="chips"><span class="chip">Ausverkauf <b>40</b></span><span class="chip">Erwartungen verfehlt <b>6</b></span><span class="chip">Quartalszahlen <b>5</b></span><span class="chip">Klage / Ermittlungen <b>1</b></span></div>
+    <a class="headline" href="https://news.google.com/rss/articles/CBMisgFBVV95cUxOWV9CMFMxMjhsT3dHRTF3bFM2TUtnNWMxeUpHUUpueVVJUGNzRGRUbWxSU25HdDBLcVh1c3FGbzlrVFBSWGdQZkpOZ21ya2ltellpNWprOVloOUxfTVV6NmhkQlZ6aEFJY1E0SHQzOG56bXJ1TFRUd2tNTi1EOERSRVNWQk1Mc254N2VnOU5aRFBtVnpsa3BDYlNtaWxjRVRxR3I1VWlVSmNBTlI3amNueU1R?oc=5">Moderna (MRNA) Stock Crash Following Premature Cancer Vaccine Data Leak</a><span class="quelle">FXLeaders</span>
   </div>
 </div>
 <footer>Kurse und Veränderungen: deutsche Börse (Stuttgart, ersatzweise Frankfurt oder München) über Yahoo Finance, teils verzögert; Uhrzeit = letzter Kurs in deutscher Zeit. Ohne deutsche Notierung: Heimatbörse, in Euro umgerechnet. Nachrichten: Google News &amp; Yahoo Finance, Zahl = Anzahl Artikel mit diesem Signalwort. Indexlisten: Wikipedia. Keine Anlageberatung.</footer>
