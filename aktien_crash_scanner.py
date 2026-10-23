@@ -522,9 +522,9 @@ def _yahoo_news(tk):
 
 
 def wochen_kurven(tickers):
-    """Kursverlauf der letzten 7 Tage im Stundentakt je Ticker."""
+    """Kursverlauf der letzten 3 Handelstage (30-Min.-Takt) je Ticker, plus Schlusskurs davor."""
     try:
-        df = yf.download(list(tickers), period="7d", interval="1h", auto_adjust=True,
+        df = yf.download(list(tickers), period="10d", interval="30m", auto_adjust=True,
                          progress=False, threads=True)
         close = df["Close"]
         if isinstance(close, pd.Series):
@@ -534,26 +534,32 @@ def wochen_kurven(tickers):
         return {}
     idx = pd.to_datetime(close.index)
     close.index = idx.tz_localize("UTC") if idx.tz is None else idx.tz_convert("UTC")
-    grenze = pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=7)
     out = {}
     for t in tickers:
         if t not in close:
             continue
-        teil = close[t].dropna()
-        teil = teil[teil.index >= grenze]
+        ser = close[t].dropna()
+        if ser.empty:
+            continue
+        tage = pd.Series([ts.tz_convert(BERLIN).date() for ts in ser.index], index=ser.index)
+        letzte3 = sorted(tage.unique())[-3:]
+        teil = ser[tage.isin(letzte3)]
+        davor = ser[tage < letzte3[0]]
         if len(teil) >= 2:
             out[t] = dict(werte=[float(v) for v in teil.values],
+                          basis=float(davor.iloc[-1]) if len(davor) else None,
+                          tage=letzte3,
                           von=teil.index[0].tz_convert(BERLIN), bis=teil.index[-1].tz_convert(BERLIN))
     return out
 
 
 def sparkline(kurve, vorschluss, ort=""):
-    """Kleines SVG-Diagramm; gestrichelte Linie = Schlusskurs vor einer Woche."""
+    """SVG-Diagramm der letzten 3 Handelstage; gestrichelte Linie = Schlusskurs vor dem Zeitraum."""
     if not kurve:
         return ""
-    w, h, pad = 300, 56, 4
+    w, h, pad = 300, 120, 5
     werte = kurve["werte"]
-    basis = vorschluss if vorschluss and not pd.isna(vorschluss) else werte[0]
+    basis = kurve.get("basis") or werte[0]
     lo, hi = min(werte + [basis]), max(werte + [basis])
     spanne = (hi - lo) or 1
     x = lambda i: pad + i * (w - 2 * pad) / max(len(werte) - 1, 1)
@@ -563,15 +569,19 @@ def sparkline(kurve, vorschluss, ort=""):
     flaeche = f"{x(0):.1f},{h - pad} {pts} {x(len(werte) - 1):.1f},{h - pad}"
     von, bis = kurve["von"], kurve["bis"]
     fmt = "%d.%m."
+    tage = " · ".join(t.strftime("%d.%m.") for t in kurve.get("tage", []))
+    aenderung = werte[-1] / basis - 1 if basis else None
     return f"""
   <div class="chart">
-    <div class="lbl">Wochenverlauf {ort} {von.strftime(fmt)} – {bis.strftime(fmt)} · gestrichelt = Kurs vor 1 Woche</div>
+    <div class="lbl">Verlauf letzte 3 Handelstage {ort} ({tage}) · gestrichelt = Schlusskurs davor</div>
+    <div class="achse"><span>Hoch {de(max(werte), 2)} €</span><span>{pct(aenderung)} in 3 Tagen</span></div>
     <svg viewBox="0 0 {w} {h}" preserveAspectRatio="none" role="img" aria-label="Kursverlauf">
       <polygon points="{flaeche}" fill="{farbe}" opacity="0.12"/>
       <line x1="{pad}" x2="{w - pad}" y1="{y(basis):.1f}" y2="{y(basis):.1f}" stroke="var(--mut)" stroke-width="1" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
       <polyline points="{pts}" fill="none" stroke="{farbe}" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
       <circle cx="{x(len(werte) - 1):.1f}" cy="{y(werte[-1]):.1f}" r="2.6" fill="{farbe}"/>
     </svg>
+    <div class="achse"><span>Tief {de(min(werte), 2)} €</span><span>{von.strftime("%d.%m. %H:%M")} – {bis.strftime("%d.%m. %H:%M")} Uhr</span></div>
   </div>"""
 
 
@@ -775,7 +785,8 @@ h1 {{ font-size:22px; margin:4px 0 2px; }}
 .titel {{ color:inherit; text-decoration:none; }}
 .news {{ border-top:1px solid var(--line); margin-top:10px; padding-top:8px; }}
 .chart {{ margin-top:10px; }}
-.chart svg {{ display:block; width:100%; height:56px; margin-top:3px; }}
+.chart svg {{ display:block; width:100%; height:120px; margin:2px 0; background:var(--bg); border-radius:6px; }}
+.achse {{ display:flex; justify-content:space-between; color:var(--mut); font-size:11px; font-variant-numeric:tabular-nums; }}
 .chips {{ display:flex; flex-wrap:wrap; gap:5px; margin:5px 0 6px; }}
 .chip {{ font-size:12px; padding:2px 8px; border-radius:99px; background:var(--chip); color:var(--chiptext); }}
 .chip b {{ font-weight:700; }}
