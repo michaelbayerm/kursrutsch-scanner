@@ -4,7 +4,7 @@ name: Backtest-Daten
 on:
   push:
     branches: [backtest]
-    paths: ["backtest/*.py", ".github/workflows/backtest.yml"]
+    paths: ["backtest/daten_export.py"]
   workflow_dispatch:
 
 permissions:
