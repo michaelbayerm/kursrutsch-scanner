@@ -173,7 +173,7 @@ def zins_serie(tage):
 
 
 def depot(df, t, M, start=10_000, anteil=0.20, max_pos=5, zins=True,
-          von="2016-07-01", bis="2026-07-31", max_sektor=None, max_neu=None, prio="kap", seed=0):
+          von="2016-07-01", bis="2026-07-31", max_sektor=None, max_neu=None, prio="kap", seed=0, hebel=1.0):
     """Tägliche Depotsimulation. df/t/M: Signale, Handelsergebnis, Pfade (gleiche Reihenfolge)."""
     ok = t["gekauft"].to_numpy()
     idx = np.where(ok)[0]
@@ -244,7 +244,7 @@ def depot(df, t, M, start=10_000, anteil=0.20, max_pos=5, zins=True,
             m = np.searchsorted(T[i], off, side="right") - 1
             m = int(np.clip(m, 0, HORIZ))
             e = int(np.searchsorted(T[i], e_idx[i]))
-            p["wert"] = p["groesse"] * (C[i, m] * X[i, m]) / (t["preis"].iat[i] * X[i, e])
+            p["wert"] = p["groesse"] * max(0.0, 1 + hebel * ((C[i, m] * X[i, m]) / (t["preis"].iat[i] * X[i, e]) - 1))
             rest.append(p)
         offen = rest
         verlauf.append(cash + sum(p["wert"] for p in offen))
