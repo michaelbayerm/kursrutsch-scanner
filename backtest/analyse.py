@@ -173,7 +173,7 @@ def zins_serie(tage):
 
 
 def depot(df, t, M, start=10_000, anteil=0.20, max_pos=5, zins=True,
-          von="2016-07-01", bis="2026-07-31", max_sektor=None):
+          von="2016-07-01", bis="2026-07-31", max_sektor=None, max_neu=None, prio="kap", seed=0):
     """Tägliche Depotsimulation. df/t/M: Signale, Handelsergebnis, Pfade (gleiche Reihenfolge)."""
     ok = t["gekauft"].to_numpy()
     idx = np.where(ok)[0]
@@ -206,8 +206,16 @@ def depot(df, t, M, start=10_000, anteil=0.20, max_pos=5, zins=True,
                 rest.append(p)
         offen = rest
         # Einstiege
-        kand = sorted(nach_ein.get(tag, []), key=lambda x: -kap[x[1]])
+        kand = nach_ein.get(tag, [])
+        if prio == "kap":
+            kand = sorted(kand, key=lambda x: -kap[x[1]])
+        elif prio == "zufall":
+            kand = [kand[j] for j in np.random.default_rng(seed + k).permutation(len(kand))]
+        neu_heute = 0
         for aus, i in kand:
+            if max_neu and neu_heute >= max_neu:
+                verpasst += 1
+                continue
             if len(offen) >= max_pos:
                 verpasst += 1
                 continue
@@ -224,6 +232,7 @@ def depot(df, t, M, start=10_000, anteil=0.20, max_pos=5, zins=True,
             offen.append(dict(ein=tag, aus=aus, i=i, groesse=groesse, wert=groesse,
                               wert_exit=groesse * (1 + r), sektor=sektor[i]))
             genommen.append(i)
+            neu_heute += 1
         # Tagesbewertung + Ausstiege am Einstiegstag
         rest = []
         for p in offen:
