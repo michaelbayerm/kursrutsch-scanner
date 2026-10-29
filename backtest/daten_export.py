@@ -70,18 +70,21 @@ def universum():
         html = requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
                             headers=UA, timeout=30).text
         tabs = pd.read_html(StringIO(html))
-        ch = next(t for t in tabs if isinstance(t.columns, pd.MultiIndex)
-                  and any("Removed" in str(c[0]) for c in t.columns))
-        ch.columns = [" ".join(map(str, c)) for c in ch.columns]
-        dcol = next(c for c in ch.columns if c.lower().startswith("date"))
-        rcol = next(c for c in ch.columns if c.startswith("Removed") and "Ticker" in c)
+        def flach(t):
+            t = t.copy()
+            t.columns = [" ".join(map(str, c)) if isinstance(c, tuple) else str(c) for c in t.columns]
+            return t
+        tabs = [flach(t) for t in tabs]
+        ch = next(t for t in tabs if any("Removed" in c for c in t.columns))
+        dcol = next(c for c in ch.columns if "date" in c.lower())
+        rcol = next(c for c in ch.columns if "Removed" in c and ("Ticker" in c or "Symbol" in c))
         ch["_d"] = pd.to_datetime(ch[dcol], errors="coerce")
         for _, r in ch[ch["_d"] >= "2016-07-01"].iterrows():
             t = str(r[rcol]).strip().replace(".", "-")
             if t and t != "nan" and t not in tick:
                 entfernt.append(t)
     except Exception as e:
-        meta["fehler"].append(f"Wikipedia S&P-Änderungen: {e}")
+        meta["fehler"].append(f"Wikipedia S&P-Änderungen: {type(e).__name__} {e}")
     for t in sorted(set(entfernt)):
         tick[t] = {"indizes": ["S&P 500 (entfernt)"], "region": "USA", "entfernt": 1}
     meta["universum"] = len(tick)
@@ -178,12 +181,30 @@ def stammdaten(t):
 
 
 def alle_stammdaten(tickers):
-    res = {}
-    with cf.ThreadPoolExecutor(max_workers=6) as ex:
-        for n, r in enumerate(ex.map(stammdaten, tickers), 1):
-            res[r["ticker"]] = r
-            if n % 100 == 0:
-                log(f"  Stammdaten {n}/{len(tickers)}")
+    cache_datei = OUT / "stamm.json"
+    res = json.loads(cache_datei.read_text()) if cache_datei.exists() else {}
+    def fehlt(t):
+        r = res.get(t)
+        return r is None or not r.get("kap") or not r.get("sektor") or not r.get("termine")
+    for durchgang, (worker, pause) in enumerate([(3, 0.3), (1, 2.0), (1, 6.0)], 1):
+        offen = [t for t in tickers if fehlt(t)]
+        log(f"  Stammdaten Durchgang {durchgang}: {len(offen)} Titel")
+        if not offen:
+            break
+        def hole(t):
+            time.sleep(pause)
+            neu = stammdaten(t)
+            alt = res.get(t, {})
+            for k2, v in alt.items():          # vorhandene Werte nicht verlieren
+                if v and not neu.get(k2):
+                    neu[k2] = v
+            return neu
+        with cf.ThreadPoolExecutor(max_workers=worker) as ex:
+            for n, r in enumerate(ex.map(hole, offen), 1):
+                res[r["ticker"]] = r
+                if n % 100 == 0:
+                    log(f"    {n}/{len(offen)}")
+        cache_datei.write_text(json.dumps(res, ensure_ascii=False))
     return res
 
 
