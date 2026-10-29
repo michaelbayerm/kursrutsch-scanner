@@ -1,0 +1,21 @@
+{
+ "fehler": [
+  "Wikipedia S&P-Änderungen: "
+ ],
+ "universum": 1092,
+ "entfernte_sp500_kandidaten": 0,
+ "mit_kursdaten": 1086,
+ "entfernt_mit_kursdaten": 0,
+ "waehrungen": [
+  "CHF",
+  "EUR",
+  "GBP",
+  "JPY",
+  "USD"
+ ],
+ "stamm_ohne_kap": 115,
+ "stamm_ohne_termine": 3,
+ "stamm_ohne_sektor": 463,
+ "signale": 10572,
+ "laufzeit_min": 14.4
+}
