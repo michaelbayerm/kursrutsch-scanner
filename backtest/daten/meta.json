@@ -1,6 +1,6 @@
 {
  "fehler": [
-  "Wikipedia S&P-Änderungen: "
+  "Wikipedia S&P-Änderungen: StopIteration "
  ],
  "universum": 1092,
  "entfernte_sp500_kandidaten": 0,
@@ -13,9 +13,9 @@
   "JPY",
   "USD"
  ],
- "stamm_ohne_kap": 115,
+ "stamm_ohne_kap": 1,
  "stamm_ohne_termine": 3,
- "stamm_ohne_sektor": 463,
- "signale": 10572,
- "laufzeit_min": 14.4
+ "stamm_ohne_sektor": 7,
+ "signale": 10573,
+ "laufzeit_min": 11.7
 }
