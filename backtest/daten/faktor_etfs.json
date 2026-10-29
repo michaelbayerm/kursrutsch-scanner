@@ -1,0 +1,102 @@
+{
+ "EUNL.DE": {
+  "name": "iShares Core MSCI World",
+  "start": "2010-01-04",
+  "ende": "2026-10-28"
+ },
+ "VGWL.DE": {
+  "name": "Vanguard FTSE All-World (aussch.)",
+  "start": "2017-10-26",
+  "ende": "2026-10-28"
+ },
+ "VWCE.DE": {
+  "name": "Vanguard FTSE All-World (thes.)",
+  "start": "2019-07-29",
+  "ende": "2026-10-28"
+ },
+ "SPPW.DE": {
+  "name": "SPDR MSCI World",
+  "start": "2019-02-26",
+  "ende": "2026-10-28"
+ },
+ "IS3R.DE": {
+  "name": "iShares MSCI World Momentum",
+  "start": "2014-10-06",
+  "ende": "2026-10-28"
+ },
+ "IS3Q.DE": {
+  "name": "iShares MSCI World Quality",
+  "start": "2014-10-06",
+  "ende": "2026-10-28"
+ },
+ "IS3S.DE": {
+  "name": "iShares MSCI World Value",
+  "start": "2014-10-06",
+  "ende": "2026-10-28"
+ },
+ "IQQ0.DE": {
+  "name": "iShares MSCI World Min Volatility",
+  "start": "2012-11-30",
+  "ende": "2026-10-28"
+ },
+ "IUSN.DE": {
+  "name": "iShares MSCI World Small Cap",
+  "start": "2018-04-26",
+  "ende": "2026-10-28"
+ },
+ "XDEM.DE": {
+  "name": "Xtrackers MSCI World Momentum",
+  "start": "2014-09-05",
+  "ende": "2026-10-28"
+ },
+ "XDEQ.DE": {
+  "name": "Xtrackers MSCI World Quality",
+  "start": "2014-09-11",
+  "ende": "2026-10-28"
+ },
+ "XDEV.DE": {
+  "name": "Xtrackers MSCI World Value",
+  "start": "2014-09-11",
+  "ende": "2026-10-28"
+ },
+ "XDEB.DE": {
+  "name": "Xtrackers MSCI World Min Volatility",
+  "start": "2014-09-05",
+  "ende": "2026-10-28"
+ },
+ "IS3N.DE": {
+  "name": "iShares Core MSCI EM IMI",
+  "start": "2014-06-11",
+  "ende": "2026-10-28"
+ },
+ "MTUM": {
+  "name": "iShares MSCI USA Momentum (USD)",
+  "start": "2013-04-18",
+  "ende": "2026-10-28"
+ },
+ "QUAL": {
+  "name": "iShares MSCI USA Quality (USD)",
+  "start": "2013-07-18",
+  "ende": "2026-10-28"
+ },
+ "VLUE": {
+  "name": "iShares MSCI USA Value (USD)",
+  "start": "2013-04-18",
+  "ende": "2026-10-28"
+ },
+ "USMV": {
+  "name": "iShares MSCI USA Min Vol (USD)",
+  "start": "2011-10-20",
+  "ende": "2026-10-28"
+ },
+ "URTH": {
+  "name": "iShares MSCI World (USD)",
+  "start": "2012-01-12",
+  "ende": "2026-10-28"
+ },
+ "EURUSD=X": {
+  "name": "EUR/USD",
+  "start": "2010-01-01",
+  "ende": "2026-10-28"
+ }
+}
