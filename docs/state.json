@@ -1,12 +1,27 @@
 {
- "letzter_lauf": "2026-10-29",
+ "letzter_lauf": "2026-10-30",
  "ticker": [
-  "ADYEN.AS",
+  "ALAB",
   "ALNY",
-  "FFIV",
-  "FTNT",
+  "AMD",
+  "APP",
+  "ARM",
+  "CAT",
+  "COIN",
+  "CRWV",
+  "DDOG",
+  "DELL",
   "GOOGL",
   "HLN.L",
-  "NOW"
+  "HPQ",
+  "ILMN",
+  "INTC",
+  "MRVL",
+  "NBIS",
+  "NOW",
+  "RDDT",
+  "SNDK",
+  "TER",
+  "TWLO"
  ]
 }
