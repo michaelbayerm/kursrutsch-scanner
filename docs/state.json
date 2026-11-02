@@ -1,27 +1,17 @@
 {
- "letzter_lauf": "2026-10-30",
+ "letzter_lauf": "2026-11-02",
  "ticker": [
   "ALAB",
-  "ALNY",
-  "AMD",
-  "APP",
-  "ARM",
-  "CAT",
+  "CIEN",
   "COIN",
-  "CRWV",
   "DDOG",
-  "DELL",
-  "GOOGL",
-  "HLN.L",
-  "HPQ",
-  "ILMN",
   "INTC",
+  "LITE",
   "MRVL",
-  "NBIS",
-  "NOW",
+  "NTAP",
+  "ORCL",
   "RDDT",
   "SNDK",
-  "TER",
-  "TWLO"
+  "STX"
  ]
 }
