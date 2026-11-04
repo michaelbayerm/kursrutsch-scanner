@@ -1,1 +1,106 @@
-Übersprungen: heute schon gelaufen (20:37 Uhr Berlin).
+Warte 48 Min. bis 19:15 Uhr …
+1) Indexmitglieder laden …
+  S&P 500         503 Titel
+  Nasdaq-100      101 Titel
+  DAX              40 Titel
+  MDAX             50 Titel
+  Euro Stoxx 50    50 Titel
+  FTSE 100        100 Titel
+  CAC 40           40 Titel
+  SMI              20 Titel
+  AEX              25 Titel
+  IBEX 35          35 Titel
+  FTSE MIB         40 Titel
+  Hang Seng        85 Titel
+  Nikkei 225      225 Titel
+   1177 Titel insgesamt
+
+2) Kurse abrufen …
+  Kurse 1–150 von 1177 …
+  Kurse 151–300 von 1177 …
+  Kurse 301–450 von 1177 …
+  Kurse 451–600 von 1177 …
+$ECV.DE: No data found, symbol may be delisted
+
+1 Failed download:
+['ECV.DE']: No data found, symbol may be delisted
+  Kurse 601–750 von 1177 …
+  Kurse 751–900 von 1177 …
+  Kurse 901–1050 von 1177 …
+  Kurse 1051–1177 von 1177 …
+   27 Titel mit ≥10 % Verlust an der Heimatbörse (Vorauswahl)
+
+3) Stammdaten & Marktkapitalisierung …
+  285A.T     Kioxia Holdings Corporation
+  4005.T     Sumitomo Chemical Company, Limited
+  5801.T     Furukawa Electric Co., Ltd.
+  5802.T     Sumitomo Electric Industries, Ltd.
+  6702.T     Fujitsu Limited
+  6770.T     Alps Alpine Co., Ltd.
+  6976.T     Taiyo Yuden Co., Ltd.
+  7735.T     SCREEN Holdings Co., Ltd.
+  CVS        CVS Health Corporation
+  DDOG       Datadog, Inc.
+  EME        EMCOR Group, Inc.
+  ETN        Eaton Corporation plc
+  FIS        Fidelity National Information Services, Inc.
+  FIX        Comfort Systems USA, Inc.
+  FLEX       Flex Ltd.
+  GEV        GE Vernova Inc.
+  GNRC       Generac Holdings Inc.
+  LITE       Lumentum Holdings Inc.
+  MPC        Marathon Petroleum Corporation
+  NRG        NRG Energy, Inc.
+  PWR        Quanta Services, Inc.
+  TMV.DE     TeamViewer SE
+  TPL        Texas Pacific Land Corporation
+  TRMB       Trimble Inc.
+  VRT        Vertiv Holdings Co
+  VST        Vistra Corp.
+  WEIR.L     Weir PLC
+
+4) WKN ermitteln …
+
+5) Kurse an deutscher Börse (Stuttgart › Frankfurt › München) …
+  Kurse 1–63 von 63 …
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: US1999081045.MU"}}}
+$49V.SG: No data found, symbol may be delisted
+$US1999081045.MU: No data found, symbol may be delisted
+$US23804L1035.F: No data found, symbol may be delisted
+$9WY.MU: No data found, symbol may be delisted
+$EM4.MU: No data found, symbol may be delisted
+$42W.MU: No data found, symbol may be delisted
+$US1999081045.F: No data found, symbol may be delisted
+$US23804L1035.MU: No data found, symbol may be delisted
+
+8 Failed downloads:
+['49V.SG', 'US1999081045.MU', 'US23804L1035.F', '9WY.MU', 'EM4.MU', '42W.MU', 'US1999081045.F', 'US23804L1035.MU']: No data found, symbol may be delisted
+   19 von 24 Titeln mit deutschem Börsenkurs (Stuttgart: 18, Frankfurt: 1, München: 0)
+   13 Titel erfüllen die Schwelle (≥12 % an deutscher Börse, ≥12 % an der Heimatbörse, falls kein deutscher Kurs)
+
+6) Nachrichten der letzten 24 Std. auswerten …
+
+7) Wochenverläufe laden …
+   13 von 13 Verläufen geladen
+
+=== Kursrutsch ≥12 % in 2 Tagen, Marktkap. > 5 Mrd. € (Stand 04.11.2026 19:15) ===
+
+                           Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €)     Börse  Land     Kurszeit                                        News
+Fidelity National Information Se A0H1FP    26,45  -25,3 % -18,9 %               13,5 Stuttgart   USA 04.11. 18:47    38: Quartalszahlen 12, Gewinnerwartung 3
+                    Trimble Inc. 882295    48,12  -18,1 % -16,3 %               11,4 Stuttgart   USA 04.11. 18:47         27: Quartalszahlen 16, Ausverkauf 3
+       Comfort Systems USA, Inc. 907784   953,15  -16,6 % -20,4 %               33,5      NYSE   USA 04.11. 19:16          23: Quartalszahlen 5, Ausverkauf 4
+                   Datadog, Inc. A2PSFR   167,36  -14,7 % -32,4 %               60,1  NasdaqGS   USA 04.11. 19:16        59: Quartalszahlen 31, Ausverkauf 12
+                    Vistra Corp. A2DJE5   106,60  -14,3 % -16,0 %               35,6 Stuttgart   USA 04.11. 19:01  27: Ausverkauf 7, Abstufung / Kursziel ↓ 6
+                NRG Energy, Inc. A0BLR4    75,52  -13,7 % -11,8 %               15,8 Stuttgart   USA 04.11. 18:48                                        13: 
+                       Flex Ltd. 890331    67,66  -13,7 % -18,3 %               25,0  NasdaqGS   USA 04.11. 19:16          31: Quartalszahlen 5, Ausverkauf 1
+  Marathon Petroleum Corporation A1JEXK   337,60  -13,1 % -14,4 %               93,0 Stuttgart   USA 04.11. 18:48 37: Quartalszahlen 14, Übernahme / Fusion 3
+              Vertiv Holdings Co A2PZ5A   184,26  -12,9 % -14,8 %               69,6 Frankfurt   USA 04.11. 18:34           25: Ausverkauf 4, Gewinnwarnung 1
+          CVS Health Corporation 859034    70,98  -12,2 % -12,0 %               90,8 Stuttgart   USA 04.11. 18:48         75: Quartalszahlen 22, Ausverkauf 5
+  Texas Pacific Land Corporation A2QL4H   261,40  -12,1 % -11,6 %               17,9 Stuttgart   USA 04.11. 18:47                         8: Quartalszahlen 1
+       SCREEN Holdings Co., Ltd. 859619    51,82  -19,0 % -17,1 %                9,5     Tokyo Japan 04.11. 07:30                        23: Quartalszahlen 2
+          Lumentum Holdings Inc. A14WK0   539,10  -11,1 % -31,8 %               48,8 Stuttgart   USA 04.11. 18:48     53: Übernahme / Fusion 13, Ausverkauf 5
+
+Neu seit letztem Lauf: 11 · angezeigt 13 von 13
+Seite geschrieben: docs/index.html
+Push vorbereitet (/home/runner/work/_temp/push.json), Versand nach Veröffentlichung der Seite.
+Push-Nachricht gesendet.

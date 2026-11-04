@@ -1,9 +1,18 @@
 {
- "letzter_lauf": "2026-11-03",
+ "letzter_lauf": "2026-11-04",
  "ticker": [
   "7735.T",
-  "IT",
+  "CVS",
+  "DDOG",
+  "FIS",
+  "FIX",
+  "FLEX",
   "LITE",
-  "MRVL"
+  "MPC",
+  "NRG",
+  "TPL",
+  "TRMB",
+  "VRT",
+  "VST"
  ]
 }
