@@ -1,1 +1,58 @@
-Übersprungen: zu früh (02:04 Uhr Berlin).
+1) Indexmitglieder laden …
+  S&P 500         503 Titel
+  Nasdaq-100      101 Titel
+  DAX              40 Titel
+  MDAX             50 Titel
+  Euro Stoxx 50    50 Titel
+  FTSE 100        100 Titel
+  CAC 40           40 Titel
+  SMI              20 Titel
+  AEX              25 Titel
+  IBEX 35          35 Titel
+  FTSE MIB         40 Titel
+  Hang Seng        85 Titel
+  Nikkei 225      225 Titel
+   1177 Titel insgesamt
+
+2) Kurse abrufen …
+  Kurse 1–150 von 1177 …
+  Kurse 151–300 von 1177 …
+  Kurse 301–450 von 1177 …
+  Kurse 451–600 von 1177 …
+$ECV.DE: No data found, symbol may be delisted
+
+1 Failed download:
+['ECV.DE']: No data found, symbol may be delisted
+  Kurse 601–750 von 1177 …
+  Kurse 751–900 von 1177 …
+  Kurse 901–1050 von 1177 …
+  Kurse 1051–1177 von 1177 …
+   3 Titel mit ≥10 % Verlust an der Heimatbörse (Vorauswahl)
+
+3) Stammdaten & Marktkapitalisierung …
+  GPN        Global Payments Inc.
+  NBIS       Nebius Group N.V.
+  SMCI       Super Micro Computer, Inc.
+
+4) WKN ermitteln …
+
+5) Kurse an deutscher Börse (Stuttgart › Frankfurt › München) …
+  Kurse 1–9 von 9 …
+   3 von 3 Titeln mit deutschem Börsenkurs (Stuttgart: 3, Frankfurt: 0, München: 0)
+   2 Titel erfüllen die Schwelle (≥12 % an deutscher Börse, ≥12 % an der Heimatbörse, falls kein deutscher Kurs)
+
+6) Nachrichten der letzten 24 Std. auswerten …
+
+7) Wochenverläufe laden …
+   2 von 2 Verläufen geladen
+
+=== Kursrutsch ≥12 % in 2 Tagen, Marktkap. > 5 Mrd. € (Stand 12.11.2026 23:25) ===
+
+               Titel    WKN Kurs (€) Intraday 1 Woche Marktkap. (Mrd. €)     Börse        Land     Kurszeit                                   News
+   Nebius Group N.V. A1JGSL   115,56  -17,1 %  +8,0 %               31,6 Stuttgart Niederlande 12.11. 21:57  137: Quartalszahlen 47, Ausverkauf 28
+Global Payments Inc. 603111    79,00  -12,2 %  -7,3 %               21,1 Stuttgart         USA 12.11. 21:55 25: Übernahme / Fusion 8, Ausverkauf 5
+
+Neu seit letztem Lauf: 2 · angezeigt 2 von 2
+Seite geschrieben: docs/index.html
+Push vorbereitet (/home/runner/work/_temp/push.json), Versand nach Veröffentlichung der Seite.
+Push-Nachricht gesendet.
